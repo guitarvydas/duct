@@ -1,0 +1,30 @@
+kind = {signature, implementation}
+
+signature = {kind [❲input destructure❳] [❲output desctructure❳]}
+
+implementation |= ❲container-function❳ | container | leaf
+
+❲container function❳ = {handler [❲net name❳] [❲child name❳] [connection] initially finally ❲prototype scope❳}
+
+container = {handler [❲net name❳] [❲child name❳] [connection] ❲prototype scope❳}
+
+leaf = {handler ❲prototype scope❳}
+
+component
+  | {"〔" ❲component name❳ "〕"}
+  | {"〔" "$self" "〕"}
+
+❲sender net receiver❳ = {sender net receiver}
+sender = {component port}
+receiver = {component port}
+
+❲component name❳ = name
+❲net name❳ = name
+❲child name❳ = name
+kind = name
+name = ⋵string
+
+composition = {kind ❲input queue❳ ❲output queue❳ container table}
+
+
+// ❲❳◦λ⋵
