@@ -1,36 +1,60 @@
-function top () {
-    let me = new mp.ContainerFunction ();
+import read;
+import write;
+
+var signature = {
+    name: "top",
+    kind: "containerized function",
+    inputs: [
+	{ "input filename", ["infame"] },
+	{ "output filename", ["outfame"] }
+    ],
+    outputs: [
+    ]
+};
+
+var implementation = {
+    name: "top",
+    kind: "containerized function",
+    handler: function (me, message) {},
+    begin: function (me, infname, outfname) {
+	me.send ("input filenname", infname);
+	me.send ("output filenname", outfname);
+	me.dispatch ();
+    },
+    finish: function (me) {},
+}	
     
-    me.signature = {
-	kindName: 'example';
-	inputPorts: ['output filename', 'input filename'];
-	outputPorts: [];
-    };
-
-    let child1 = read ();
-    let child2 = write ();
-
-    me.children =  [ child1, child2 ];
-
-    me.connections = [
-	{ {me, 'input filename'}, "net1", { child1, 'input filename'} },
-	{ {me, 'output filename'}, "net2", { child2, 'output filename'} },
-	{ {child1, 'char'}, "net3", { child2, 'char'} }.
-	{ {child2, 'request'}, "net4", { child1, 'request'} }
-    ];
-
-    // me.handler = default handler for Containers 
-
-    me.nets = [{"net1", [child1]}, {"net2", [child2] }, {"net3", [child2] }, {"net4", [child1]}];
-
-    me.initially = function (inputFilename, outputFilename) {
-	me.send ('input filename', inputFilename);
-	me.send ('output filename', outputFilename);
-    };
-
-    // me.finally = nothing, just die
-
-    me.implementation = {me.handler, me.nets, me.children, me.connections};
-
-    return me;
+function Top (this) {
+    this.signature = signature;
+    this.implementation = implementation;
+    var child1 = new Read (me);
+    var child2 = new Write (me);
+    this.children = [
+	{"name": "r", "instance": child1}, 
+	{"name": "w", "instance": child2}
+    ],
+    this.nets = [
+	{"name":"⇒₁","locks":["r"]},
+	{"name":"⇒₂","locks":["w"]},
+	{"name":"⇒₃","locks":["r"]},
+	{"name":"⇒₄","locks":["w"]}
+    ],
+    this.connections = [
+	{"sender":{"component":"$me","port":"input filename"},
+	 "net":"⇒₁",
+	 "receivers": [{"component":"r","port":"filename"}]
+	},		   
+	{"sender":{"component":"$me","port":"output filename"},
+	 "net":"⇒₂",
+	 "receivers": [{"component":"w","port":"filename"}]
+	},		   
+	{"sender":{"component":"r","port":"char"},
+	 "net":"⇒₃",
+	 "receivers": [{"component":"w","port":"char"}]
+	},		   
+	{"sender":{"component":"w","port":"request"},
+	 "net":"⇒₄",
+	 "receivers": [{"component":"r","port":"req"}]
+	}
+    ]
 }

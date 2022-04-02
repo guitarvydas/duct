@@ -1,25 +1,33 @@
-const fs = require('fs')
+var signature = {
+    name: "write",
+    kind: "leaf",
+    inputs: [
+	{ "filename", ["filename"] },
+	{ "char", ["char"] }
+    ],
+    outputs: [
+	{ "request", ["request"] }
+    ]
+};
 
-function write () {
-    let me = new mp.Leaf ();
-    me.signature = {
-	kindName: 'write';
-	inputPorts: ['filename', 'char'];
-	outputPorts: ['request'];
-    };
-    me.implementation = consoleWriteHandler;
-    return me;
+var implementation = {
+    name: "write",
+    kind: "leaf",
+    handler: function (me, message) {
+	if ("filename" === message.tag) {
+	    me.send ("request", true);
+	} else if ("char" === message.tag) {
+	    console.log (me.message.data);
+	    me.send ("request", true);
+	} else {
+	    me.errorUnhandledMessage (message);
+	}
+    }
 }
 
-
-function consoleWriteHandler (me, message) {
-    if (message.tag === 'filename') {
-	// ignore
-    } else if (message.tag === 'char') {
-	console.log (message.data);
-    } else {
-	me.unhandledMessage (message);
-    }
+function Write (this) {
+    this.signature = signature;
+    this.implementation = implementation;
 }
 
 
