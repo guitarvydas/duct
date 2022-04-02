@@ -73,17 +73,13 @@ function Top (this) {
     this.signature = signature;
     this.implementation = implementation;
     this.makeRunnable = function (container) {
-	var me = new eh.Composition ();
-	me.container = container;
-	me.kind = this;
+	var me = new eh.Composition (this, container);
 	me.children = this.makeChildren ();
 	me.nets = this.makeNets ();
 	me.connections = this.makeConnections ();
 	me.handler = eh.defaultContainerHandler;
 	me.begin = this.makeBegin ();
 	me.finish = this.makeFinish ();
-	me.inputQueue = new Queue ();
-	me.outputQueue = new Queue ();
 	return me;
     }
 }
