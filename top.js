@@ -1,3 +1,4 @@
+const eh = require('composition');
 import read;
 import write;
 
@@ -24,22 +25,26 @@ var implementation = {
     finish: function (me) {},
 }	
     
-function Top (this) {
-    this.signature = signature;
-    this.implementation = implementation;
+function makeChildren (me) {
     var child1 = new Read (me);
     var child2 = new Write (me);
-    this.children = [
+    return [
 	{"name": "r", "instance": child1}, 
 	{"name": "w", "instance": child2}
-    ],
-    this.nets = [
+    ];
+}
+
+function makeNets (me) {
+    return [
 	{"name":"⇒₁","locks":["r"]},
 	{"name":"⇒₂","locks":["w"]},
 	{"name":"⇒₃","locks":["r"]},
 	{"name":"⇒₄","locks":["w"]}
-    ],
-    this.connections = [
+    ];
+}
+
+function makeConnections (me) {
+    return [
 	{"sender":{"component":"$me","port":"input filename"},
 	 "net":"⇒₁",
 	 "receivers": [{"component":"r","port":"filename"}]
@@ -56,5 +61,24 @@ function Top (this) {
 	 "net":"⇒₄",
 	 "receivers": [{"component":"r","port":"req"}]
 	}
-    ]
+    ];
+}
+
+function Top (this) {
+    this.signature = signature;
+    this.implementation = implementation;
+    this.makeRunnable = function (container) {
+	var me = new eh.Composition ();
+	me.container = container;
+	me.kind = this;
+	me.children = this.makeChildren ();
+	me.nets = this.makeNets ();
+	me.connections = this.makeConnections ();
+	me.handler = eh.defaultContainerHandler;
+	me.begin = this.makeBegin ();
+	me.finish = this.makeFinish ();
+	me.inputQueue = new Queue ();
+	me.outputQueue = new Queue ();
+	return me;
+    }
 }

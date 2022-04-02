@@ -1,3 +1,5 @@
+const eh = require('composition');
+
 var signature = {
     name: "write",
     kind: "leaf",
@@ -28,6 +30,10 @@ var implementation = {
 function Write (this) {
     this.signature = signature;
     this.implementation = implementation;
+    this.makeRunnable = function (container) {
+	var runnable = new eh.Composition (this, container);
+	return runnable;
+    }
 }
 
 

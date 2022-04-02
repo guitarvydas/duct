@@ -1,4 +1,5 @@
-const fs = require('fs')
+const eh = require('composition');
+const fs = require('fs');
 
 var signature = {
     name: "read",
@@ -32,13 +33,16 @@ var implementation = {
     }
 }
 
-function Read (this, ancestor) {
-    let me = new Composition (ancestor);
+function Read () {
     this.signature = signature;
     this.implementation = implementation;
     this.filename = null;
     this.contents = null;
     this.index = null;
+    this.makeRunnable = function (container) {
+	let runnable = new eh.Composition (this, container);
+	return runnable;
+    }
 }
 
 
