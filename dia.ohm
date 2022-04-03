@@ -94,7 +94,8 @@ keyword
   | "in"
   | "of"
   | "me"
-  | "X") ~namecharRest
+  | "X") 
+  ~namecharRest
 
 eol = "\n"
 
