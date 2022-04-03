@@ -1,0 +1,7 @@
+loop foreach child in this.children {
+    if (child.hasOutputs ()) {
+        message = child.dequeueOutput ()
+
+    loop {
+    }
+}

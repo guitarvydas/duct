@@ -1,0 +1,84 @@
+dia {
+  Main = Implementation+
+  Implementation = ContainerImplementation | SynchronousLeafImplementation
+
+ContainerImplementation = "implementation" name Box
+SynchronousLeafImplementation = SynchronousCall
+
+SynchronousCall 
+  = "@" name "<=" name -- params
+  | "@" name           -- noparams
+
+Box = "{" BoxOperation Box* "}"
+BoxOperation
+  = ForEvery
+  | Synonym
+  | Find
+  | WithLock
+  | Cond
+  | SynchronousCall
+
+Cond = "cond" CondClause+
+CondClause = "{" Predicate Box "}"
+
+WithLock = name "with" name "locked"
+Find = name "in" name "of" name "=>" name
+Synonym = name "=" NameList
+ForEvery
+  = "for" "every" "item" "in" Datum "given" ParameterList "=>" name -- sugaredWithParams
+  | "for" "every" name "in" Datum "given" ParameterList "=>" name -- withParams
+  | "for" "every" "item" "in" Datum  "=>" name -- sugaredWithoutParams
+  | "for" "every" name "in" Datum  "=>" name -- withoutParams
+
+Datum
+  = name "of" Datum -- field
+  | name            -- solitary
+  | "me"            -- me
+
+Predicate
+  = name "==" name
+  | name "!=" name
+
+ParameterList = NameList
+NameList 
+  = name "," NameList -- list
+  | name              -- solitary
+
+name = namecharFirst namecharRest*
+namecharFirst = ~separator ~keyword ("_" | "A" .. "Z" | "a" .. "z")
+namecharRest = ~separator ~keyword ("_" | "A" .. "Z" | "a" .. "z" | "0" .. "9")
+
+  separator
+    = "<="
+    | "=>"
+    | "//"
+    | "=="
+    | "!="
+    | "="
+    | "{"
+    | "}"
+    | "("
+    | ")"
+    | "@"
+    | "."
+    | ","
+    | eol
+
+keyword
+  = "implementation"
+  | "locked"
+  | "given"
+  | "every"
+  | "find"
+  | "cond"
+  | "with"
+  | "item"
+  | "for"
+  | "in"
+  | "of"
+  | "me"
+  | "X"
+
+eol = "\n"
+comment = "//" (~eol any)* eol
+}
