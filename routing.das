@@ -24,15 +24,13 @@ implementation routeChildrenOutputs
 }
 
 sync deliver_output_to_child_input <= me, receiver, message
-{ // map message for receiver
+   // map message for receiver
   { var input_message <= {receiver.etag, message.data}
-    @receiver.enqueueInputMessage (input_message)
+    { @receiver.enqueueInputMessage <= input_message } 
   }
-}
 
 sync deliver_output_to_me_output <= me, receiver, message
-{ // map message for output
+  // map message for output
   { var output_message <= {receiver.etag, message.data}
-    @me.enqueueInputMessage (output_message)
+    { @me.enqueueInputMessage <= output_message }
   }
-}
