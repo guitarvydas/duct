@@ -26,12 +26,14 @@ Find
   = "find" name "in" Datum "given" ParameterList "=>" name -- withParams
   | "find" name "in" Datum "=>" name                       -- withoutParams
 
-Synonym = "synonym" name "=" NameList
+Synonym = "synonym" name "=" DatumList
 ForEvery
   = "for" "every" "item" "in" Datum "given" ParameterList "=>" name -- sugaredWithParams
   | "for" "every" name "in" Datum "given" ParameterList "=>" name -- withParams
   | "for" "every" "item" "in" Datum  "=>" name -- sugaredWithoutParams
   | "for" "every" name "in" Datum  "=>" name -- withoutParams
+
+
 
 Datum
   = name "of" Datum -- field
@@ -47,9 +49,9 @@ ParameterList
   = Datum "X" ParameterList -- list
   | Datum                   -- solitary
 
-NameList 
-  = Datum "," NameList -- list
-  | Datum              -- solitary
+DatumList 
+  = Datum "," DatumList -- list
+  | Datum               -- solitary
 
 name = namecharFirst namecharRest*
 namecharFirst = ~separator ~keyword ("_" | "A" .. "Z" | "a" .. "z")
@@ -87,5 +89,12 @@ keyword
   | "X") ~namecharRest
 
 eol = "\n"
-comment = "//" (~eol any)* eol
+
+space
+ += comment
+
+comment
+  = "//" (~"\n" any)* "\n"  -- singleLine
+  | "/*" (~"*/" any)* "*/"  -- multiLine
+
 }
