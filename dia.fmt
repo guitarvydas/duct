@@ -1,0 +1,66 @@
+Main [@i] = [[${i}]]
+Implementation [x] = [[${x}]]
+
+ContainerImplementation [ki name b] = [[${ki}${name}${b}]]
+
+SynchronousLeafImplementation_withFormals [ksync name karrow dl b] = ][[${ksync}${name}${karrow}${dl}${b}]]
+SynchronousLeafImplementation_withoutFormals [ksync name b] = ][[${ksync}${name}${b}]]
+
+SynchronousCall_params [kat d1 karrow d2] = [[${kat}${d1}${karrow}${d2}]]
+SynchronousCall_noparams [kat d1] = [[${kat}${d1}]]
+
+Box = [klb bo @b krb] = [[${klb}${bo}${b}${krb}]]
+BoxOperation [op] = [[${op}]]
+
+Cond [kcond @condclause] = [[${kcond}${condclause}]]
+CondClause [klb p b krb] = [[${klb}${p}${b}${krb}]]
+
+WithLock [name kwith name2 klocked] = [[${name}${kwith}${name2}${klocked}]]
+
+Find_withParams [kfind name kin d kgiven pl karrow name2] = [[${kfind}${name}${kin}${d}${kgiven}${pl}${karrow}${name2}]]
+Find_withoutParams [kfind name kin d karrow name2] = [[${kfind}${name}${kin}${d}${karrow}${name2}]]
+
+VarBox [kvar name karrow klb dl krb] = [[${kvar}${name}${karrow}${klb}${dl}${krb}]]
+
+Synonym [ksyn name keq dl] = [[${ksym}${name}${keq}${dl}]]
+
+ForEvery_sugaredWithParams [kfor kevery kitem kin d kgiven pl kassign name]
+  = [[${kfor}${kevery}${kitem}${kin}${d}${kgiven}${pl}${kassign}${name}]]
+ForEvery_withParams [kfor kevery name1 kin d kgiven pl kassign name]
+  = [[${kfor}${kevery}${name1}${kin}${d}${kgiven}${pl}${kassign}${name}]]
+ForEvery_sugaredWithoutParams [kfor kevery kitem kin d kassign name]
+  = [[${kfor}${kevery}${kitem}${kin}${d}${kassign}${name}]]
+ForEvery_withoutParams [kfor kevery name1 kin d kassign name]
+  = [[${kfor}${kevery}${name1}${kin}${d}${kassign}${name}]]
+
+
+
+Datum_field [n kof d] = [[${n}${kof}${d}]]
+Datum_dotted [n kdot d] = [[${n}${kdot}${d}]]
+Datum_solitary [n] = [[${n}]]
+Datum_mefield [me kof d] = [[${me}${kof}${d}]]
+Datum_meDottedField [me kdot d] = [[${me}${kdot}${d}]]
+Datum_me [md] = [[${me}]]
+
+Predicate_eq [left eq right] = [[${left}${eq}${right}]]
+Predicate_ne [left eq right] = [[${left}${eq}${right}]]
+
+ParameterList_list [d kx pl] = [[${d}${kx}${pl}]]
+ParameterList_solitary [d] = [[${d}]]
+
+DatumList_list [d1 kcomma d2] = [[${d1}${kcomma}${d2}]]
+DatumList_solitary [d] = [[${d}]]
+
+name [first @rest] = [[${first}${rest}]]
+namecharFirst [c] = [[${c}]]
+namecharRest [c] = [[${c}]]
+
+separator [sep] = [[${sep}]]
+
+keyword [kw] = [[${kw}]]
+
+eol [c] = [[${c}]]
+
+space [c] = [[${c}]]
+
+comment [c] = [[${c}]]

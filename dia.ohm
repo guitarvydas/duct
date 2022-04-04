@@ -49,8 +49,8 @@ Datum
   | "me"            -- me
 
 Predicate
-  = Datum "==" Datum
-  | Datum "!=" Datum
+  = Datum "==" Datum -- eq
+  | Datum "!=" Datum -- ne
 
 ParameterList
   = Datum "X" ParameterList -- list
