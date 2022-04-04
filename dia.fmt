@@ -3,29 +3,41 @@ Implementation [x] = [[${x}]]
 
 ContainerImplementation [ki name b] = [[${ki}${name}${b}]]
 
-SynchronousLeafImplementation_withFormals [ksync name karrow dl b] = ][[${ksync}${name}${karrow}${dl}${b}]]
-SynchronousLeafImplementation_withoutFormals [ksync name b] = ][[${ksync}${name}${b}]]
+SynchronousLeafImplementation_withFormals [ksync name karrow dl b] = [[
 
-SynchronousCall_params [kat d1 karrow d2] = [[${kat}${d1}${karrow}${d2}]]
-SynchronousCall_noparams [kat d1] = [[${kat}${d1}]]
+function ${name} (${dl}) {${b}
+\}]]
 
-Box [klb bo @b krb] = [[${klb}${bo}${b}${krb}]]
+SynchronousLeafImplementation_withoutFormals [ksync name b] = [[
+
+function ${name} () {${b}
+\}]]
+
+SynchronousCall_params [kat d1 karrow d2] = [[${d1} (${d2});]]
+SynchronousCall_noparams [kat d1] = [[${d1} ();]]
+
+Box [klb bo @b krb] = [[\n${bo}${b}]]
 BoxOperation [op] = [[${op}]]
 
-Cond [kcond @condclause] = [[${kcond}${condclause}]]
-CondClause [klb p b krb] = [[${klb}${p}${b}${krb}]]
+Cond [kcond condclause] = [[if ${condclause}
+\}]]
+CondClause_rec [klb p b krb cont] = [[(${p}) {${b}
+\} else { if ${cont}]]
+CondClause_bottom [klb p b krb] = [[(${p}) {${b}
+\}]]
 
 WithLock [name kwith name2 klocked] = [[${name}${kwith}${name2}${klocked}]]
 
-Find_withParams [kfind name kin d kgiven pl karrow name2] = [[${kfind}${name}${kin}${d}${kgiven}${pl}${karrow}${name2}]]
-Find_withoutParams [kfind name kin d karrow name2] = [[${kfind}${name}${kin}${d}${karrow}${name2}]]
+Find_withParams [kfind name kin d kgiven pl karrow name2] = [[var ${name2} = this.find_${name}_in_${d} (${pl});]]
+Find_withoutParams [kfind name kin d karrow name2] = [[var ${name2} = find_${name}_in_${d} ();]]
 
-VarBox [kvar name karrow klb dl krb] = [[${kvar}${name}${karrow}${klb}${dl}${krb}]]
+VarBox [kvar name karrow klb dl krb] = [[var ${name} = \{${dl}\};]]
 
-Synonym [ksyn name keq dl] = [[${ksyn}${name}${keq}${dl}]]
+Synonym [ksyn name keq dl] = [[var ${name} = ${dl};]]
 
 ForEvery_sugaredWithParams [kfor kevery kitem kin d kgiven pl kassign name]
-  = [[${kfor}${kevery}${kitem}${kin}${d}${kgiven}${pl}${kassign}${name}]]
+  = [[var ${name} = ${d} (pl).forEach (item => {
+${kassign}]
 ForEvery_withParams [kfor kevery name1 kin d kgiven pl kassign name]
   = [[${kfor}${kevery}${name1}${kin}${d}${kgiven}${pl}${kassign}${name}]]
 ForEvery_sugaredWithoutParams [kfor kevery kitem kin d kassign name]
@@ -35,20 +47,20 @@ ForEvery_withoutParams [kfor kevery name1 kin d kassign name]
 
 
 
-Datum_field [n kof d] = [[${n}${kof}${d}]]
-Datum_dottedField [n kdot d] = [[${n}${kdot}${d}]]
+Datum_field [n kof d] = [[${d}${n}]]
+Datum_dottedField [n kdot d] = [[${n}.${d}]]
 Datum_solitary [n] = [[${n}]]
 Datum_meField [me kof d] = [[${me}${kof}${d}]]
-Datum_meDottedField [me kdot d] = [[${me}${kdot}${d}]]
-Datum_me [me] = [[${me}]]
+Datum_meDottedField [me kdot d] = [[this.${d}]]
+Datum_me [me] = [[this]]
 
-Predicate_eq [left eq right] = [[${left}${eq}${right}]]
-Predicate_ne [left eq right] = [[${left}${eq}${right}]]
+Predicate_eq [left eq right] = [[${left} === ${right}]]
+Predicate_ne [left eq right] = [[${left} !== ${right}]]
 
-ParameterList_list [d kx pl] = [[${d}${kx}${pl}]]
+ParameterList_list [d kx pl] = [[${d}, ${pl}]]
 ParameterList_solitary [d] = [[${d}]]
 
-DatumList_list [d1 kcomma d2] = [[${d1}${kcomma}${d2}]]
+DatumList_list [d1 kcomma d2] = [[${d1}, ${d2}]]
 DatumList_solitary [d] = [[${d}]]
 
 name [first @rest] = [[${first}${rest}]]
