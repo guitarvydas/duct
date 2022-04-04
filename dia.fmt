@@ -19,6 +19,12 @@ SynchronousCall_noparams [kat d1] = [[this.${d1} ();]]
 Box [klb bo @b krb] = [[\n${bo}${b}]]
 BoxOperation [op] = [[${op}]]
 
+When [kwhen kmessages @nb] = [[if (_me.inputQueue.length > 0) {${nb}\n\};]]
+
+Fetch [kfetch karrow d @nb] = [[var ${d} = _me.inputQueue.dequeue ();${nb}]]
+
+FindConnectionFromMe [kfind d kfrom kme kon kport d2 @nb] = [[var ${d} = _me.find_connection (${d2});${nb}]]
+
 Cond [kcond ccf ccr] = [[${ccf}${ccr}]]
 CondClause [klb p b krb] = [[(${p}) {${b}
 \}]]
@@ -48,10 +54,9 @@ ForEvery_withoutParams [kfor kevery name1 kin d kassign name @nb]
 
 Datum_field [n kof d] = [[${d}${n}]]
 Datum_dottedField [n kdot d] = [[${n}.${d}]]
-Datum_solitary [n] = [[${n}]]
-Datum_meField [me kof d] = [[${me}${kof}${d}]]
-Datum_meDottedField [me kdot d] = [[this.${d}]]
-Datum_me [me] = [[_me]]
+Datum_name [n] = [[${n}]]
+Datum_me [n] = [[_me]]
+Datum_port [n] = [[port]]
 
 Predicate_eq [left eq right] = [[${left} === ${right}]]
 Predicate_ne [left eq right] = [[${left} !== ${right}]]

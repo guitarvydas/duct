@@ -8,4 +8,5 @@ handling:
 	./dev.bash <handling.das >/tmp/handling.js
 
 identity:
-	./identity.bash
+	./identity.bash <routing.das
+	./identity.bash <handling.das

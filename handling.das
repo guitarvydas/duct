@@ -1,8 +1,8 @@
 implementation deliverInputMessageToAllChildrenOfSelf
-{ when has messages
+{ when messages
   { fetch => input_message
     { synonym message = input_message
-      { find connection from me on port message.port => connection
+      { find connection from me on port message.port
         { lock receivers of connection
           { for every receiver in connection => dest
             { synonym params = {me, message, receiver}
