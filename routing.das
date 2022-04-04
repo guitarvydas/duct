@@ -3,18 +3,18 @@ implementation routeChildrenOutputs
   { for every item in outputQueue of child => output_message
     { synonym message = output_message
       { find connection in me given child X message.port => connection
-        { for every receiver in connection => dest
-          { connection with receivers locked
-            { synonym params = {me, message, receiver}
-              { cond
-                { dest.component != me
-                  { @deliver_output_to_child_input <= params }
-                }
-                { dest.component == me
-                  { @deliver_output_to_me_output <= params }
-                }
-              }
-            }
+        { lock receivers of connection
+	  { for every receiver in connection => dest
+	      { synonym params = {me, message, receiver}
+		{ cond
+		  { dest.component != me
+		    { @deliver_output_to_child_input <= params }
+		  }
+		  { dest.component == me
+		    { @deliver_output_to_me_output <= params }
+		  }
+		}
+	    }
           }
         }
       }

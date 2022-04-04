@@ -25,7 +25,7 @@ FirstCondClause = CondClause
 RestCondClause = CondClause
 CondClause = "{" Predicate Box "}"
 
-WithLock = name "with" name "locked" NB?
+WithLock = "lock" "receivers" "of" name NB?
 
 Find
   = "find" name "in" Datum "given" ParameterList "=>" name NB? -- withParams
@@ -92,9 +92,10 @@ namecharRest = ~separator ~keyword ("_" | "A" .. "Z" | "a" .. "z" | "0" .. "9")
 
 keyword
   = ("implementation"
-  | "locked"
+  | "receivers"
   | "given"
   | "every"
+  | "lock"
   | "find"
   | "cond"
   | "with"
