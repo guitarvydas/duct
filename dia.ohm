@@ -14,18 +14,25 @@ Box = "{" BoxOperation Box? "}"
 BoxOperation
   = ForEvery
   | Synonym
+  | FindConnectionFromMe
   | Find
   | WithLock
   | Cond
   | VarBox
+  | When
+  | Fetch
   | SynchronousCall
+
+When = "when" "messages" NB?
+Fetch = "fetch" "=>" Datum NB?
+FindConnectionFromMe = "find" Datum "from" "me" "on" "port" Datum NB?
 
 Cond = "cond" FirstCondClause RestCondClause*
 FirstCondClause = CondClause
 RestCondClause = CondClause
 CondClause = "{" Predicate Box "}"
 
-WithLock = "lock" "receivers" "of" name NB?
+WithLock = "lock" "receivers" "of" Datum NB?
 
 Find
   = "find" name "in" Datum "given" ParameterList "=>" name NB? -- withParams
@@ -51,12 +58,11 @@ SynchronousCall
 
 
 Datum
-  = name "of" Datum -- field
-  | name "." Datum  -- dottedField
-  | name            -- solitary
-  | "me" "of" Datum -- meField
-  | "me" "." Datum  -- meDottedField
-  | "me"            -- me
+  = Datum "of" Datum -- field
+  | Datum "." Datum  -- dottedField
+  | kwPORT          -- port
+  | kwME            -- me
+  | name            -- name
 
 Predicate
   = Datum "==" Datum -- eq
@@ -91,22 +97,31 @@ namecharRest = ~separator ~keyword ("_" | "A" .. "Z" | "a" .. "z" | "0" .. "9")
     | eol
 
 keyword
-  = ("implementation"
-  | "receivers"
-  | "given"
-  | "every"
-  | "lock"
-  | "find"
-  | "cond"
-  | "with"
-  | "item"
-  | "sync"
-  | "for"
-  | "in"
-  | "of"
-  | "me"
-  | "X") 
-  ~namecharRest
+  = &(~namecharFirst)
+          ( "implementation"
+          | "receivers"
+          | "messages"
+          | "given"
+          | "every"
+          | "lock"
+          | "find"
+          | "from"
+          | "cond"
+          | "with"
+          | "when"
+          | "item"
+          | "sync"
+          | "port"
+          | "for"
+          | "in"
+          | "on"
+          | "of"
+          | "me"
+          | "X") 
+   &(~namecharRest)
+
+kwME = &(~namecharFirst) "me" &(~namecharRest)
+kwPORT = &(~namecharFirst) "port" &(~namecharRest)
 
 eol = "\n"
 
