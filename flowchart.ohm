@@ -1,0 +1,31 @@
+flowchart {
+
+Flowchart = "flowchart" name "{" Skewer+ "}"
+Skewer = "skewer" name "{" Action Action* "}"
+Action 
+  = Unless
+  | Jump
+  | Label
+  | Call
+
+Unless = "unless" name name
+Jump = ">" name
+Call = name
+Label = name ":"
+
+
+name = nameFirst nameRest*
+nameFirst = "_" | "-" | "A" .. "Z" | "a" .. "z"
+nameRest = "0" .. "9" | nameFirst
+
+string = dq (~dq any)* dq
+dq = "\""
+
+space
+ += comment
+
+comment
+  = "//" (~"\n" any)* "\n"  -- singleLine
+  | "/*" (~"*/" any)* "*/"  -- multiLine
+
+}

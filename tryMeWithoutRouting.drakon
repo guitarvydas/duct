@@ -1,0 +1,27 @@
+flowchart try-component {
+  skewer main {
+    unless has-children L1
+    run-each-child
+    unless child-produced-output L2
+    > produced-output
+  }
+  skewer try-self {
+    L1:
+    L2:
+    run-self
+    unless self-produced-output L3
+    > produced-output
+  }
+  skewer no-output {
+    L3:
+    send no-output t
+    > finished
+  }
+  skewer produced-output {
+    send produced-output t
+    > finished
+  }
+  skewer finished {
+    end
+  }
+}

@@ -1,0 +1,44 @@
+ty {
+
+Main = Typedef+
+
+Typedef = Synonym | ORtype | Fields | ExternalType
+
+Synonym
+  = name "=" TypeReference  -- ref
+  | name "=" ExternalType -- external
+  
+ORtype = TypeReference "|=" TypeReference MoreOr*
+MoreOr = "|" TypeReference
+Fields = TypeName "=" "{" TypeReference+ "}"
+ExternalType = ":" name
+
+
+TypeReference
+  = "[" TypeName "]" -- list
+  | TypeName         -- single
+  | string           -- string
+
+
+
+TypeName
+ = ":" name -- external
+ | name     -- name
+
+
+
+name = nameFirst nameRest*
+nameFirst = "_" | "-" | "A" .. "Z" | "a" .. "z"
+nameRest = "0" .. "9" | nameFirst
+
+string = dq (~dq any)* dq
+dq = "\""
+
+space
+ += comment
+
+comment
+  = "//" (~"\n" any)* "\n"  -- singleLine
+  | "/*" (~"*/" any)* "*/"  -- multiLine
+
+}
