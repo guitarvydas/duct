@@ -11,7 +11,7 @@ Synonym
 ORtype = name "|=" TypeReference MoreOr*
 MoreOr = "|" TypeReference
 Fields = TypeName "=" "{" TypeReference+ "}"
-ExternalType = ":" name
+ExternalType = "..." name
 
 
 TypeReference
@@ -22,18 +22,17 @@ TypeReference
 
 
 TypeName
- = ":" name -- external
+ = "..." name -- external
  | name     -- name
 
 
 
-keyword = nokw
+keyword = "..."
 
 
 
-nokw = "{"
 bracket = "{" | "}" | "(" | ")" | "[" | "]"
-separator = ":" | "|" | bracket
+separator = "." | ":" | "|" | bracket
 
 name = namecharFirst namecharRest*
 namecharFirst = ~keyword namechar 

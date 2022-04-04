@@ -1,17 +1,17 @@
 Main [@ty] = [[${ty}]]
 
-Typedef [tdef] = [[${tdef}]]
+Typedef [tdef] = [[\n${tdef}]]
 
-Synonym_ref [n keq ty] = [[${n}${keq}${ty}]]
-Synonym_external [n keq ext] = [[${n}${keq}${ext}]]
+Synonym_ref [n keq ty] = [[${n}${keq} ${ty}]]
+Synonym_external [n keq ext] = [[${n}${keq} ${ext}]]
   
-ORtype [n koreq tyref @more] = [[${n}${koreq}${tyref}${more}]]
-MoreOr [kor tyref] = [[${kor}${tyref}]]
-Fields [n keq lb @tyref rb] = [[${n}${keq}${lb}${tyref}${rb}]]
+ORtype [n koreq tyref @more] = [[${n}${koreq} ${tyref}${more}]]
+MoreOr [kor tyref] = [[${kor} ${tyref}]]
+Fields [n keq lb @tyref rb] = [[${n}${keq} ${lb}${tyref}${rb}]]
 ExternalType [kcolon n] = [[${kcolon}${n}]]
 
 
-TypeReference_list [lb n rb] = [[${lb}${n}${rb}]]
+TypeReference_list [lb n rb] = [[${lb}${n}${rb} ]]
 TypeReference_single [n] = [[${n}]]
 TypeReference_string [s] = [[${s}]]
 
@@ -27,7 +27,7 @@ TypeName_name [n] = [[${n}]]
 bracket [c] = [[${c}]]
 separator [c] = [[${c}]]
 
-name [first @rest] = [[${first}${rest}]]
+name [first @rest] = [[${first}${rest} ]]
 namecharFirst [c] = [[${c}]]
 namecharRest [c] = [[${c}]]
 

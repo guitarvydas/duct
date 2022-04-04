@@ -20,7 +20,7 @@ component-name = name
 net-name = name
 child-name = name
 kind = name
-name = :string
+name = ...string
 
 composition = {kind input-queue output-queue container table}
 
