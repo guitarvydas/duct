@@ -20,7 +20,7 @@ CondClause [klb p b krb] = [[${klb}${p}${b}${krb}]]
 FirstCondClause [c] = [[${c}]]
 RestCondClause [c] = [[${c}]]
 
-WithLock [name kwith name2 klocked @nb] = [[${name}${kwith}${name2}${klocked}${nb}]]
+WithLock [klock kreceivers kof name @nb] = [[${klock}${kreceivers}${kof}${name}${nb}]]
 
 Find_withParams [kfind name kin d kgiven pl karrow name2 @nb] = [[${kfind}${name}${kin}${d}${kgiven}${pl}${karrow}${name2}${nb}]]
 Find_withoutParams [kfind name kin d karrow name2 @nb] = [[${kfind}${name}${kin}${d}${karrow}${name2}${nb}]]
