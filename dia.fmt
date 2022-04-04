@@ -1,7 +1,7 @@
 Main [@i] = [[${i}]]
 Implementation [x] = [[${x}]]
 
-ContainerImplementation [ki name b] = [[${ki}${name}${b}]]
+ContainerImplementation [ki name b] = [[function ${name} () \{\n${b}\n\}]]
 
 SynchronousLeafImplementation_withFormals [ksync name karrow dl b] = [[
 
@@ -35,13 +35,13 @@ VarBox [kvar name karrow klb dl krb @nb] = [[var ${name} = \{${dl}\};${nb}]]
 Synonym [ksyn name keq dl @nb] = [[var ${name} = ${dl};${nb}]]
 
 ForEvery_sugaredWithParams [kfor kevery kitem kin d kgiven pl kassign name @nb]
-  = [[${kfor}${kevery}${kitem}${kin}${d}${kgiven}${pl}${kassign}${name}${nb}]]
+  = [[var ${name} = ${d} (${pl}).forEach (item => \{${nb}\n\}]]
 ForEvery_withParams [kfor kevery name1 kin d kgiven pl kassign name @nb]
-  = [[${kfor}${kevery}${name1}${kin}${d}${kgiven}${pl}${kassign}${name}${nb}]]
+  = [[var ${name} = ${d} (${pl}).forEach (${name1} => \{${nb}\n\}]]
 ForEvery_sugaredWithoutParams [kfor kevery kitem kin d kassign name @nb]
-  = [[${kfor}${kevery}${kitem}${kin}${d}${kassign}${name}${nb}]]
+  = [[var ${name} = ${d}.forEach (item => \{${nb}\n\}]]
 ForEvery_withoutParams [kfor kevery name1 kin d kassign name @nb]
-  = [[${kfor}${kevery}${name1}${kin}${d}${kassign}${name}${nb}]]
+  = [[var ${name} = ${d}.forEach (${name1} => \{${nb}\n\}]]
 
 
 
