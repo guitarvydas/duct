@@ -2,7 +2,7 @@ all:
 	./run-simple.bash
 
 dev:
-	./dev.bash
+	./dev.bash >junk.js
 
 identity:
 	./identity.bash

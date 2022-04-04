@@ -1,20 +1,20 @@
 Main [@i] = [[${i}]]
 Implementation [x] = [[${x}]]
 
-ContainerImplementation [ki name b] = [[function ${name} () \{\n${b}\n\}]]
+ContainerImplementation [ki name b] = [[this.${name} = function () \{\nvar _me = this;${b}\n\}]]
 
 SynchronousLeafImplementation_withFormals [ksync name karrow dl b] = [[
 
-function ${name} (${dl}) {${b}
+this.${name} = function (${dl}) {${b}
 \}]]
 
 SynchronousLeafImplementation_withoutFormals [ksync name b] = [[
 
-function ${name} () {${b}
+this.${name} = function () {${b}
 \}]]
 
-SynchronousCall_params [kat d1 karrow d2] = [[${d1} (${d2});]]
-SynchronousCall_noparams [kat d1] = [[${d1} ();]]
+SynchronousCall_params [kat d1 karrow d2] = [[this.${d1} (${d2});]]
+SynchronousCall_noparams [kat d1] = [[this.${d1} ();]]
 
 Box [klb bo @b krb] = [[\n${bo}${b}]]
 BoxOperation [op] = [[${op}]]
@@ -25,14 +25,15 @@ CondClause [klb p b krb] = [[(${p}) {${b}
 FirstCondClause [cc] = [[if ${cc}]]
 RestCondClause [cc] = [[ else if ${cc}]]
 
-WithLock [name kwith name2 klocked @nb] = [[${name}.${name2}_${klocked}${nb}]]
+WithLock [name kwith name2 klocked @nb] = [[this.${name}.${name2}_${klocked} ();${nb}]]
 
 Find_withParams [kfind name kin d kgiven pl karrow name2 @nb] = [[var ${name2} = this.find_${name}_in_${d} (${pl});${nb}]]
-Find_withoutParams [kfind name kin d karrow name2 @nb] = [[var ${name2} = find_${name}_in_${d} ();${nb}]]
+Find_withoutParams [kfind name kin d karrow name2 @nb] = [[var ${name2} = this.find_${name}_in_${d} ();${nb}]]
 
-VarBox [kvar name karrow klb dl krb @nb] = [[var ${name} = \{${dl}\};${nb}]]
+VarBox [kvar name karrow klb dl krb @nb] = [[var ${name} = \[${dl}\];${nb}]]
 
-Synonym [ksyn name keq dl @nb] = [[var ${name} = ${dl};${nb}]]
+Synonym_obj [ksyn name keq klb dl krb @nb] = [[var ${name} = \[${dl}\];${nb}]]
+Synonym_solitary [ksyn name keq dl @nb] = [[var ${name} = ${dl};${nb}]]
 
 ForEvery_sugaredWithParams [kfor kevery kitem kin d kgiven pl kassign name @nb]
   = [[var ${name} = ${d} (${pl}).forEach (item => \{${nb}\n\});]]
@@ -50,7 +51,7 @@ Datum_dottedField [n kdot d] = [[${n}.${d}]]
 Datum_solitary [n] = [[${n}]]
 Datum_meField [me kof d] = [[${me}${kof}${d}]]
 Datum_meDottedField [me kdot d] = [[this.${d}]]
-Datum_me [me] = [[this]]
+Datum_me [me] = [[_me]]
 
 Predicate_eq [left eq right] = [[${left} === ${right}]]
 Predicate_ne [left eq right] = [[${left} !== ${right}]]
