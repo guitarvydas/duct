@@ -20,10 +20,10 @@ BoxOperation
   | VarBox
   | SynchronousCall
 
-Cond = "cond" CondClause+
-CondClause
-  = "{" Predicate BoxOperation NB "}" -- rec
-  | "{" Predicate BoxOperation "}"    -- bottom
+Cond = "cond" FirstCondClause RestCondClause*
+FirstCondClause = CondClause
+RestCondClause = CondClause
+CondClause = "{" Predicate Box "}"
 
 WithLock = name "with" name "locked" NB?
 
