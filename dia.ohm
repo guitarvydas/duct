@@ -21,7 +21,9 @@ BoxOperation
   | SynchronousCall
 
 Cond = "cond" CondClause+
-CondClause = "{" Predicate NB? "}"
+CondClause
+  = "{" Predicate BoxOperation NB "}" -- rec
+  | "{" Predicate BoxOperation "}"    -- bottom
 
 WithLock = name "with" name "locked" NB?
 

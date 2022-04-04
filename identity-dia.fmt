@@ -16,7 +16,8 @@ Box [klb bo @b krb] = [[${klb}${bo}${b}${krb}]]
 BoxOperation [op] = [[${op}]]
 
 Cond [kcond @condclause] = [[${kcond}${condclause}]]
-CondClause [klb p @nb krb] = [[${klb}${p}${nb}${krb}]]
+CondClause_rec [klb p b nb krb] = [[${klb}${p}${b}${nb}${krb}]]
+CondClause_bottom [klb p b krb] = [[${klb}${p}${b}${krb}]]
 
 WithLock [name kwith name2 klocked @nb] = [[${name}${kwith}${name2}${klocked}${nb}]]
 

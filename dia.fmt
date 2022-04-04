@@ -21,7 +21,7 @@ BoxOperation [op] = [[${op}]]
 
 Cond [kcond condclause] = [[if ${condclause}
 \}]]
-CondClause [klb p b krb cont] = [[(${p}) {${b}
+CondClause_rec [klb p nb krb cont] = [[(${p}) {${nb}
 \} else { if ${cont}]]
 CondClause_bottom [klb p b krb] = [[(${p}) {${b}
 \}]]
