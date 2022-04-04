@@ -33,7 +33,9 @@ Find
 
 VarBox = "var" name "<=" "{" DatumList "}" NB?
 
-Synonym = "synonym" name "=" DatumList NB?
+Synonym 
+  = "synonym" name "=" "{" DatumList "}" NB? -- obj
+  | "synonym" name "=" Datum NB?             -- solitary
 
 ForEvery
   = "for" "every" "item" "in" Datum "given" ParameterList "=>" name NB? -- sugaredWithParams
