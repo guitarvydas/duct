@@ -9,29 +9,32 @@ SynchronousLeafImplementation_withoutFormals [ksync name b] = ][[${ksync}${name}
 SynchronousCall_params [kat d1 karrow d2] = [[${kat}${d1}${karrow}${d2}]]
 SynchronousCall_noparams [kat d1] = [[${kat}${d1}]]
 
+SequenceOfBoxes [@nb] = [[${nb}]]
+NestedBox [b] = [[${b}]]
+NB [b] = [[${b}]]
 Box [klb bo @b krb] = [[${klb}${bo}${b}${krb}]]
 BoxOperation [op] = [[${op}]]
 
 Cond [kcond @condclause] = [[${kcond}${condclause}]]
-CondClause [klb p b krb] = [[${klb}${p}${b}${krb}]]
+CondClause [klb p @nb krb] = [[${klb}${p}${nb}${krb}]]
 
-WithLock [name kwith name2 klocked] = [[${name}${kwith}${name2}${klocked}]]
+WithLock [name kwith name2 klocked @nb] = [[${name}${kwith}${name2}${klocked}${nb}]]
 
-Find_withParams [kfind name kin d kgiven pl karrow name2] = [[${kfind}${name}${kin}${d}${kgiven}${pl}${karrow}${name2}]]
-Find_withoutParams [kfind name kin d karrow name2] = [[${kfind}${name}${kin}${d}${karrow}${name2}]]
+Find_withParams [kfind name kin d kgiven pl karrow name2 @nb] = [[${kfind}${name}${kin}${d}${kgiven}${pl}${karrow}${name2}${nb}]]
+Find_withoutParams [kfind name kin d karrow name2 @nb] = [[${kfind}${name}${kin}${d}${karrow}${name2}${nb}]]
 
-VarBox [kvar name karrow klb dl krb] = [[${kvar}${name}${karrow}${klb}${dl}${krb}]]
+VarBox [kvar name karrow klb dl krb @nb] = [[${kvar}${name}${karrow}${klb}${dl}${krb}${nb}]]
 
-Synonym [ksyn name keq dl] = [[${ksyn}${name}${keq}${dl}]]
+Synonym [ksyn name keq dl @nb] = [[${ksyn}${name}${keq}${dl}${nb}]]
 
-ForEvery_sugaredWithParams [kfor kevery kitem kin d kgiven pl kassign name]
-  = [[${kfor}${kevery}${kitem}${kin}${d}${kgiven}${pl}${kassign}${name}]]
-ForEvery_withParams [kfor kevery name1 kin d kgiven pl kassign name]
-  = [[${kfor}${kevery}${name1}${kin}${d}${kgiven}${pl}${kassign}${name}]]
-ForEvery_sugaredWithoutParams [kfor kevery kitem kin d kassign name]
-  = [[${kfor}${kevery}${kitem}${kin}${d}${kassign}${name}]]
-ForEvery_withoutParams [kfor kevery name1 kin d kassign name]
-  = [[${kfor}${kevery}${name1}${kin}${d}${kassign}${name}]]
+ForEvery_sugaredWithParams [kfor kevery kitem kin d kgiven pl kassign name @nb]
+  = [[${kfor}${kevery}${kitem}${kin}${d}${kgiven}${pl}${kassign}${name}${nb}]]
+ForEvery_withParams [kfor kevery name1 kin d kgiven pl kassign name @nb]
+  = [[${kfor}${kevery}${name1}${kin}${d}${kgiven}${pl}${kassign}${name}${nb}]]
+ForEvery_sugaredWithoutParams [kfor kevery kitem kin d kassign name @nb]
+  = [[${kfor}${kevery}${kitem}${kin}${d}${kassign}${name}${nb}]]
+ForEvery_withoutParams [kfor kevery name1 kin d kassign name @nb]
+  = [[${kfor}${kevery}${name1}${kin}${d}${kassign}${name}${nb}]]
 
 
 

@@ -2,16 +2,15 @@ dia {
   Main = Implementation+
   Implementation = ContainerImplementation | SynchronousLeafImplementation
 
-ContainerImplementation = "implementation" name Box
+ContainerImplementation = "implementation" name SequenceOfBoxes
 SynchronousLeafImplementation 
   = "sync" name "<=" DatumList Box -- withFormals
   | "sync" name                Box -- withoutFormals
 
-SynchronousCall 
-  = "@" Datum "<=" Datum -- params
-  | "@" Datum            -- noparams
-
-Box = "{" BoxOperation Box* "}"
+SequenceOfBoxes = NestedBox+
+NestedBox = Box
+NB = NestedBox
+Box = "{" BoxOperation Box? "}"
 BoxOperation
   = ForEvery
   | Synonym
@@ -22,22 +21,29 @@ BoxOperation
   | SynchronousCall
 
 Cond = "cond" CondClause+
-CondClause = "{" Predicate Box "}"
+CondClause = "{" Predicate NB? "}"
 
-WithLock = name "with" name "locked"
+WithLock = name "with" name "locked" NB?
+
 Find
-  = "find" name "in" Datum "given" ParameterList "=>" name -- withParams
-  | "find" name "in" Datum "=>" name                       -- withoutParams
+  = "find" name "in" Datum "given" ParameterList "=>" name NB? -- withParams
+  | "find" name "in" Datum "=>" name                       NB? -- withoutParams
 
-VarBox = "var" name "<=" "{" DatumList "}"
+VarBox = "var" name "<=" "{" DatumList "}" NB?
 
-Synonym = "synonym" name "=" DatumList
+Synonym = "synonym" name "=" DatumList NB?
+
 ForEvery
-  = "for" "every" "item" "in" Datum "given" ParameterList "=>" name -- sugaredWithParams
-  | "for" "every" name "in" Datum "given" ParameterList "=>" name -- withParams
-  | "for" "every" "item" "in" Datum  "=>" name -- sugaredWithoutParams
-  | "for" "every" name "in" Datum  "=>" name -- withoutParams
+  = "for" "every" "item" "in" Datum "given" ParameterList "=>" name NB? -- sugaredWithParams
+  | "for" "every" name "in" Datum "given" ParameterList "=>" name NB? -- withParams
+  | "for" "every" "item" "in" Datum  "=>" name NB? -- sugaredWithoutParams
+  | "for" "every" name "in" Datum  "=>" name NB? -- withoutParams
 
+
+SynchronousCall
+  // no nesting here - Call is a Leaf, not a nested box
+  = "@" Datum "<=" Datum -- params
+  | "@" Datum            -- noparams
 
 
 Datum
