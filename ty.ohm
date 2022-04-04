@@ -8,7 +8,7 @@ Synonym
   = name "=" TypeReference  -- ref
   | name "=" ExternalType -- external
   
-ORtype = TypeReference "|=" TypeReference MoreOr*
+ORtype = name "|=" TypeReference MoreOr*
 MoreOr = "|" TypeReference
 Fields = TypeName "=" "{" TypeReference+ "}"
 ExternalType = ":" name
@@ -27,12 +27,20 @@ TypeName
 
 
 
-name = nameFirst nameRest*
-nameFirst = "_" | "-" | "A" .. "Z" | "a" .. "z"
-nameRest = "0" .. "9" | nameFirst
+keyword = nokw
 
-string = dq (~dq any)* dq
-dq = "\""
+
+
+nokw = "{"
+bracket = "{" | "}" | "(" | ")" | "[" | "]"
+separator = ":" | "|" | bracket
+
+name = namecharFirst namecharRest*
+namecharFirst = ~keyword namechar 
+namecharRest = ~keyword namechar
+
+namechar = ~space ~separator any
+
 
 space
  += comment
@@ -40,5 +48,8 @@ space
 comment
   = "//" (~"\n" any)* "\n"  -- singleLine
   | "/*" (~"*/" any)* "*/"  -- multiLine
+
+string = dq (~dq any)* dq
+dq = "\""
 
 }
