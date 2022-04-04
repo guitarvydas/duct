@@ -1,4 +1,4 @@
-all: routing
+all: routing handling
 	./run-simple.bash
 
 routing:
@@ -10,3 +10,6 @@ handling:
 identity:
 	./identity.bash <routing.das
 	./identity.bash <handling.das
+
+dev:
+	./identity-flowchart.bash <tryMeWithoutRouting.drakon
