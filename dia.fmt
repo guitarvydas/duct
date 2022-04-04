@@ -25,7 +25,7 @@ CondClause [klb p b krb] = [[(${p}) {${b}
 FirstCondClause [cc] = [[if ${cc}]]
 RestCondClause [cc] = [[ else if ${cc}]]
 
-WithLock [name kwith name2 klocked @nb] = [[this.${name}.${name2}_${klocked} ();${nb}]]
+WithLock [name kwith name2 klocked @nb] = [[this.${name}.${name2}.lock ();${nb}\nthis.${name}.${name2}.unlock ();]]
 
 Find_withParams [kfind name kin d kgiven pl karrow name2 @nb] = [[var ${name2} = this.find_${name}_in_${d} (${pl});${nb}]]
 Find_withoutParams [kfind name kin d karrow name2 @nb] = [[var ${name2} = this.find_${name}_in_${d} ();${nb}]]
