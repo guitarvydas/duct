@@ -9,7 +9,7 @@ SynchronousLeafImplementation_withoutFormals [ksync name b] = ][[${ksync}${name}
 SynchronousCall_params [kat d1 karrow d2] = [[${kat}${d1}${karrow}${d2}]]
 SynchronousCall_noparams [kat d1] = [[${kat}${d1}]]
 
-Box = [klb bo @b krb] = [[${klb}${bo}${b}${krb}]]
+Box [klb bo @b krb] = [[${klb}${bo}${b}${krb}]]
 BoxOperation [op] = [[${op}]]
 
 Cond [kcond @condclause] = [[${kcond}${condclause}]]
@@ -22,7 +22,7 @@ Find_withoutParams [kfind name kin d karrow name2] = [[${kfind}${name}${kin}${d}
 
 VarBox [kvar name karrow klb dl krb] = [[${kvar}${name}${karrow}${klb}${dl}${krb}]]
 
-Synonym [ksyn name keq dl] = [[${ksym}${name}${keq}${dl}]]
+Synonym [ksyn name keq dl] = [[${ksyn}${name}${keq}${dl}]]
 
 ForEvery_sugaredWithParams [kfor kevery kitem kin d kgiven pl kassign name]
   = [[${kfor}${kevery}${kitem}${kin}${d}${kgiven}${pl}${kassign}${name}]]
@@ -36,11 +36,11 @@ ForEvery_withoutParams [kfor kevery name1 kin d kassign name]
 
 
 Datum_field [n kof d] = [[${n}${kof}${d}]]
-Datum_dotted [n kdot d] = [[${n}${kdot}${d}]]
+Datum_dottedField [n kdot d] = [[${n}${kdot}${d}]]
 Datum_solitary [n] = [[${n}]]
-Datum_mefield [me kof d] = [[${me}${kof}${d}]]
+Datum_meField [me kof d] = [[${me}${kof}${d}]]
 Datum_meDottedField [me kdot d] = [[${me}${kdot}${d}]]
-Datum_me [md] = [[${me}]]
+Datum_me [me] = [[${me}]]
 
 Predicate_eq [left eq right] = [[${left}${eq}${right}]]
 Predicate_ne [left eq right] = [[${left}${eq}${right}]]
