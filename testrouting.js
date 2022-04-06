@@ -1,8 +1,18 @@
 
 function Sb () {
     var lambdas = {
-	sb D: function (_label) {
-	    this.panic ("sb", _label); 
+	sb: function (_label) {
+	    if (_label === 0) {
+		this.func1 ();
+
+		return sb (7);
+	    } else if (_label === 7) {
+		this.func2 ();
+
+
+	    } else {
+		this.panic ("sb", _label); 
+	    }
 	},
 	_endoflambdas: null
     };

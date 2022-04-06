@@ -1,4 +1,7 @@
 flowchart Sb {
   skewer sb {
+    func1
+    : sb/7
+    func2
   }
 }
