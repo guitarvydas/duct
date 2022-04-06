@@ -1,4 +1,5 @@
 var queue = require('./queue');
+var handling = require('./handling');
 
 function Composition (kind, container) {
     this.kind = null;
@@ -124,35 +125,7 @@ function Composition (kind, container) {
     
     
     // route Container input to children (or $me's output)
-    this.containerDeliverInputMessageToAllChildrenOrSelf = function (message) {
-	let connection = this.findConnectionFromSelfInput (message.etag);
-	connection.lockReceivers ();
-	connection.receivers.forEach (destination => {
-	    if (destination.component === this) {
-		this.deliverInputToOwnOutput (message, destination.port);
-	    } else {
-		this.deliverInputToInputOfChild (message, destination.port);
-	    }
-	});
-	connection.unlockReceivers ();
-    }
-
-    this.deliverInputToOwnOutput = function (message, ouputPort) {
-	niy;
-    }
-
-    this.deliverInputToInputOfChild = function (message, inputPort) {
-	niy;
-    }
-
-/// Routing outputs from children (and $me)
-    this.routeChildrenOutputs = function () {
-	niy;
-    }
-
-    // helpers
-    this.findConnectionFromSelfInput = function (etag) {
-	niy ();
-    }
+    this.defaultContainerHandler =
+	handling.deliverInputMessageToAllChildrenOfSelf;
     
 }
