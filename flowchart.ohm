@@ -1,7 +1,12 @@
 flowchart {
 
 Flowchart = "flowchart" name "{" Skewer+ "}"
-Skewer = "skewer" name "{" Action? LabelledAction* "}"
+Skewer
+  = "skewer" name "{" Action LabelledAction+ "}" -- both
+  | "skewer" name "{" Action "}"                 -- actiononly
+  | "skewer" name "{" LabelledAction+ "}"        -- labelledactionsonly
+  | "skewer" name "{" "}"                        -- neither
+  
 Action 
   = Unless
   | Jump
