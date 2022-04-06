@@ -6,26 +6,33 @@ return function () { this.lambdas.main (0); }
 \}]]
 
 
-Skewer [ksk name lb a rb] = [[\n\n${name}: function (_label) {
-${a}
+Skewer [ksk name lb a @la rb] = [[\n\n${name}: function (_label) {
+if (_label === 0) {
+{${a}\}
+${la}
 else {
 this.panic (); 
 }
 }
-return this.${name} (1);
 }\,]]
 
-Action [a] = [[\nif (_label === 0) {${a}
-}]]]]
-LabelledAction [name kslash index kcolon @cont] = [[\nreturn ${name} (${index});
-else if (_label === ${index}) \{${cont}
+Action [a] = [[\nif (_label === 0) {
+${a}
+}]]
+
+LabelledAction [kcolon ldef @cont] = [[\nreturn ${support.formatLabelFunction (ldef)};
+} else if (_label === ${support.formatIndex (ldef)}) \{${cont}
 \}]]
 
-Unless [ku n1 n2 kslash index @cont]
-  = [[if (!this.${n1} ()) { U0;
-return this.${n2} (${index});
-U1; } else { U1;${cont}
-U0; }]]
+Unless [ku n1 lref @cont]
+  = [[if (!this.${n1} ()) {
+U0;
+return this.${lref} (${support.formatIndex (lref)});
+U1;
+} else {
+U1;
+${cont}
+U0;}]]
 
 Jump [k n @cont] = [[return this.${n} ();${cont}]]
 Call [n @cont] = [[this.${n} ();${cont}]]

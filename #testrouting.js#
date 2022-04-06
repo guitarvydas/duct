@@ -1,0 +1,62 @@
+
+function Try_component () {
+    var lambdas = {
+
+	a: function (_label) {
+	    if (_label === 0) {
+		{}
+
+		else {
+		    this.panic (); 
+		}
+	    }
+	},
+
+	b: function (_label) {
+	    if (_label === 0) {
+		{
+		    if (_label === 0) {
+			this.c ();
+		    }}
+
+		else {
+		    this.panic (); 
+		}
+	    }
+	},
+
+	try_self: function (_label) {
+	    if (_label === 0) {
+		{}
+
+		return try_self (1);
+	    } else if (_label === 1) {
+	    }
+	    return try_self (2);
+	} else if (_label === 2) {
+	    if (_label === 0) {
+		this.run_self ();
+		if (_label === 0) {
+		    if (!this.self_produced_output ()) {
+			U0;
+			return this.no_output/3 (3);
+			U1;
+		    } else {
+			U1;
+
+			if (_label === 0) {
+			    return this.produced_output ();
+			}
+			U0;}
+		}
+	    }
+	}
+	else {
+	    this.panic (); 
+	}
+    }
+},
+null
+}
+return function () { this.lambdas.main (0); }
+}
