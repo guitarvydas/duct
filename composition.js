@@ -1,4 +1,4 @@
-import queue;
+var queue = require('./queue');
 
 function Composition (kind, container) {
     this.kind = null;
@@ -37,7 +37,7 @@ function Composition (kind, container) {
 	this.runComponent ();
     }
 
-    this.runComponent () {
+    this.runComponent = function () {
 	this.runComponentWithoutRouting ();
 	this.routeChildrenOutputs ();
     }

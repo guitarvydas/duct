@@ -1,5 +1,8 @@
-import top
-var component = new Top ();
+var top = require ('./top');
+var component = new top.Top ();
 
-component.initially ('junk.txt', 'junk.out');
-
+component.begin ('junk.txt', 'junk.out');
+// component.route ();
+// component.dispatch ();
+// component.route ();
+// component.finish ();

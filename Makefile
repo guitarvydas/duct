@@ -4,10 +4,10 @@ all: routing handling
 dev: tyIdentity
 
 routing:
-	./dev.bash <routing.das >/tmp/routing.js
+	./dev.bash <routing.das >routing.js
 
 handling:
-	./dev.bash <handling.das >/tmp/handling.js
+	./dev.bash <handling.das >handling.js
 
 identity: fcIdentity
 	./identity.bash <routing.das

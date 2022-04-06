@@ -1,15 +1,15 @@
-const eh = require('composition');
+const eh = require('./composition');
 const fs = require('fs');
 
 var signature = {
     name: "read",
     kind: "leaf",
     inputs: [
-	{ "filename", ["filename"] },
-	{ "req", ["req"] }
+	{ "name": "filename", "structure": ["filename"] },
+	{ "name":"req", "structure":["req"] }
     ],
     outputs: [
-	{ "char", ["char"] }
+	{ "name": "char", "structure": ["char"] }
     ]
 };
 

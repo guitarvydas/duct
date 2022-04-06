@@ -1,14 +1,14 @@
-const eh = require('composition');
+const eh = require('./composition');
 
 var signature = {
     name: "write",
     kind: "leaf",
     inputs: [
-	{ "filename", ["filename"] },
-	{ "char", ["char"] }
+	{ "name": "filename", "structure": ["filename"] },
+	{ "name": "char", "structure": ["char"] }
     ],
     outputs: [
-	{ "request", ["request"] }
+	{ "name": "request", "structure": ["request"] }
     ]
 };
 
@@ -27,7 +27,7 @@ var implementation = {
     }
 }
 
-function Write (this) {
+function Write () {
     this.signature = signature;
     this.implementation = implementation;
     this.makeRunnable = function (container) {
