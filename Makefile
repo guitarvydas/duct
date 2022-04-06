@@ -17,7 +17,7 @@ fcIdentity:
 	./identity-flowchart.bash <tryMeWithoutRouting.drakon
 
 fc:
-	./flowchart.bash <tryMeWithoutRouting.drakon
+	./flowchart.bash <tryMeWithoutRouting.drakon >tryMeWithoutRouting.js
 
 tyIdentity:
 	./identity-ty.bash <mp.ty

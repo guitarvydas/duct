@@ -1,22 +1,37 @@
-Flowchart [kfc name lb @sk rb] = [[${kfc}${name}${lb}${sk}${rb}]]
-Skewer [ksk name lb a rb] = [[${ksk}${name}${lb}${a}${rb}]]
-Action [a] = [[${a}]]
+Flowchart [kfc name lb @sk rb] = [[\nfunction ${name} () \{
+var lambdas = \{${sk}
+null
+\}
+return function () { this.lambdas.main (0); }
+\}]]
+
+
+Skewer [ksk name lb a rb] = [[\n\n${name}: function (_label) \{
+if (_label === 0) {${a}
+\}
+\}\,]]
+
+Action [a] = [[\n${a}]]
 
 Unless [ku n1 n2 kslash index @cont]
-  = [[\nif (!this.${n1} ()) \{
+  = [[if (!this.${n1} ()) \{
 return this.${n2} (${index});
-\} else \{${cont}\}]]
+\} else \{${cont}
+\}]]
 
-Jump [k n @cont] = [[\nreturn this.${n} ();${cont}]]
-Call [n @cont] = [[\nthis.${n} ();${cont}]]
-Label [n kcolon @cont] = [[${n}${kcolon}${cont}]]
-Send [n v @cont] = [[\nthis.send (${n}, ${v});${cont}]]
+Jump [k n @cont] = [[return this.${n} ();${cont}]]
+Call [n @cont] = [[this.${n} ();${cont}]]
+Label [n kcolon @cont] = [[else if (_label === ${n}) \{${cont}
+\}]]
+Send [ksend n v @cont] = [[this.send ("${n}", ${v});${cont}]]
 
 
 bracket [c] = [[${c}]]
 separator [c] = [[${c}]]
 
-name [first @rest] = [[${support.mangle (first + rest)}]]
+name_trigger [k] = [[true]]
+name_name [n] = [[${n}]]
+namestring [first @rest] = [[${support.mangle (first + rest)}]]
 namecharFirst [c] = [[${c}]]
 namecharRest [c] = [[${c}]]
 

@@ -11,16 +11,24 @@ Action
 
 Unless = "unless" name name "/" name Action?
 Jump = ">" name Action?
+Send = "send" name Value Action?
 Call = name Action?
-Send = name Value Action?
 Label = number ":" Action?
 
-keyword = "flowchart" | "skewer"
+keyword = (
+    "flowchart" 
+  | "skewer" 
+  | "send" 
+  | "_"
+  ) ~namecharRest
 
 bracket = "{" | "}" | "(" | ")" | "[" | "]"
 separator = ":" | ">" | "/" | bracket
 
-name = namecharFirst namecharRest*
+name
+  = "_"        -- trigger
+  | namestring -- name 
+namestring = namecharFirst namecharRest*
 namecharFirst = ~keyword namechar 
 namecharRest = ~keyword namechar
 
@@ -41,5 +49,6 @@ dq = "\""
 Value = name | number
 
 }
+
 
 

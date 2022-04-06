@@ -4,15 +4,17 @@ Action [a] = [[${a}]]
 
 Unless [ku n1 n2 kslash index @cont] = [[${ku}${n1}${n2}${kslash}${index}${cont}]]
 Jump [k n @cont] = [[${k}${n}${cont}]]
-Call [n @cont] = [[${n}${cont}]]
-Send [n v @cont] = [[${n}${v}${cont}]]
+Send [ksend n v @cont] = [[${ksend}${n}${v}${cont}]]
 Label [n kcolon @cont] = [[${n}${kcolon}${cont}]]
+Call [n @cont] = [[${n}${cont}]]
 
 
 bracket [c] = [[${c}]]
 separator [c] = [[${c}]]
 
-name [first @rest] = [[${first}${rest}]]
+name_trigger [k] = [[${k}]]
+name_name [n] = [[${n}]]
+namestring [first @rest] = [[${first}${rest}]]
 namecharFirst [c] = [[${c}]]
 namecharRest [c] = [[${c}]]
 

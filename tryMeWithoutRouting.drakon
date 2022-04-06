@@ -14,11 +14,11 @@ flowchart Try-component {
   }
   skewer no-output {
     3:
-    send no-output t
+    send no-output _
     > finished
   }
   skewer produced-output {
-    send produced-output t
+    send produced-output _
     > finished
   }
   skewer finished {
