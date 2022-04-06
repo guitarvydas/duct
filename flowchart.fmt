@@ -1,20 +1,21 @@
 Flowchart [kfc name lb @sk rb] = [[${kfc}${name}${lb}${sk}${rb}]]
-
-Skewer [ksk name lb a @morea rb] = [[${ksk}${name}${lb}${a}${morea}${rb}]]
-
+Skewer [ksk name lb a rb] = [[${ksk}${name}${lb}${a}${rb}]]
 Action [a] = [[${a}]]
 
-Unless [ku n1 n2 kslash index] = [[${ku}${n1}${n2}${kslash}${index}]]
+Unless [ku n1 n2 kslash index @cont]
+  = [[\nif (!this.${n1} ()) \{
+return this.${n2} (${index});
+\} else \{${cont}\}]]
 
-Jump [k n] = [[${k}${n}]]
-Call [n] = [[${n}]]
-Label [n kcolon] = [[${n}${kcolon}]]
+Jump [k n @cont] = [[\nreturn this.${n} ();${cont}]]
+Call [n @cont] = [[\nthis.${n} ();${cont}]]
+Label [n kcolon @cont] = [[${n}${kcolon}${cont}]]
 
 
 bracket [c] = [[${c}]]
 separator [c] = [[${c}]]
 
-name [first @rest] = [[${first}${rest}]]
+name [first @rest] = [[${support.mangle (first + rest)}]]
 namecharFirst [c] = [[${c}]]
 namecharRest [c] = [[${c}]]
 
