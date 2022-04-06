@@ -14,7 +14,7 @@ this.panic ();
 }
 }\,]]
 
-Action [a] = [[\nif (_label === 0) {
+Action [a] = [[
 ${a}
 }]]
 
