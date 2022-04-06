@@ -3,9 +3,11 @@ function Try_component () {
     var lambdas = {
 	Try_component: function (_label) {
 	    if (_label === 0) {
-		this.send ("portabc", true);
-		this.send ("portabc", 123);
-		this.send ("portabc", "def");
+		if (!this.pred ()) {
+		    return this.dest (5);
+		} else {
+
+		    ;}
 	    } else {
 		this.panic (_label); 
 	    }

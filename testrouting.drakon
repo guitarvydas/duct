@@ -1,7 +1,5 @@
 flowchart Try-component {
   skewer Try-component {
-    send portabc _
-    send portabc 123
-    send portabc "def"
+    unless pred dest/5
   }
 }

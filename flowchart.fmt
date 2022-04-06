@@ -22,7 +22,7 @@ LabelledAction [kcolon ldef @cont] = [[\nreturn ${support.formatLabelFunction (l
 
 Unless [ku n1 lref @cont]
   = [[if (!this.${n1} ()) {
-return this.${lref} (${support.formatIndex (lref)});
+return this.${support.formatLabelFunction (lref)};
 } else {
 ${cont}
 ;}]]
