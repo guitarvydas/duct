@@ -4,6 +4,7 @@ function Try_component () {
 	Try_component: function (_label) {
 	    if (_label === 0) {
 		this.func ();
+		this.gof ();
 	    } else {
 		this.panic (_label); 
 	    }
