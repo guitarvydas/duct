@@ -1,6 +1,5 @@
 flowchart Try-component {
   skewer Try-component {
-  }
-  skewer skewerb {
+    > skewerb/0
   }
 }

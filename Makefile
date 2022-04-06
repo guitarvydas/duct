@@ -1,8 +1,7 @@
 all: routing handling
 	./run-simple.bash
 
-dev: fcIdentity fctest
-
+dev: fci
 
 routing:
 	./dev.bash <routing.das >routing.js
@@ -13,6 +12,9 @@ handling:
 identity: fcIdentity
 	./identity.bash <routing.das
 	./identity.bash <handling.das
+
+fci:
+	./identity-flowchart.bash <testrouting.drakon
 
 fcIdentity:
 	./identity-flowchart.bash <tryMeWithoutRouting.drakon

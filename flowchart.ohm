@@ -10,7 +10,7 @@ Action
 
 LabelledAction = ":" LabelDef Action?
 Unless = "unless" name LabelRef Action?
-Jump = ">" name Action?
+Jump = ">" LabelRef Action?
 Send = "send" name Value Action?
 Call = MethodRef Action?
 
