@@ -6,14 +6,14 @@ flowchart Try-component {
     > produced-output
   }
   skewer try-self {
-    1:
-    2:
+    : try-self/1
+    : try-self/2
     run-self
     unless self-produced-output no-output/3
     > produced-output
   }
   skewer no-output {
-    3:
+    : no-output/3
     send no-output _
     > finished
   }

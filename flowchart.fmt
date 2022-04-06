@@ -6,24 +6,39 @@ return function () { this.lambdas.main (0); }
 \}]]
 
 
-Skewer [ksk name lb a rb] = [[\n\n${name}: function (_label) \{
-if (_label === 0) {${a}
-\}
-\}\,]]
+Skewer [ksk name lb a rb] = [[\n\n${name}: function (_label) {
+${a}
+else {
+this.panic (); 
+}
+}
+return this.${name} (1);
+}\,]]
 
-Action [a] = [[\n${a}]]
+Action [a] = [[\nif (_label === 0) {${a}
+}]]]]
+LabelledAction [name kslash index kcolon @cont] = [[\nreturn ${name} (${index});
+else if (_label === ${index}) \{${cont}
+\}]]
 
 Unless [ku n1 n2 kslash index @cont]
-  = [[if (!this.${n1} ()) \{
+  = [[if (!this.${n1} ()) { U0;
 return this.${n2} (${index});
-\} else \{${cont}
-\}]]
+U1; } else { U1;${cont}
+U0; }]]
 
 Jump [k n @cont] = [[return this.${n} ();${cont}]]
 Call [n @cont] = [[this.${n} ();${cont}]]
-Label [n kcolon @cont] = [[else if (_label === ${n}) \{${cont}
-\}]]
 Send [ksend n v @cont] = [[this.send ("${n}", ${v});${cont}]]
+
+
+
+LabelDef [n] = [[${n}]]
+LabelRef [n] = [[${n}]]
+Label [name kslash number] = [[${name}${kslash}${number}]]
+
+MethodRef [n] = [[${n}]]
+
 
 
 bracket [c] = [[${c}]]

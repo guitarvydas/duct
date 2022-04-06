@@ -1,19 +1,18 @@
 flowchart {
 
 Flowchart = "flowchart" name "{" Skewer+ "}"
-Skewer = "skewer" name "{" Action "}"
+Skewer = "skewer" name "{" Action? LabelledAction* "}"
 Action 
   = Unless
   | Jump
-  | Label
   | Call
   | Send
 
-Unless = "unless" name name "/" name Action?
+LabelledAction = ":" LabelDef Action?
+Unless = "unless" name LabelRef Action?
 Jump = ">" name Action?
 Send = "send" name Value Action?
-Call = name Action?
-Label = number ":" Action?
+Call = MethodRef Action?
 
 keyword = (
     "flowchart" 
@@ -24,6 +23,12 @@ keyword = (
 
 bracket = "{" | "}" | "(" | ")" | "[" | "]"
 separator = ":" | ">" | "/" | bracket
+
+LabelDef = Label
+LabelRef = Label
+Label = name "/" number
+
+MethodRef = name ~"/"
 
 name
   = "_"        -- trigger
@@ -49,6 +54,3 @@ dq = "\""
 Value = name | number
 
 }
-
-
-

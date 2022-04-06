@@ -1,12 +1,20 @@
 Flowchart [kfc name lb @sk rb] = [[${kfc}${name}${lb}${sk}${rb}]]
-Skewer [ksk name lb a rb] = [[${ksk}${name}${lb}${a}${rb}]]
-Action [a] = [[${a}]]
+Skewer [ksk name lb a @la rb] = [[${ksk}${name}${lb}${a}${la}${rb}]]
 
-Unless [ku n1 n2 kslash index @cont] = [[${ku}${n1}${n2}${kslash}${index}${cont}]]
+Action [a] = [[${a}]]
+LabelledAction [ldef kcolon @cont] = [[${ldef}${kcolon}${cont}]]
+
+Unless [ku n1 lref @cont] = [[${ku}${n1}${lref}${cont}]]
 Jump [k n @cont] = [[${k}${n}${cont}]]
 Send [ksend n v @cont] = [[${ksend}${n}${v}${cont}]]
-Label [n kcolon @cont] = [[${n}${kcolon}${cont}]]
 Call [n @cont] = [[${n}${cont}]]
+
+
+LabelDef [n] = [[${n}]]
+LabelRef [n] = [[${n}]]
+Label [name kslash number] = [[${name}${kslash}${number}]]
+
+MethodRef [n] = [[${n}]]
 
 
 bracket [c] = [[${c}]]
