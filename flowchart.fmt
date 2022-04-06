@@ -1,9 +1,11 @@
 Flowchart [kfc name lb @sk rb] = [[${kfc}${name}${lb}${sk}${rb}]]
+
 Skewer [ksk name lb a @morea rb] = [[${ksk}${name}${lb}${a}${morea}${rb}]]
+
 Action [a] = [[${a}]]
 
 Unless [ku n1 n2] = [[${ku}${n1}${n2}]]
-Jump [k n] = [[${k}${n}]]
+Jump [k sk n] = [[${k}${sk}${n}]]
 Call [n] = [[${n}]]
 Label [n kcolon] = [[${n}${kcolon}]]
 

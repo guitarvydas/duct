@@ -8,15 +8,15 @@ Action
   | Label
   | Call
 
-Unless = "unless" name name
+Unless = "unless" name name "/" name
 Jump = ">" name
 Call = name
-Label = name ":"
+Label = number ":"
 
 keyword = "flowchart" | "skewer"
 
 bracket = "{" | "}" | "(" | ")" | "[" | "]"
-separator = ":" | ">" | bracket
+separator = ":" | ">" | "/" | bracket
 
 name = namecharFirst namecharRest*
 namecharFirst = ~keyword namechar 
@@ -24,6 +24,7 @@ namecharRest = ~keyword namechar
 
 namechar = ~space ~separator any
 
+number = digit+
 
 space
  += comment
@@ -36,3 +37,4 @@ string = dq (~dq any)* dq
 dq = "\""
 
 }
+

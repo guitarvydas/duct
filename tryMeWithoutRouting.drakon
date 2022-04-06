@@ -1,28 +1,19 @@
 flowchart Try-component {
   skewer main {
-	// recursively run each child, if any child produced output, don't run parent
-	// reason: a Container is "busy" if any child is busy
-	//  Containers are implemented as compositions of children
-	//  a Component must not process another message until it has fully processed
-	//    the current message
-	// see Drakon diagram tryComponentWithoutRouting.drawio
-	// return:
-	//   return true if any ouput was produced (by children or me)
-	//   return false if no ouput was produced
     unless has-children try-self/1
     run-each-child
     unless child-produced-output try-self/2
     > produced-output
   }
   skewer try-self {
-    try-self/1:
-    try-self/2:
+    1:
+    2:
     run-self
     unless self-produced-output no-output/3
     > produced-output
   }
   skewer no-output {
-    no-output/3:
+    3:
     send no-output t
     > finished
   }
