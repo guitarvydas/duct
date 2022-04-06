@@ -1,18 +1,16 @@
-Flowchart [kfc name lb @sk rb] = [[\nfunction ${name} () \{
-var lambdas = \{${sk}
+Flowchart [kfc name lb @sk rb] = [[\nfunction ${name} () {
+var lambdas = {${sk}
 null
-\}
-return function () { this.lambdas.main (0); }
-\}]]
-
-
-Skewer [ksk name lb a @la rb] = [[\n\n${name}: function (_label) {
-if (_label === 0) {
-{${a}\}
-${la}
-else {
-this.panic (); 
+};
+return (function () { this.lambdas.main (0); });
 }
+]]
+
+
+Skewer [ksk name lb a @la rb] = [[\n${name}: function (_label) {
+if (_label === 0) {${a}${la}
+} else {
+this.panic (); 
 }
 }\,]]
 
