@@ -1,17 +1,17 @@
 flowchart {
 
 Flowchart = "flowchart" name "{" Skewer+ "}"
-Skewer = "skewer" name "{" Action Action* "}"
+Skewer = "skewer" name "{" Action "}"
 Action 
   = Unless
   | Jump
   | Label
   | Call
 
-Unless = "unless" name name "/" name
-Jump = ">" name
-Call = name
-Label = number ":"
+Unless = "unless" name name "/" name Action?
+Jump = ">" name Action?
+Call = name Action?
+Label = number ":" Action?
 
 keyword = "flowchart" | "skewer"
 
@@ -37,4 +37,5 @@ string = dq (~dq any)* dq
 dq = "\""
 
 }
+
 
