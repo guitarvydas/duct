@@ -5,6 +5,7 @@ Action [a] = [[${a}]]
 Unless [ku n1 n2 kslash index @cont] = [[${ku}${n1}${n2}${kslash}${index}${cont}]]
 Jump [k n @cont] = [[${k}${n}${cont}]]
 Call [n @cont] = [[${n}${cont}]]
+Send [n v @cont] = [[${n}${v}${cont}]]
 Label [n kcolon @cont] = [[${n}${kcolon}${cont}]]
 
 
@@ -25,3 +26,5 @@ comment [c] = [[${c}]]
 
 string [qb @cs qe] = [[${qb}${cs}${qe}]]
 dq [c] = [[${c}]]
+
+Value [v] = [[${v}]]

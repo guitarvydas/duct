@@ -10,6 +10,7 @@ return this.${n2} (${index});
 Jump [k n @cont] = [[\nreturn this.${n} ();${cont}]]
 Call [n @cont] = [[\nthis.${n} ();${cont}]]
 Label [n kcolon @cont] = [[${n}${kcolon}${cont}]]
+Send [n v @cont] = [[\nthis.send (${n}, ${v});${cont}]]
 
 
 bracket [c] = [[${c}]]

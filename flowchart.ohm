@@ -7,10 +7,12 @@ Action
   | Jump
   | Label
   | Call
+  | Send
 
 Unless = "unless" name name "/" name Action?
 Jump = ">" name Action?
 Call = name Action?
+Send = name Value Action?
 Label = number ":" Action?
 
 keyword = "flowchart" | "skewer"
@@ -35,6 +37,8 @@ comment
 
 string = dq (~dq any)* dq
 dq = "\""
+
+Value = name | number
 
 }
 
