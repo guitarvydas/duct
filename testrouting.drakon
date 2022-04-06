@@ -1,6 +1,7 @@
 flowchart Try-component {
   skewer Try-component {
-    func
-    gof
+    send portabc _
+    send portabc 123
+    send portabc "def"
   }
 }
