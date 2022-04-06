@@ -27,7 +27,7 @@ return this.${support.formatLabelFunction (lref)};
 ${cont}
 ;}]]
 
-Jump [k n @cont] = [[return this.${n} ();${cont}]]
+Jump [k n @cont] = [[return this.${support.formatLabelFunction (n)} ();${cont}]]
 Call [n @cont] = [[this.${n} ();${cont}]]
 Send [ksend n v @cont] = [[this.send ("${n}", ${v});${cont}]]
 

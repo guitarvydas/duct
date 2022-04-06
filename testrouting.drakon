@@ -1,5 +1,9 @@
 flowchart Try-component {
   skewer Try-component {
+    unless xyz skewerb/0
     > skewerb/0
+  }
+  skewer sb {
+    funcb
   }
 }
