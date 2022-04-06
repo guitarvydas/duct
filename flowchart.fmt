@@ -7,28 +7,28 @@ return (function () { this.lambdas.${name} (0); });
 ]]
 
 
-Skewer_both [ksk name lb a @la rb] = [[\n${name}: function (_label) {
+Skewer_both [ksk name lb a @la rb] = [[\n${name} A: function (_label) {
 if (_label === 0) {${a}${la}
 } else {
 this.panic ("${name}", _label); 
 }
 }\,]]
 
-Skewer_actiononly [ksk name lb a rb] = [[\n${name}: function (_label) {
+Skewer_actiononly [ksk name lb a rb] = [[\n${name} B: function (_label) {
 if (_label === 0) {${a}
 } else {
 this.panic ("${name}", _label); 
 }
 }\,]]
 
-Skewer_labelledactionsonly [ksk name lb @la rb] = [[\n${name}: function (_label) {
+Skewer_labelledactionsonly [ksk name lb @la rb] = [[\n${name} C: function (_label) {
 if (_label === 0) {${la}
 else {
 this.panic ("${name}", _label); 
 }
 }\,]]
 
-Skewer_neither [ksk name lb rb] = [[\n${name}: function (_label) {
+Skewer_neither [ksk name lb rb] = [[\n${name} D: function (_label) {
 this.panic ("${name}", _label); 
 }\,]]
 

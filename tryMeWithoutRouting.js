@@ -1,113 +1,83 @@
 
 function Try_component () {
     var lambdas = {
-
 	main: function (_label) {
 	    if (_label === 0) {
 		if (!this.has_children ()) {
-		    U0;
-		    return this.try_self/1 (1);
-		    U1;
+		    return this.try_self (1);
 		} else {
-		    U1;
 
-		    if (_label === 0) {
-			this.run_each_child ();
-			if (_label === 0) {
-			    if (!this.child_produced_output ()) {
-				U0;
-				return this.try_self/2 (2);
-				U1;
-			    } else {
-				U1;
+		    this.run_each_child ();
+		    if (!this.child_produced_output ()) {
+			return this.try_self (2);
+		    } else {
 
-				if (_label === 0) {
-				    return this.produced_output ();
-				}
-				U0;}
-			}
-		    }
-		    U0;}
-	    }
-	    else {
-		this.panic (); 
-	    }
-	}
-	return this.main (1);
-    },
+			return this.produced_output (0) ();
 
-	try_self: function (_label) {
-	    return try_self (1);
-	} else if (_label === 1) {
-	}
-    return try_self (2);
-} else if (_label === 2) {
-    if (_label === 0) {
-	this.run_self ();
-	if (_label === 0) {
-	    if (!this.self_produced_output ()) {
-		U0;
-		return this.no_output/3 (3);
-		U1;
+			;}
+
+
+		    ;}
+
 	    } else {
-		U1;
+		this.panic ("main", _label); 
+	    }
+	},
+	try_self: function (_label) {
+	    if (_label === 0) {
+		return try_self (1);
+	    } else if (_label === 1) {
 
-		if (_label === 0) {
-		    return this.produced_output ();
+		return try_self (2);
+	    } else if (_label === 2) {
+		this.run_self ();
+		if (!this.self_produced_output ()) {
+		    return this.no_output (3);
+		} else {
+
+		    return this.produced_output (0) ();
+
+		    ;}
+
+
+
+		else {
+		    this.panic ("try_self", _label); 
 		}
-		U0;}
-	}
-    }
-}
-else {
-    this.panic (); 
-}
-}
-return this.try_self (1);
-},
+	    },
+	    no_output: function (_label) {
+		if (_label === 0) {
+		    return no_output (3);
+		} else if (_label === 3) {
+		    this.send ("no_output", true);
+		    return this.finished (0) ();
 
-no_output: function (_label) {
-    return no_output (3);
-} else if (_label === 3) {
-    if (_label === 0) {
-	this.send ("no_output", true);
-	if (_label === 0) {
-	    return this.finished ();
-	}
-    }
-}
-else {
-    this.panic (); 
-}
-}
-return this.no_output (1);
-},
 
-produced_output: function (_label) {
-    if (_label === 0) {
-	this.send ("produced_output", true);
-	if (_label === 0) {
-	    return this.finished ();
-	}
-    }
-    else {
-	this.panic (); 
-    }
-}
-return this.produced_output (1);
-},
 
-finished: function (_label) {
-    if (_label === 0) {
-	this.end ();
-    }
-    else {
-	this.panic (); 
-    }
-}
-return this.finished (1);
-},
-null
-}
-return function () { this.lambdas.main (0); }
-}
+		    else {
+			this.panic ("no_output", _label); 
+		    }
+		},
+		produced_output: function (_label) {
+		    if (_label === 0) {
+			this.send ("produced_output", true);
+			return this.finished (0) ();
+
+
+		    } else {
+			this.panic ("produced_output", _label); 
+		    }
+		},
+		finished: function (_label) {
+		    if (_label === 0) {
+			this.end ();
+
+		    } else {
+			this.panic ("finished", _label); 
+		    }
+		},
+		_endoflambdas: null
+	    };
+	    return (function () { this.lambdas.Try_component (0); });
+	}
+

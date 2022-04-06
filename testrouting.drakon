@@ -1,7 +1,15 @@
-flowchart Sb {
-  skewer sb {
-    func1
-    : sb/7
-    func2
+flowchart Try-component {
+  skewer try-self {
+    : try-self/1
+    : try-self/2
+    func
+    > produced-output/0
+  }
+  skewer no-output {
+    : no-output/3
+    funcX
+  }
+  skewer produced-output {
+    funcY
   }
 }

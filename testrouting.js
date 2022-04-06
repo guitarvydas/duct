@@ -1,21 +1,43 @@
 
-function Sb () {
+function Try_component () {
     var lambdas = {
-	sb: function (_label) {
+	try_self C: function (_label) {
 	    if (_label === 0) {
-		this.func1 ();
+		return try_self (1);
+	    } else if (_label === 1) {
 
-		return sb (7);
-	    } else if (_label === 7) {
-		this.func2 ();
+		return try_self (2);
+	    } else if (_label === 2) {
+		this.func ();
+		return this.produced_output (0) ();
 
 
-	    } else {
-		this.panic ("sb", _label); 
-	    }
-	},
-	_endoflambdas: null
-    };
-    return (function () { this.lambdas.Sb (0); });
-}
+
+		else {
+		    this.panic ("try_self", _label); 
+		}
+	    },
+	    no_output C: function (_label) {
+		if (_label === 0) {
+		    return no_output (3);
+		} else if (_label === 3) {
+		    this.funcX ();
+
+
+		    else {
+			this.panic ("no_output", _label); 
+		    }
+		},
+		produced_output B: function (_label) {
+		    if (_label === 0) {
+			this.funcY ();
+
+		    } else {
+			this.panic ("produced_output", _label); 
+		    }
+		},
+		_endoflambdas: null
+	    };
+	    return (function () { this.lambdas.Try_component (0); });
+	}
 
