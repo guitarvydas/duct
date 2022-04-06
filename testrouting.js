@@ -1,22 +1,15 @@
 
 function Try_component () {
     var lambdas = {
-	a: function (_label) {
+	Try_component: function (_label) {
 	    if (_label === 0) {
-		this.c ();
-	    }
-	} else {
-	    this.panic (); 
-	}
-    },
-	b: function (_label) {
-	    if (_label === 0) {
+		this.func ();
 	    } else {
-		this.panic (); 
+		this.panic (_label); 
 	    }
 	},
-	null
-};
-return (function () { this.lambdas.main (0); });
+	_endoflambdas: null
+    };
+    return (function () { this.lambdas.Try_component (0); });
 }
 

@@ -1,7 +1,5 @@
 flowchart Try-component {
-  skewer a {
-    c
-  }
-  skewer b {
+  skewer Try-component {
+    func
   }
 }
