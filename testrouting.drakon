@@ -2,7 +2,6 @@ flowchart Try-component {
   skewer try-self {
     : try-self/1
     : try-self/2
-    func
     > produced-output/0
   }
   skewer no-output {

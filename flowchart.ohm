@@ -13,7 +13,10 @@ Action
   | Call
   | Send
 
-LabelledAction = ":" LabelDef Action?
+LabelledAction 
+  = ":" LabelDef Action -- action
+  | ":" LabelDef        -- empty
+  
 Unless = "unless" name LabelRef Action?
 Jump = ">" LabelRef Action?
 Send = "send" name Value Action?
@@ -60,3 +63,4 @@ dq = "\""
 Value = name | number
 
 }
+
