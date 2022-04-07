@@ -76,10 +76,6 @@ DatumList
   = Datum "," DatumList -- list
   | Datum               -- solitary
 
-name = namecharFirst namecharRest*
-namecharFirst = ~separator ~keyword ("_" | "A" .. "Z" | "a" .. "z")
-namecharRest = ~separator ~keyword ("_" | "A" .. "Z" | "a" .. "z" | "0" .. "9")
-
   separator
     = "<="
     | "=>"
@@ -124,6 +120,10 @@ kwME = &(~namecharFirst) "me" &(~namecharRest)
 kwPORT = &(~namecharFirst) "port" &(~namecharRest)
 
 eol = "\n"
+
+name = namecharFirst namecharRest*
+namecharFirst = ~separator ~keyword ("_" | "A" .. "Z" | "a" .. "z")
+namecharRest = ~separator ~keyword ("_" | "A" .. "Z" | "a" .. "z" | "0" .. "9")
 
 space
  += comment

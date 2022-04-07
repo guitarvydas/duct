@@ -1,0 +1,81 @@
+Flowchart [kfc name lb @sk rb] = [[\nexports.${name} = function () {
+var lambdas = {${sk}
+_endoflambdas: null
+};
+return (function () { this.lambdas.${name} (0); });
+}
+]]
+
+
+Skewer_both [ksk name lb a @la rb] = [[\n${name}: function (_label) {
+if (_label === 0) {${a}${la}
+} else {
+this.panic ("${name}", _label); 
+}
+}\,]]
+
+Skewer_actiononly [ksk name lb a rb] = [[\n${name}: function (_label) {
+if (_label === 0) {${a}
+} else {
+this.panic ("${name}", _label); 
+}
+}\,]]
+
+Skewer_labelledactionsonly [ksk name lb @la rb] = [[\n${name}: function (_label) {
+if (_label === 0) {${la}
+} else {
+this.panic ("${name}", _label); 
+}
+}\,]]
+
+Skewer_neither [ksk name lb rb] = [[\n${name}: function (_label) {
+this.panic ("${name}", _label); 
+}\,]]
+
+Action [a] = [[\n${a}\n]]
+
+LabelledAction_action [kcolon ldef cont] = [[\nreturn ${support.formatLabelFunction (ldef)};
+} else if (_label === ${support.formatIndex (ldef)}) \{${cont}\n]]
+LabelledAction_empty [kcolon ldef] = [[\nreturn ${support.formatLabelFunction (ldef)};
+} else if (_label === ${support.formatIndex (ldef)}) {\n]]
+
+Unless [ku n1 lref @cont]
+  = [[if (!this.${n1} ()) {
+ return this.${support.formatLabelFunction (lref)};
+} else {
+${cont}
+;}]]
+
+Jump [k n @cont] = [[return this.${support.formatLabelFunction (n)} ();${cont}]]
+Call [n @cont] = [[this.${n} ();${cont}]]
+Send [ksend n v @cont] = [[this.send ("${n}", ${v});${cont}]]
+
+
+
+LabelDef [n] = [[${n}]]
+LabelRef [n] = [[${n}]]
+Label [name kslash number] = [[${name}${kslash}${number}]]
+
+MethodRef [n] = [[${n}]]
+
+
+
+bracket [c] = [[${c}]]
+separator [c] = [[${c}]]
+
+name_trigger [k] = [[true]]
+name_name [n] = [[${n}]]
+namestring [first @rest] = [[${support.mangle (first + rest)}]]
+namecharFirst [c] = [[${c}]]
+namecharRest [c] = [[${c}]]
+
+separator [sep] = [[${sep}]]
+
+keyword [kw] = [[${kw}]]
+
+space [c] = [[${c}]]
+
+comment [c] = [[${c}]]
+
+string [qb @cs qe] = [[${qb}${cs}${qe}]]
+dq [c] = [[${c}]]

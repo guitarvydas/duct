@@ -1,13 +1,13 @@
-const eh = require('composition');
-import read;
-import write;
+const eh = require('./composition');
+read = require ('./read');
+write = require ('./write');
 
 var signature = {
     name: "top",
     kind: "containerized function",
     inputs: [
-	{ "input filename", ["infame"] },
-	{ "output filename", ["outfame"] }
+	{ "name": "input filename", "structure": ["infname"] },
+	{ "name": "output filename", "structure": ["outfname"] }
     ],
     outputs: [
     ]
@@ -16,7 +16,6 @@ var signature = {
 function begin (me, infname, outfname) {
     me.send ("input filenname", infname);
     me.send ("output filenname", outfname);
-    me.dispatch ();
 }
 
 function finish (me) {
@@ -25,7 +24,7 @@ function finish (me) {
 var implementation = {
     name: "top",
     kind: "containerized function",
-    handler: defaultContainerHandler;
+    handler: defaultContainerHandler,
     begin: begin,
     finish: finish
 }	
@@ -69,7 +68,7 @@ function makeConnections (me) {
     ];
 }
 
-function Top (this) {
+function Top () {
     this.signature = signature;
     this.implementation = implementation;
     this.makeRunnable = function (container) {
