@@ -35,7 +35,7 @@ function Composition (kind, container) {
     }
 
     this.runComponent = function () {
-	tryMeWithoutRouting.??? (this);
+	tryMeWithoutRouting ();
 	// this.routeChildrenOutputs ();
     }
 
