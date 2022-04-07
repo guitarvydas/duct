@@ -1,33 +1,52 @@
-Flowchart [kfc name lb @sk rb] = [[\nfunction ${name} () \{
-var lambdas = \{${sk}
-null
-\}
-return function () { this.lambdas.main (0); }
-\}]]
+Flowchart [kfc name lb @sk rb] = [[\nexports.${name} = function () {
+var lambdas = {${sk}
+_endoflambdas: null
+};
+return (function () { this.lambdas.${name} (0); });
+}
+]]
 
 
-Skewer [ksk name lb a rb] = [[\n\n${name}: function (_label) {
-${a}
-else {
-this.panic (); 
+Skewer_both [ksk name lb a @la rb] = [[\n${name}: function (_label) {
+if (_label === 0) {${a}${la}
+} else {
+this.panic ("${name}", _label); 
 }
-}
-return this.${name} (1);
 }\,]]
 
-Action [a] = [[\nif (_label === 0) {${a}
-}]]]]
-LabelledAction [name kslash index kcolon @cont] = [[\nreturn ${name} (${index});
-else if (_label === ${index}) \{${cont}
-\}]]
+Skewer_actiononly [ksk name lb a rb] = [[\n${name}: function (_label) {
+if (_label === 0) {${a}
+} else {
+this.panic ("${name}", _label); 
+}
+}\,]]
 
-Unless [ku n1 n2 kslash index @cont]
-  = [[if (!this.${n1} ()) { U0;
-return this.${n2} (${index});
-U1; } else { U1;${cont}
-U0; }]]
+Skewer_labelledactionsonly [ksk name lb @la rb] = [[\n${name}: function (_label) {
+if (_label === 0) {${la}
+} else {
+this.panic ("${name}", _label); 
+}
+}\,]]
 
-Jump [k n @cont] = [[return this.${n} ();${cont}]]
+Skewer_neither [ksk name lb rb] = [[\n${name}: function (_label) {
+this.panic ("${name}", _label); 
+}\,]]
+
+Action [a] = [[\n${a}\n]]
+
+LabelledAction_action [kcolon ldef cont] = [[\nreturn ${support.formatLabelFunction (ldef)};
+} else if (_label === ${support.formatIndex (ldef)}) \{${cont}\n]]
+LabelledAction_empty [kcolon ldef] = [[\nreturn ${support.formatLabelFunction (ldef)};
+} else if (_label === ${support.formatIndex (ldef)}) {\n]]
+
+Unless [ku n1 lref @cont]
+  = [[if (!this.${n1} ()) {
+ return this.${support.formatLabelFunction (lref)};
+} else {
+${cont}
+;}]]
+
+Jump [k n @cont] = [[return this.${support.formatLabelFunction (n)} ();${cont}]]
 Call [n @cont] = [[this.${n} ();${cont}]]
 Send [ksend n v @cont] = [[this.send ("${n}", ${v});${cont}]]
 

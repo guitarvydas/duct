@@ -1,22 +1,31 @@
 flowchart {
 
 Flowchart = "flowchart" name "{" Skewer+ "}"
-Skewer = "skewer" name "{" Action? LabelledAction* "}"
+Skewer
+  = "skewer" name "{" Action LabelledAction+ "}" -- both
+  | "skewer" name "{" Action "}"                 -- actiononly
+  | "skewer" name "{" LabelledAction+ "}"        -- labelledactionsonly
+  | "skewer" name "{" "}"                        -- neither
+  
 Action 
   = Unless
   | Jump
   | Call
   | Send
 
-LabelledAction = ":" LabelDef Action?
+LabelledAction 
+  = ":" LabelDef Action -- action
+  | ":" LabelDef        -- empty
+  
 Unless = "unless" name LabelRef Action?
-Jump = ">" name Action?
+Jump = ">" LabelRef Action?
 Send = "send" name Value Action?
 Call = MethodRef Action?
 
 keyword = (
     "flowchart" 
   | "skewer" 
+  | "unless" 
   | "send" 
   | "_"
   ) ~namecharRest
@@ -54,3 +63,4 @@ dq = "\""
 Value = name | number
 
 }
+
