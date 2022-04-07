@@ -1,8 +1,9 @@
 all: routing handling
 	./run-simple.bash
 
-devXX: fcIdentity fc
-dev: fcit fct
+dev: fcIdentity fc
+
+devXX: fcit fct
 
 routing:
 	./dev.bash <routing.das >routing.js

@@ -1,4 +1,4 @@
-Flowchart [kfc name lb @sk rb] = [[\nfunction ${name} () {
+Flowchart [kfc name lb @sk rb] = [[\nexports.${name} = function () {
 var lambdas = {${sk}
 _endoflambdas: null
 };

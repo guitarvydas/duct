@@ -1,5 +1,5 @@
 
-function Try_component () {
+exports.Try_component = function () {
     var lambdas = {
 	main: function (_label) {
 	    if (_label === 0) {
@@ -41,43 +41,43 @@ function Try_component () {
 
 
 
-		else {
-		    this.panic ("try_self", _label); 
-		}
-	    },
-	    no_output: function (_label) {
-		if (_label === 0) {
-		    return no_output (3);
-		} else if (_label === 3) {
-		    this.send ("no_output", true);
-		    return this.finished (0) ();
+	    } else {
+		this.panic ("try_self", _label); 
+	    }
+	},
+	no_output: function (_label) {
+	    if (_label === 0) {
+		return no_output (3);
+	    } else if (_label === 3) {
+		this.send ("no_output", true);
+		return this.finished (0) ();
 
 
 
-		    else {
-			this.panic ("no_output", _label); 
-		    }
-		},
-		produced_output: function (_label) {
-		    if (_label === 0) {
-			this.send ("produced_output", true);
-			return this.finished (0) ();
+	    } else {
+		this.panic ("no_output", _label); 
+	    }
+	},
+	produced_output: function (_label) {
+	    if (_label === 0) {
+		this.send ("produced_output", true);
+		return this.finished (0) ();
 
 
-		    } else {
-			this.panic ("produced_output", _label); 
-		    }
-		},
-		finished: function (_label) {
-		    if (_label === 0) {
-			this.end ();
+	    } else {
+		this.panic ("produced_output", _label); 
+	    }
+	},
+	finished: function (_label) {
+	    if (_label === 0) {
+		this.end ();
 
-		    } else {
-			this.panic ("finished", _label); 
-		    }
-		},
-		_endoflambdas: null
-	    };
-	    return (function () { this.lambdas.Try_component (0); });
-	}
+	    } else {
+		this.panic ("finished", _label); 
+	    }
+	},
+	_endoflambdas: null
+    };
+    return (function () { this.lambdas.Try_component (0); });
+}
 
