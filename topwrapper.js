@@ -3,7 +3,7 @@ var message = require ('./message');
 
 function TopWrapper (infname, outfname) {
     this.begin = function () {
-	this.uut.protoImplementation.begin (this.uut, infname, outfname);
+        this.uut.protoImplementation.begin (this.uut, infname, outfname);
     };
     this.finish = function () {
         this.uut.protoImplementation.finish (this.uut);
@@ -35,6 +35,9 @@ function TopWrapper (infname, outfname) {
     };
     this.uut =  new top.Top (this);
     this.children = [this.uut];
+    this.route = function () {
+        this.uut.implementation.route ();
+    }
 }
 
 function isValidETagForUUT (etag) {

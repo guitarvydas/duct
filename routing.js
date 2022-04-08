@@ -1,4 +1,4 @@
-this.routeChildrenOutputs = function () {
+exports.route = function () {
 var _me = this;
 var child = _me.forEach (child => {
 var output_message = childoutputQueue.forEach (item => {

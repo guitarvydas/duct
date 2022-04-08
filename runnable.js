@@ -1,5 +1,6 @@
 let queue = require ('./queue');
 let message = require ('./message');
+let routing = require ('./routing');
 
 function send (etag, v) {
     let m = new message.OutputMessage (etag, v);
@@ -22,17 +23,21 @@ function Runnable (signature, protoImplementation, container) {
     }
     this.hasOutputs = function () {return !this.outputQueue.empty ()};
     this.dequeueOutput = function () {return this.outputQueue.dequeue ();};
+    this.begin = protoImplementation.begin;
+    this.finish = protoImplementation.finish;
 }
 
 function Leaf (signature, protoImplementation, container) {
     let me = new Runnable (signature, protoImplementation, container);
     me.conclude = container.conclude;
+    me.route = function () { };
     return me;
 }
 
 function Container (signature, protoImplementation, container) {
     let me = new Runnable (signature, protoImplementation, container);
     me.conclude = container.conclude;
+    me.route = routing.route;
     return me;
 }
 

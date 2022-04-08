@@ -1,4 +1,4 @@
-implementation routeChildrenOutputs
+implementation route
 { for every child in me => child
   { for every item in outputQueue of child => output_message
     { synonym message = output_message

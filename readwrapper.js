@@ -25,6 +25,7 @@ function ReadWrapper () {
     };
     this.done = function () {return this._done;};
     this.route = function () {
+	this.uut.route ();
         displayAllOutputsForAllChildren (this);
     };    
     this.step = function () {
