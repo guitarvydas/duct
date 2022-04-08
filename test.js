@@ -13,7 +13,13 @@ function testWrite () {
     var ww = require ('./writewrapper');
     var testHarness = new ww.WriteWrapper ();
     testHarness.send ("filename", "test.out");
+        testHarness.step ();
     testHarness.send ("char", "x");
+        testHarness.step ();
+    testHarness.send ("char", "y");
+        testHarness.step ();
+    testHarness.send ("char", "z");
+        testHarness.step ();
 }
 
 testRead ();
