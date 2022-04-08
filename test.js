@@ -25,6 +25,7 @@ testHarness.step ();
 testHarness.send ("req", true); 
 testHarness.step ();
  */
+testHarness.send ("xyz", true); 
 while (!testHarness.done ()) {
     testHarness.send ("req", true); 
     testHarness.step ();

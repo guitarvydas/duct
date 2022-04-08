@@ -1,4 +1,4 @@
-const eh = require('./composition');
+const eh = require('./runnable');
 
 var signature = {
     name: "write",
@@ -12,13 +12,13 @@ var signature = {
     ]
 };
 
-var implementation = {
+var protoImplementation = {
     name: "write",
     kind: "leaf",
     handler: function (me, message) {
-	if ("filename" === message.tag) {
+	if ("filename" === message.etag) {
 	    me.send ("request", true);
-	} else if ("char" === message.tag) {
+	} else if ("char" === message.etag) {
 	    console.log (me.message.data);
 	    me.send ("request", true);
 	} else {
@@ -27,15 +27,13 @@ var implementation = {
     }
 }
 
-function Write () {
-    this.signature = signature;
-    this.implementation = implementation;
-    this.makeRunnable = function (container) {
-	var runnable = new eh.Composition (this, container);
-	return runnable;
-    }
+function Write (container) {
+    let me = new runnable.Leaf (signature, protoImplementation, container);
+    me.filename = null;
+    return me;
 }
 
+exports.Write = Write;
 
 // This example code implements output to the console
 // but is port-for-port compatible with output to a file (aka referential transparency)
