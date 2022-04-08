@@ -2,8 +2,6 @@ var read = require ('./read');
 var message = require ('./message');
 
 function ReadWrapper () {
-    this.uut =  new read.Read (this);
-    this.children = [this.uut];
     this.begin = function () {
         // this.args = ???
         uut.begin ();
@@ -21,8 +19,11 @@ function ReadWrapper () {
             console.error (`invalid input message to UUT ${message.etag}`);
         }
     };
-    this.done = false;
-    this.conclude = function () { this.done = true; };
+    this._done = false;
+    this.conclude = function () { 
+        this.container._done = true; 
+    };
+    this.done = function () {return this._done;};
     this.route = function () {
         displayAllOutputsForAllChildren (this);
     };    
@@ -33,6 +34,8 @@ function ReadWrapper () {
     this.stepAllChildrenOnce = function () {
         this.children.forEach (child => { child.step (); });
     };
+    this.uut =  new read.Read (this);
+    this.children = [this.uut];
 }
 
 function isValidETagForUUT (etag) {

@@ -48,7 +48,7 @@ exports.Read = Read;
 // helper functions
 
 function eof (me) {
-    if (me.cindex > me.contents.length) {
+    if (me.cindex > (me.contents.length - 1)) {
         return true;
     } else {
         return false;
