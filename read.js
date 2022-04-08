@@ -1,63 +1,62 @@
-const eh = require('./composition');
+const runnable = require('./runnable');
 const fs = require('fs');
 
 var signature = {
     name: "read",
     kind: "leaf",
     inputs: [
-	{ "name": "filename", "structure": ["filename"] },
-	{ "name":"req", "structure":["req"] }
+        { "name": "filename", "structure": ["filename"] },
+        { "name":"req", "structure":["req"] }
     ],
     outputs: [
-	{ "name": "char", "structure": ["char"] }
+        { "name": "char", "structure": ["char"] }
     ]
 };
 
-var implementation = {
+let protoImplementation = {
     name: "read",
     kind: "leaf",
     handler: function (me, message) {
-	if ("filename" === message.tag) {
-	    me.filename = message.data;
-	    me.contents = fs.readFileSync (me.filename, 'utf8');
-	    me.cindex = 0;
-	} else if ("req" === message.tag) {
-	    if (me.eof ()) {
-		me.conclude ();
-	    } else {
-		me.send ("char", me.nextChar ());
-	    }
-	} else {
-	    me.errorUnhandledMessage (message);
-	}
-    }
+        if ("filename" === message.etag) {
+            me.filename = message.data;
+            me.contents = fs.readFileSync (me.filename, 'utf8');
+            me.cindex = 0;
+        } else if ("req" === message.etag) {
+            if (eof (me)) {
+                me.conclude ();
+            } else {
+                me.send ("char", nextChar (me));
+            }
+        } else {
+            me.errorUnhandledMessage (message);
+        }
+    },
+    begin: function () {},
+    finish: function () {}
 }
 
-function Read () {
-    this.signature = signature;
-    this.implementation = implementation;
-    this.filename = null;
-    this.contents = null;
-    this.index = null;
-    this.makeRunnable = function (container) {
-	let runnable = new eh.Composition (this, container);
-	return runnable;
-    }
+function Read (container) {
+    let me = new runnable.Leaf (signature, protoImplementation, container);
+    me.filename = null;
+    me.contents = null;
+    me.index = null;
+    return me;
 }
 
+exports.Read = Read;
 
 // helper functions
 
 function eof (me) {
-    if (me.cindex > me/contents.length) {
-	return true;
+    if (me.cindex > me.contents.length) {
+        return true;
     } else {
-	return false;
+        return false;
     }
 }
 
 function nextChar (me) {
-    let c = me.contents.substr (cindex, 1);
+    let c = me.contents.substr (me.cindex, 1);
     me.cindex += 1;
     return c;
 }
