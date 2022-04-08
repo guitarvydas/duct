@@ -2,8 +2,6 @@ var read = require ('./read');
 var message = require ('./message');
 
 function ReadWrapper () {
-    this.uut =  new read.Read (this);
-    this.children = [this.uut];
     this.begin = function () {
         // this.args = ???
         uut.begin ();
@@ -21,22 +19,23 @@ function ReadWrapper () {
             console.error (`invalid input message to UUT ${message.etag}`);
         }
     };
-    this.done = false;
-    this.conclude = function () { this.done = true; };
+    this._done = false;
+    this.conclude = function () { 
+        this.container._done = true; 
+    };
+    this.done = function () {return this._done;};
     this.route = function () {
-        this.children.forEach (child => {
-            this.displayAllOutputs (child);
-        });
+        displayAllOutputsForAllChildren (this);
     };    
     this.step = function () {
-        while (!this.done) {
-            this.stepAllChildrenOnce ();
-            this.route ();
-        }
+        this.stepAllChildrenOnce ();
+        this.route ();
     };    
     this.stepAllChildrenOnce = function () {
         this.children.forEach (child => { child.step (); });
     };
+    this.uut =  new read.Read (this);
+    this.children = [this.uut];
 }
 
 function isValidETagForUUT (etag) {
@@ -49,7 +48,20 @@ function isValidETagForUUT (etag) {
 
 function isInputETag (etag) {
     var inputs = this.uut.signature.inputs;
-    return inputs.some (input => { return (etag === input.name); }    );
+    return inputs.some (input => { return (etag === input.name); });
+}
+
+function displayAllOutputsForAllChildren (me) {
+    me.children.forEach (child => {
+        displayAllOutputs (child);
+    });
+}
+
+function displayAllOutputs (child) {
+    while (child.hasOutputs ()) {
+        var m = child.dequeueOutput ();
+        console.log (`${child.signature.name} outputs ${m.etag}:${m.data}`);
+    }
 }
 
 exports.ReadWrapper = ReadWrapper;
