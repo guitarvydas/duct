@@ -1,7 +1,7 @@
-var read = require ('./read');
+var write = require ('./write');
 var message = require ('./message');
 
-function ReadWrapper () {
+function WriteWrapper () {
     this.begin = function () {
         // this.args = ???
         uut.begin ();
@@ -34,7 +34,7 @@ function ReadWrapper () {
     this.stepAllChildrenOnce = function () {
         this.children.forEach (child => { child.step (); });
     };
-    this.uut =  new read.Read (this);
+    this.uut =  new write.Write (this);
     this.children = [this.uut];
 }
 
@@ -64,4 +64,4 @@ function displayAllOutputs (child) {
     }
 }
 
-exports.ReadWrapper = ReadWrapper;
+exports.WriteWrapper = WriteWrapper;

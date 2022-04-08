@@ -1,4 +1,4 @@
-const eh = require('./runnable');
+const runnable = require('./runnable');
 
 var signature = {
     name: "write",
@@ -19,7 +19,7 @@ var protoImplementation = {
 	if ("filename" === message.etag) {
 	    me.send ("request", true);
 	} else if ("char" === message.etag) {
-	    console.log (me.message.data);
+	    console.log (message.data);
 	    me.send ("request", true);
 	} else {
 	    me.errorUnhandledMessage (message);
