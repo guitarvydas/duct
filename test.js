@@ -13,3 +13,4 @@ var rw = require ('./readwrapper');
 var testHarness = new rw.ReadWrapper ();
 testHarness.send ("filename", "test.txt");
 testHarness.send ("req", true); 
+testHarness.step ();
