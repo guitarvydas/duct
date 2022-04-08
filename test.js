@@ -43,8 +43,6 @@ console.log ();
 console.log ('write ...');
 testWrite ();
 
-/*
 console.log ();
 console.log ('top ...');
 testContainer ();
-*/

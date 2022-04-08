@@ -52,7 +52,7 @@ ForEvery_withoutParams [kfor kevery name1 kin d kassign name @nb]
 
 
 
-Datum_field [n kof d] = [[${d}${n}]]
+Datum_field [n kof d] = [[${d}.${n}]]
 Datum_dottedField [n kdot d] = [[${n}.${d}]]
 Datum_name [n] = [[${n}]]
 Datum_me [n] = [[_me]]
