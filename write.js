@@ -2,7 +2,6 @@ const runnable = require('./runnable');
 
 var signature = {
     name: "write",
-    kind: "leaf",
     inputs: [
 	{ "name": "filename", "structure": ["filename"] },
 	{ "name": "char", "structure": ["char"] }

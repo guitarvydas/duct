@@ -3,7 +3,6 @@ const fs = require('fs');
 
 var signature = {
     name: "read",
-    kind: "leaf",
     inputs: [
         { "name": "filename", "structure": ["filename"] },
         { "name":"req", "structure":["req"] }

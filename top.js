@@ -1,10 +1,9 @@
-const eh = require('./composition');
+const top = require('./otp');
 read = require ('./read');
 write = require ('./write');
 
 var signature = {
     name: "top",
-    kind: "containerized function",
     inputs: [
 	{ "name": "input filename", "structure": ["infname"] },
 	{ "name": "output filename", "structure": ["outfname"] }
@@ -23,7 +22,7 @@ function finish (me) {
 
 var implementation = {
     name: "top",
-    kind: "containerized function",
+    kind: "container",
     handler: defaultContainerHandler,
     begin: begin,
     finish: finish
@@ -72,7 +71,7 @@ function Top () {
     this.signature = signature;
     this.implementation = implementation;
     this.makeRunnable = function (container) {
-	var me = new eh.Composition ();
+	var me = new top.Composition ();
 	me.container = container;
 	me.kind = this;
 	me.children = this.makeChildren ();
