@@ -25,6 +25,7 @@ function testWrite () {
 function testContainer () {
     var tw = require ('./topwrapper');
     var testHarness = new tw.TopWrapper ();
+    testHarness.begin ('test.txt', 'test.out');
 }
 
 testRead ();

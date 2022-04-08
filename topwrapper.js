@@ -3,17 +3,17 @@ var message = require ('./message');
 
 function TopWrapper (infname, outfname) {
     this.begin = function () {
-	uut.begin (me, infname, outfname);
+	this.uut.protoImplementation.begin (this.uut, infname, outfname);
     };
     this.finish = function () {
-        uut.finish ();
+        this.uut.protoImplementation.finish (this.uut);
     };
     this.isValidETagForUUT = isValidETagForUUT;
     this.isInputETag = isInputETag;
     this.send = function (etag, v) {
         if (this.isValidETagForUUT (etag)) {
             var m = new message.OutputMessage (etag, v);
-            this.uut.handler (this.uut, m);
+            this.uut.protoImplementationhandler (this.uut, m);
         } else {
             console.error (`invalid input message ${message.etag}`);
         }
@@ -31,7 +31,7 @@ function TopWrapper (infname, outfname) {
         this.route ();
     };    
     this.stepAllChildrenOnce = function () {
-        this.children.forEach (child => { child.step (); });
+        this.children.forEach (child => { child.step (this.uut); });
     };
     this.uut =  new top.Top (this);
     this.children = [this.uut];
