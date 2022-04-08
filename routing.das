@@ -19,7 +19,7 @@ implementation route
         }
       }
     }
-    {@child.resetOutputQueue}
+    {@child.instance.resetOutputQueue}
   }
 }
 

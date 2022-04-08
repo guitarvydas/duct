@@ -13,8 +13,8 @@ SynchronousLeafImplementation_withoutFormals [ksync name b] = [[
 this.${name} = function () {${b}
 \}]]
 
-SynchronousCall_params [kat d1 karrow d2] = [[this.${d1} (${d2});]]
-SynchronousCall_noparams [kat d1] = [[this.${d1} ();]]
+SynchronousCall_params [kat d1 karrow d2] = [[${d1} (${d2});]]
+SynchronousCall_noparams [kat d1] = [[${d1} ();]]
 
 Box [klb bo @b krb] = [[\n${bo}${b}]]
 BoxOperation [op] = [[${op}]]
