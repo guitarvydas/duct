@@ -34,8 +34,8 @@ var protoImplementation = {
 }       
     
 function makeChildren (me) {
-    var child1 = new Read (me);
-    var child2 = new Write (me);
+    var child1 = new read.Read (me);
+    var child2 = new write.Write (me);
     return [
         {"name": "r", "instance": child1}, 
         {"name": "w", "instance": child2}
@@ -74,6 +74,9 @@ function makeConnections (me) {
 
 function Top (container) {
     let me = new runnable.Container (signature, protoImplementation, container);
+    me.children = makeChildren (container);
+    me.nets = makeNets (container);
+    me.connections = makeConnections (container);
     return me;
 }
 
