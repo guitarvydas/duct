@@ -16,7 +16,7 @@ function WriteWrapper () {
             var m = new message.OutputMessage (etag, v);
             this.uut.handler (this.uut, m);
         } else {
-            console.error (`invalid input message to UUT ${message.etag}`);
+            console.error (`invalid input message ${message.etag}`);
         }
     };
     this._done = false;

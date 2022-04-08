@@ -1,6 +1,10 @@
-const top = require('./otp');
-read = require ('./read');
-write = require ('./write');
+const handling = require('./handling');
+const routing = require('./routing');
+const runnable = require('./runnable');
+
+const top = require('./top');
+const read = require ('./read');
+const write = require ('./write');
 
 var signature = {
     name: "top",
@@ -20,10 +24,10 @@ function begin (me, infname, outfname) {
 function finish (me) {
 }
 
-var implementation = {
+var protoImplementation = {
     name: "top",
     kind: "container",
-    handler: defaultContainerHandler,
+    handler: handling.deliverInputMessageToAllChildrenOfSelf,
     begin: begin,
     finish: finish
 }	
@@ -67,21 +71,9 @@ function makeConnections (me) {
     ];
 }
 
-function Top () {
-    this.signature = signature;
-    this.implementation = implementation;
-    this.makeRunnable = function (container) {
-	var me = new top.Composition ();
-	me.container = container;
-	me.kind = this;
-	me.children = this.makeChildren ();
-	me.nets = this.makeNets ();
-	me.connections = this.makeConnections ();
-	me.handler = eh.defaultContainerHandler;
-	me.begin = this.makeBegin ();
-	me.finish = this.makeFinish ();
-	me.inputQueue = new Queue ();
-	me.outputQueue = new Queue ();
-	return me;
-    }
+function Top (container) {
+    let me = new runnable.Container (signature, protoImplementation, container);
+    return me;
 }
+
+exports.Top = Top;

@@ -22,5 +22,12 @@ function testWrite () {
         testHarness.step ();
 }
 
+function testContainer () {
+    var tw = require ('./topwrapper');
+    var testHarness = new tw.TopWrapper ();
+}
+
 testRead ();
 testWrite ();
+testContainer ();
+
