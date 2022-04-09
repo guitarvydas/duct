@@ -24,6 +24,7 @@ function Runnable (signature, protoImplementation, container, name) {
     this.inject = inject;
     this.handler = protoImplementation.handler;
     this.hasOutputs = function () {return !this.outputQueue.empty ()};
+    this.has_children = function () {return (0 < this.children.length); };
     this.dequeueOutput = function () {return this.outputQueue.dequeue ();};
     this.begin = protoImplementation.begin;
     this.finish = protoImplementation.finish;
