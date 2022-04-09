@@ -31,9 +31,9 @@ function TopWrapper (infname, outfname) {
     };    
     this.step = function () {
         this.stepAllChildrenOnce ();
-	if (this.tracing) {
+        if (this.tracing) {
             recursivelyDisplayAllOutputsForAllChildren (this);
-	}
+        }
         this.route ();
     };    
     this.stepAllChildrenOnce = function () {
@@ -61,9 +61,9 @@ function isInputETag (etag) {
 
 function destructivelyDisplayAllOutputsForAllChildren (me) {
     me.children.forEach (child => {
-	var r = child.runnable;
+        var r = child.runnable;
         displayAllOutputs (r);
-	r.resetOutputQueue ();
+        r.resetOutputQueue ();
     });
 }
 
@@ -83,13 +83,19 @@ function recursiveDisplay (m) {
     if (m) {
         return `(${m.etag}:${m.data}:${recursiveDisplay (m.tracer)})`;
     } else {
-	return '.';
+        return '.';
     }
 }
 
 function recursivelyDisplayAllOutputsForAllChildren (me) {
-    displayAllOutputsForAllChildren (me.uut);
-    //displayAllOutputsForAllChildren (me.uut);
+    recursiveTraceOutput (me.uut);
+}
+
+function recursiveTraceOutput (me) {
+    displayAllOutputsForAllChildren (me);
+    me.children.forEach (childobject => {
+        recursiveTraceOutput (childobject.runnable);
+    });
 }
 
 exports.TopWrapper = TopWrapper;

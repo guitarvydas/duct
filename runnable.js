@@ -35,6 +35,7 @@ function Leaf (signature, protoImplementation, container, name) {
     let me = new Runnable (signature, protoImplementation, container, name);
     me.conclude = container.conclude;
     me.route = function () { };
+    me.children = [];
     return me;
 }
 
