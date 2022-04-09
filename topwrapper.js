@@ -27,7 +27,7 @@ function TopWrapper (infname, outfname) {
     };
     this.done = function () {return this._done;};
     this.route = function () {
-        displayAllOutputsForAllChildren (this);
+        displayAllOutputsForAllChildrenAndDestroy (this);
     };    
     this.step = function () {
         this.stepAllChildrenOnce ();
@@ -59,18 +59,16 @@ function isInputETag (etag) {
     return inputs.some (input => { return (etag === input.name); });
 }
 
-function displayAllOutputsForAllChildren (me) {
+function displayAllOutputsForAllChildrenAndDestroy (me) {
     me.children.forEach (child => {
-        displayAllOutputs (child);
+        displayAllOutputsAndDestroy (child);
     });
 }
 
-function displayAllOutputs (child) {
+function displayAllOutputsAndDestroy (child) {
     while (child.hasOutputs ()) {
-        //var m = child.dequeueOutput ();
-        child.outputQueue.forEach (m => {
+        var m = child.dequeueOutput ();
             console.log (`${child.signature.name} outputs ${m.etag}:${m.data}:${recursiveDisplay (m.tracer)}`);
-        })
     }
 }
 
