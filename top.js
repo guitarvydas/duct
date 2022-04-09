@@ -37,8 +37,8 @@ function makeChildren (me) {
     var child1 = new read.Read (me);
     var child2 = new write.Write (me);
     return [
-        {"name": "r", "instance": child1}, 
-        {"name": "w", "instance": child2}
+        {"name": "r", "runnable": child1}, 
+        {"name": "w", "runnable": child2}
     ];
 }
 

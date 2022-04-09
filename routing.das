@@ -1,6 +1,6 @@
 implementation route
 { for every child in children of me => child
-  { for every item in outputQueue of child.instance => output_message
+  { for every item in outputQueue of child.runnable => output_message
     { synonym message = output_message
       { find connection in me given child X message.port => connection
         { lock receivers of connection
@@ -19,7 +19,7 @@ implementation route
         }
       }
     }
-    {@child.instance.resetOutputQueue}
+    {@child.runnable.resetOutputQueue}
   }
 }
 
