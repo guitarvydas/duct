@@ -33,10 +33,10 @@ function WriteWrapper () {
         this.route ();
     };    
     this.stepAllChildrenOnce = function () {
-        this.children.forEach (child => { child.step (); });
+        this.children.forEach (child => { child.runnable.step (); });
     };
     this.uut =  new write.Write (this);
-    this.children = [this.uut];
+    this.children = [{name: "uut", runnable: this.uut}];
 }
 
 function isValidETagForUUT (etag) {
@@ -54,8 +54,9 @@ function isInputETag (etag) {
 
 function destructivelyDisplayAllOutputsForAllChildren (me) {
     me.children.forEach (child => {
-        displayAllOutputs (child);
-	child.resetOutputQueue ();
+	var r = child.runnable;
+        displayAllOutputs (r);
+	r.resetOutputQueue ();
     });
 }
 

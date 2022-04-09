@@ -37,10 +37,10 @@ function TopWrapper (infname, outfname) {
         this.route ();
     };    
     this.stepAllChildrenOnce = function () {
-        this.children.forEach (child => { child.step (this.uut); });
+        this.children.forEach (child => { child.runnable.step (this.uut); });
     };
     this.uut =  new top.Top (this);
-    this.children = [this.uut];
+    this.children = [{name: "uut", runnable: this.uut}];
     this.route = function () {
         this.uut.route ();
     }
@@ -61,20 +61,21 @@ function isInputETag (etag) {
 
 function destructivelyDisplayAllOutputsForAllChildren (me) {
     me.children.forEach (child => {
-        displayAllOutputs (child);
-	child.resetOutputQueue ();
+	var r = child.runnable;
+        displayAllOutputs (r);
+	r.resetOutputQueue ();
     });
 }
 
 function displayAllOutputsForAllChildren (me) {
     me.children.forEach (child => {
-        displayAllOutputs (child);
+        displayAllOutputs (child.runnable);
     });
 }
 
-function displayAllOutputs (child) {
-    child.outputQueue.forEach (m => {
-        console.log (`${child.signature.name} outputs ${m.etag}:${m.data}:${recursiveDisplay (m.tracer)}`);
+function displayAllOutputs (runnablechild) {
+    runnablechild.outputQueue.forEach (m => {
+        console.log (`${child.signature.name} outputs ${recursiveDisplay (m)}`);
     })
 }
 
@@ -87,7 +88,7 @@ function recursiveDisplay (m) {
 }
 
 function recursivelyDisplayAllOutputsForAllChildren (me) {
-    displayAllOutputsForAllChildren (me);
+    displayAllOutputsForAllChildren (me.uut);
     //displayAllOutputsForAllChildren (me.uut);
 }
 

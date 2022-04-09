@@ -1,7 +1,7 @@
 exports.route = function () {
 var _me = this;
 var child = _me.children.forEach (child => {
-var output_message = child.instance.outputQueue.forEach (item => {
+var output_message = child.runnable.outputQueue.forEach (item => {
 var message = output_message;
 var connection = this.find_connection_in__me (child, message.port);
 connection.lock ();
@@ -15,7 +15,7 @@ deliver_output_to_me_output (params);
 });
 connection.unlock ();
 });
-child.instance.resetOutputQueue ();
+child.runnable.resetOutputQueue ();
 });
 }
 
