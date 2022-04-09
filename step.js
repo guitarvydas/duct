@@ -1,18 +1,18 @@
 
 exports.Try_component = function () {
 var lambdas = {
-main: function (_label) {
+main: function (_me, _label) {
 if (_label === 0) {
-if (!this.has_children ()) {
- return this.try_self (1);
+if (!_me.has_children ()) {
+ return lambdas.try_self (_me, 1);
 } else {
 
-this.run_each_child ();
-if (!this.child_produced_output ()) {
- return this.try_self (2);
+_me.step_each_child ();
+if (!_me.child_produced_output ()) {
+ return lambdas.try_self (_me, 2);
 } else {
 
-return this.produced_output (0) ();
+return lambdas.produced_output (_me, 0) ();
 
 ;}
 
@@ -20,64 +20,64 @@ return this.produced_output (0) ();
 ;}
 
 } else {
-this.panic ("main", _label); 
+_me.panic ("main", _label); 
 }
 },
-try_self: function (_label) {
+try_self: function (_me, _label) {
 if (_label === 0) {
-return try_self (1);
+return lambdas.try_self (_me, 1);
 } else if (_label === 1) {
 
-return try_self (2);
+return lambdas.try_self (_me, 2);
 } else if (_label === 2) {
-this.run_self ();
-if (!this.self_produced_output ()) {
- return this.no_output (3);
+_me.step ();
+if (!_me.self_produced_output ()) {
+ return lambdas.no_output (_me, 3);
 } else {
 
-return this.produced_output (0) ();
+return lambdas.produced_output (_me, 0) ();
 
 ;}
 
 
 
 } else {
-this.panic ("try_self", _label); 
+_me.panic ("try_self", _label); 
 }
 },
-no_output: function (_label) {
+no_output: function (_me, _label) {
 if (_label === 0) {
-return no_output (3);
+return lambdas.no_output (_me, 3);
 } else if (_label === 3) {
-this.send ("no_output", true);
-return this.finished (0) ();
+_me.send ("no_output", true);
+return lambdas.finished (_me, 0) ();
 
 
 
 } else {
-this.panic ("no_output", _label); 
+_me.panic ("no_output", _label); 
 }
 },
-produced_output: function (_label) {
+produced_output: function (_me, _label) {
 if (_label === 0) {
-this.send ("produced_output", true);
-return this.finished (0) ();
+_me.send ("produced_output", true);
+return lambdas.finished (_me, 0) ();
 
 
 } else {
-this.panic ("produced_output", _label); 
+_me.panic ("produced_output", _label); 
 }
 },
-finished: function (_label) {
+finished: function (_me, _label) {
 if (_label === 0) {
-this.end ();
+_me.end ();
 
 } else {
-this.panic ("finished", _label); 
+_me.panic ("finished", _label); 
 }
 },
 _endoflambdas: null
 };
-return (function () { lambdas.main (0); });
+return (function (_me) { lambdas.main (_me, 0); });
 }
 

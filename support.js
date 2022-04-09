@@ -13,6 +13,6 @@ exports.formatIndex = function (s) {
 exports.formatLabelFunction = function (s) {
     // hmm, this works, but could be simpler (if we returned objects instead of strings)
     let groups = s.match (re);
-    return `${groups[1]} (${groups[2]})`;
+    return `lambdas.${groups[1]} (_me, ${groups[2]})`;
 }
 
