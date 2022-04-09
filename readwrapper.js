@@ -2,6 +2,7 @@ var read = require ('./read');
 var message = require ('./message');
 
 function ReadWrapper () {
+    this.name = "rw";
     this.begin = function () {
         // this.args = ???
         uut.begin ();
@@ -13,7 +14,7 @@ function ReadWrapper () {
     this.isInputETag = isInputETag;
     this.send = function (etag, v) {
         if (this.isValidETagForUUT (etag)) {
-            var m = new message.OutputMessage (etag, v);
+            var m = new message.OutputMessage (etag, v, this);
             this.uut.handler (this.uut, m);
         } else {
             console.error (`invalid input message ${etag}`);
@@ -61,7 +62,15 @@ function displayAllOutputsForAllChildren (me) {
 function displayAllOutputs (child) {
     while (child.hasOutputs ()) {
         var m = child.dequeueOutput ();
-        console.log (`${child.signature.name} outputs ${m.etag}:${m.data}`);
+        console.log (`${child.signature.name} outputs ${m.etag}:${m.data}:${recursiveDisplay (m.tracer)}`);
+    }
+}
+
+function recursiveDisplay (m) {
+    if (m) {
+        return `(${m.comefrom}::${m.etag}:${m.data}:${recursiveDisplay (m.tracer)})`;
+    } else {
+	return '.';
     }
 }
 

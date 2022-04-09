@@ -24,7 +24,7 @@ let protoImplementation = {
             if (eof (me)) {
                 me.conclude ();
             } else {
-                me.send ("char", nextChar (me));
+                me.send ("char", nextChar (me), this, message);
             }
         } else {
             me.errorUnhandledMessage (message);
@@ -35,7 +35,8 @@ let protoImplementation = {
 }
 
 function Read (container) {
-    let me = new runnable.Leaf (signature, protoImplementation, container);
+    let me = new runnable.Leaf (signature, protoImplementation, container, "read");
+    me.name = "r";
     me.filename = null;
     me.contents = null;
     me.index = null;
