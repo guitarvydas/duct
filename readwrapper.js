@@ -30,12 +30,9 @@ function ReadWrapper () {
         destructivelyDisplayAllOutputsForAllChildren (this);
     };    
     this.step = function () {
-        this.stepAllChildrenOnce ();
+	this.uut.step ();
         this.route ();
     };    
-    this.stepAllChildrenOnce = function () {
-	this.uut.step ();
-    };
     this.uut =  new read.Read (this);
     this.children = [{name: "uut", runnable: this.uut}];
 }

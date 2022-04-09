@@ -30,15 +30,12 @@ function TopWrapper (infname, outfname) {
         destructivelyDisplayAllOutputsForAllChildrenAndDestroy (this);
     };    
     this.step = function () {
-        this.stepAllChildrenOnce ();
+	this.uut.step ();
         if (this.tracing) {
             recursiveTraceOutput (this.uut);
         }
         this.route ();
     };    
-    this.stepAllChildrenOnce = function () {
-	this.uut.step ();
-    };
     this.uut =  new top.Top (this);
     this.children = [{name: "uut", runnable: this.uut}];
     this.route = function () {
