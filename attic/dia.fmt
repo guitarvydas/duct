@@ -1,0 +1,83 @@
+Main [@i] = [[${i}]]
+Implementation [x] = [[${x}]]
+
+ContainerImplementation_withParam [ki name lp formal rp b] = [[exports.${name} = function (${formal}) \{\nvar _me = this;${b}\n\}]]
+ContainerImplementation_noParam [ki name b] = [[exports.${name} = function () \{\nvar _me = this;${b}\n\}]]
+
+SynchronousLeafImplementation_withFormals [ksync name karrow dl b] = [[
+
+this.${name} = function (${dl}) {${b}
+\}]]
+
+SynchronousLeafImplementation_withoutFormals [ksync name b] = [[
+
+this.${name} = function () {${b}
+\}]]
+
+SynchronousCall_params [kat d1 karrow d2] = [[${d1} (${d2});]]
+SynchronousCall_noparams [kat d1] = [[${d1} ();]]
+
+Box [klb bo @b krb] = [[\n${bo}${b}]]
+BoxOperation [op] = [[${op}]]
+
+When [kwhen kmessages @nb] = [[if (_me.inputQueue.length > 0) {${nb}\n\};]]
+
+Fetch [kfetch karrow d @nb] = [[var ${d} = _me.inputQueue.dequeue ();${nb}]]
+
+FindConnectionFromMe [kfind d kfrom kme kon kport d2 @nb] = [[var ${d} = _me.find_connection (${d2});${nb}]]
+
+Cond [kcond ccf ccr] = [[${ccf}${ccr}]]
+CondClause [klb p b krb] = [[(${p}) {${b}
+\}]]
+FirstCondClause [cc] = [[if ${cc}]]
+RestCondClause [cc] = [[ else if ${cc}]]
+
+WithLock [klock kreceivers kof name @nb] = [[${name}.lock ();${nb}\n${name}.unlock ();]]
+
+Find_withParams [kfind name kin d kgiven pl karrow name2 @nb] = [[var ${name2} = this.find_${name}_in_${d} (${pl});${nb}]]
+Find_withoutParams [kfind name kin d karrow name2 @nb] = [[var ${name2} = this.find_${name}_in_${d} ();${nb}]]
+
+VarBox [kvar name karrow klb dl krb @nb] = [[var ${name} = \[${dl}\];${nb}]]
+
+Synonym_obj [ksyn name keq klb dl krb @nb] = [[var ${name} = \[${dl}\];${nb}]]
+Synonym_solitary [ksyn name keq dl @nb] = [[var ${name} = ${dl};${nb}]]
+
+ForEvery_sugaredWithParams [kfor kevery kitem kin d kgiven pl kassign name @nb]
+  = [[var ${name} = ${d} (${pl}).forEach (item => \{${nb}\n\});]]
+ForEvery_withParams [kfor kevery name1 kin d kgiven pl kassign name @nb]
+  = [[var ${name} = ${d} (${pl}).forEach (${name1} => \{${nb}\n\});]]
+ForEvery_sugaredWithoutParams [kfor kevery kitem kin d kassign name @nb]
+  = [[var ${name} = ${d}.forEach (item => \{${nb}\n\});]]
+ForEvery_withoutParams [kfor kevery name1 kin d kassign name @nb]
+  = [[var ${name} = ${d}.forEach (${name1} => \{${nb}\n\});]]
+
+
+
+Datum_field [n kof d] = [[${d}.${n}]]
+Datum_dottedField [n kdot d] = [[${n}.${d}]]
+Datum_name [n] = [[${n}]]
+Datum_me [n] = [[_me]]
+Datum_port [n] = [[port]]
+
+Predicate_eq [left eq right] = [[${left} === ${right}]]
+Predicate_ne [left eq right] = [[${left} !== ${right}]]
+
+ParameterList_list [d kx pl] = [[${d}, ${pl}]]
+ParameterList_solitary [d] = [[${d}]]
+
+DatumList_list [d1 kcomma d2] = [[${d1}, ${d2}]]
+DatumList_solitary [d] = [[${d}]]
+
+name [first @rest] = [[${first}${rest}]]
+namecharFirst [c] = [[${c}]]
+namecharRest [c] = [[${c}]]
+
+separator [sep] = [[${sep}]]
+
+keyword [kw] = [[${kw}]]
+
+eol [c] = [[${c}]]
+
+space [c] = [[${c}]]
+
+comment [c] = [[${c}]]

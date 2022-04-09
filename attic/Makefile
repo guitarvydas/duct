@@ -1,6 +1,4 @@
-all: routing handling step drawingFactbase
-
-drawingFactbase:
+all: routing handling
 	./run-simple.bash
 
 dev: fcIdentity fc
@@ -20,14 +18,14 @@ identity: fcIdentity
 fcit:
 	./identity-flowchart.bash <testrouting.drakon
 
-stepIdentity:
-	./identity-flowchart.bash <step.drakon
+fcIdentity:
+	./identity-flowchart.bash <tryMeWithoutRouting.drakon
 
 fct:
 	./flowchart.bash <testrouting.drakon >testrouting.js
 
-step:
-	./flowchart.bash <step.drakon >step.js
+fc:
+	./flowchart.bash <tryMeWithoutRouting.drakon >tryMeWithoutRouting.js
 
 fctest:
 	./flowchart.bash <testrouting.drakon >testrouting.js
