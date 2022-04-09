@@ -53,21 +53,21 @@ function makeNets (me) {
 
 function makeConnections (me) {
     return [
-        {"sender":{"component":"$me","port":"input filename"},
+        {"sender":{"component":"$me","etag":"input filename"},
          "net":"⇒₁",
-         "receivers": [{"component":"r","port":"filename"}]
+         "receivers": [{"component":"r","etag":"filename"}]
         },                 
-        {"sender":{"component":"$me","port":"output filename"},
+        {"sender":{"component":"$me","etag":"output filename"},
          "net":"⇒₂",
-         "receivers": [{"component":"w","port":"filename"}]
+         "receivers": [{"component":"w","etag":"filename"}]
         },                 
-        {"sender":{"component":"r","port":"char"},
+        {"sender":{"component":"r","etag":"char"},
          "net":"⇒₃",
-         "receivers": [{"component":"w","port":"char"}]
+         "receivers": [{"component":"w","etag":"char"}]
         },                 
-        {"sender":{"component":"w","port":"request"},
+        {"sender":{"component":"w","etag":"request"},
          "net":"⇒₄",
-         "receivers": [{"component":"r","port":"req"}]
+         "receivers": [{"component":"r","etag":"req"}]
         }
     ];
 }

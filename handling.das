@@ -1,5 +1,5 @@
 implementation deliverInputMessageToAllChildrenOfSelf (message)
-      { find connection from me on port message.port
+      { find connection from me on port message.etag
         { lock receivers of connection
           { for every receiver in connection => dest
             { synonym params = {me, message, receiver}

@@ -22,9 +22,10 @@ BoxOperation [op] = [[${op}]]
 
 When [kwhen kmessages @nb] = [[if (_me.inputQueue.length > 0) {${nb}\n\};]]
 
-Fetch [kfetch karrow d @nb] = [[var ${d} = _me.inputQueue.dequeue ();${nb}]]
-
 FindConnectionFromMe [kfind d kfrom kme kon kport d2 @nb] = [[var ${d} = _me.find_connection (${d2});${nb}]]
+
+WhenAll [kwhen kall pb nb] = [[\nif (${pb}) \{${nb}\n\}]]
+Return [karrow d @nb] = [[\nreturn ${d};${nb}]]
 
 Cond [kcond ccf ccr] = [[${ccf}${ccr}]]
 CondClause [klb p b krb] = [[(${p}) {${b}
@@ -61,6 +62,10 @@ Datum_port [n] = [[port]]
 
 Predicate_eq [left eq right] = [[${left} === ${right}]]
 Predicate_ne [left eq right] = [[${left} !== ${right}]]
+
+PredicateBlock [lb p1 pm rb] = [[${p1}${pm}]]
+PredicateMore [p] = [[ && ${p}]]
+
 
 ParameterList_list [d kx pl] = [[${d}, ${pl}]]
 ParameterList_solitary [d] = [[${d}]]

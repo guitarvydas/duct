@@ -1,9 +1,12 @@
-all: routing handling step drawingFactbase
+all: routing handling step drawingFactbase find_connection
 
 drawingFactbase:
 	./run-simple.bash
 
-dev: fcIdentity fc
+dev: find_connection
+
+find_connection:
+	./dev.bash <find_connection.das >find_connection.js
 
 devXX: fcit fct
 

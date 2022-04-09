@@ -1,6 +1,6 @@
 exports.deliverInputMessageToAllChildrenOfSelf = function (message) {
 var _me = this;
-var connection = _me.find_connection (message.port);
+var connection = _me.find_connection (message.etag);
 connection.lock ();
 var dest = connection.forEach (receiver => {
 var params = [_me, message, receiver];
