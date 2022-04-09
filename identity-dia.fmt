@@ -1,7 +1,8 @@
 Main [@i] = [[${i}]]
 Implementation [x] = [[${x}]]
 
-ContainerImplementation [ki name b] = [[${ki}${name}${b}]]
+ContainerImplementation_withParam [ki name lp formal rp b] = [[${ki}${name}${lp}${formal}${rp}${b}]]
+ContainerImplementation_noParam [ki name b] = [[${ki}${name}${b}]]
 
 SynchronousLeafImplementation_withFormals [ksync name karrow dl b] = ][[${ksync}${name}${karrow}${dl}${b}]]
 SynchronousLeafImplementation_withoutFormals [ksync name b] = ][[${ksync}${name}${b}]]

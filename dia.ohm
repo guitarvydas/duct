@@ -2,7 +2,10 @@ dia {
   Main = Implementation+
   Implementation = ContainerImplementation | SynchronousLeafImplementation
 
-ContainerImplementation = "implementation" name SequenceOfBoxes
+ContainerImplementation =
+  | "implementation" name "(" name ")" SequenceOfBoxes -- withParam
+  | "implementation" name SequenceOfBoxes -- noParam
+
 SynchronousLeafImplementation 
   = "sync" name "<=" DatumList Box -- withFormals
   | "sync" name                Box -- withoutFormals

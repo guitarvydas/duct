@@ -30,7 +30,7 @@ function TopWrapper (infname, outfname) {
         destructivelyDisplayAllOutputsForAllChildrenAndDestroy (this);
     };    
     this.step = function () {
-	this.uut.step ();
+        this.uut.step ();
         if (this.tracing) {
             recursiveTraceOutput (this.uut);
         }

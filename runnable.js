@@ -7,6 +7,11 @@ function send (etag, v, tracer) {
     this.outputQueue.enqueue (m);
 }
 
+function inject (etag, v, tracer) {
+    let m = new message.InputMessage (etag, v, tracer);
+    this.inputQueue.enqueue (m);
+}
+
 function Runnable (signature, protoImplementation, container, name) {
     this.name = name;
     this.signature = signature;
@@ -15,6 +20,7 @@ function Runnable (signature, protoImplementation, container, name) {
     this.inputQueue = new queue.Queue ();
     this.outputQueue = new queue.Queue ();
     this.send = send;
+    this.inject = inject;
     this.handler = protoImplementation.handler;
     this.step = function () {
         if (! this.inputQueue.empty ()) {
@@ -27,7 +33,7 @@ function Runnable (signature, protoImplementation, container, name) {
     this.begin = protoImplementation.begin;
     this.finish = protoImplementation.finish;
     this.resetOutputQueue = function () {
-	this.outputQueue = new queue.Queue ();
+        this.outputQueue = new queue.Queue ();
     }
 }
 
