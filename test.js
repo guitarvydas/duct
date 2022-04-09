@@ -30,6 +30,9 @@ function testWrite () {
 function testContainer () {
     var tw = require ('./topwrapper');
     var testHarness = new tw.TopWrapper ();
+    
+    testHarness.tracing = true;
+    
     testHarness.begin ('test.txt', 'test.out');
     testHarness.step ();
     testHarness.route ();

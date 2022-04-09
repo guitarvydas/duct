@@ -27,7 +27,7 @@ function ReadWrapper () {
     this.done = function () {return this._done;};
     this.route = function () {
 	this.uut.route ();
-        displayAllOutputsForAllChildren (this);
+        destructivelyDisplayAllOutputsForAllChildren (this);
     };    
     this.step = function () {
         this.stepAllChildrenOnce ();
@@ -53,17 +53,17 @@ function isInputETag (etag) {
     return inputs.some (input => { return (etag === input.name); });
 }
 
-function displayAllOutputsForAllChildren (me) {
+function destructivelyDisplayAllOutputsForAllChildren (me) {
     me.children.forEach (child => {
         displayAllOutputs (child);
+	child.resetOutputQueue ();
     });
 }
 
 function displayAllOutputs (child) {
-    while (child.hasOutputs ()) {
-        var m = child.dequeueOutput ();
+    child.outputQueue.forEach (m => {
         console.log (`${child.signature.name} outputs ${m.etag}:${m.data}:${recursiveDisplay (m.tracer)}`);
-    }
+    })
 }
 
 function recursiveDisplay (m) {

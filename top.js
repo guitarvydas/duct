@@ -17,8 +17,8 @@ var signature = {
 };
 
 function begin (me, infname, outfname) {
-    me.send ("input filenname", infname);
-    me.send ("output filenname", outfname);
+    me.send ("input filenname", infname, this);
+    me.send ("output filenname", outfname, this);
 }
 
 function finish (me) {
@@ -74,6 +74,7 @@ function makeConnections (me) {
 
 function Top (container) {
     let me = new runnable.Container (signature, protoImplementation, container);
+    me.name = "T";
     me.children = makeChildren (container);
     me.nets = makeNets (container);
     me.connections = makeConnections (container);
