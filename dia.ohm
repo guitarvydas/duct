@@ -69,8 +69,9 @@ Datum
   | kwME            -- me
   | name            -- name
 
-Predicate
-  = Datum "==" Datum -- eq
+Predicate =
+  | Datum "is" "me"      -- me
+  | Datum "==" Datum -- eq
   | Datum "!=" Datum -- ne
 
 PredicateBlock = "{" Predicate PredicateMore "}"
@@ -119,6 +120,7 @@ keyword
           | "port"
           | "for"
           | "all"
+          | "is"
           | "in"
           | "on"
           | "of"

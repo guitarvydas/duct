@@ -5,7 +5,13 @@ var _ret =  null;
 _me.connections.forEach (connection => {
 var sender = connection.sender;
 
-if ((sender.component === _me) && (sender.etag === etag)) {
+console.log (sender.component);
+console.log ((sender.component === "$me"));
+console.log (sender.etag);
+console.log (etag);
+console.log ((sender.etag === etag))
+
+if ((sender.component === "$me") && (sender.etag === etag)) {
 
 _ret = connection;
 }
