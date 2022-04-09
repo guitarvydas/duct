@@ -33,7 +33,7 @@ function WriteWrapper () {
         this.route ();
     };    
     this.stepAllChildrenOnce = function () {
-        this.children.forEach (child => { child.runnable.step (); });
+	this.uut.step ();
     };
     this.uut =  new write.Write (this);
     this.children = [{name: "uut", runnable: this.uut}];

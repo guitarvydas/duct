@@ -34,7 +34,7 @@ function ReadWrapper () {
         this.route ();
     };    
     this.stepAllChildrenOnce = function () {
-        this.children.forEach (child => { child.runnable.step (); });
+	this.uut.step ();
     };
     this.uut =  new read.Read (this);
     this.children = [{name: "uut", runnable: this.uut}];
