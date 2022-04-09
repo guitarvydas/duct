@@ -63,7 +63,7 @@ function destructivelyDisplayAllOutputsForAllChildren (me) {
 
 function displayAllOutputs (child) {
     child.outputQueue.forEach (m => {
-        console.log (`${child.signature.name} outputs ${m.etag}:${m.data}:${recursiveDisplay (m.tracer)}`);
+        console.log (`${child.signature.name} outputs ${recursiveDisplay (m)}`);
     })
 }
 
