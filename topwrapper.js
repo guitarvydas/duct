@@ -75,7 +75,7 @@ function displayAllOutputsForAllChildren (me) {
 
 function displayAllOutputs (runnablechild) {
     runnablechild.outputQueue.forEach (m => {
-        console.log (`${child.signature.name} outputs ${recursiveDisplay (m)}`);
+        console.log (`${runnablechild.signature.name} outputs ${recursiveDisplay (m)}`);
     })
 }
 
