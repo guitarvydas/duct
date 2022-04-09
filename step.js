@@ -30,7 +30,7 @@ return lambdas.try_self (_me, 1);
 
 return lambdas.try_self (_me, 2);
 } else if (_label === 2) {
-_me.step ();
+_me.run_self ();
 if (!_me.self_produced_output ()) {
  return lambdas.no_output (_me, 3);
 } else {

@@ -60,13 +60,20 @@ function Container (signature, protoImplementation, container, name) {
         // if no child was busy, then Container looks at its own input
         var workFunction = steprecursively.Try_component ();
         var workPerformed = workFunction (this);
-        if ((! workPerformed) && (! me.inputQueue.empty ())) {
-            let m = me.inputQueue.dequeue ();
-            me.handler (m);
-            return me.hasOutputs ();
+        if (! workPerformed) {
+	    return me.run_self ();
         } else {
             return false;
         }
+    },
+    me.run_self = function () {
+        if (! me.inputQueue.empty ()) {
+            let m = me.inputQueue.dequeue ();
+            me.handler (m);
+            return me.hasOutputs ();
+	} else {
+	    return false;
+	}
     },
     me.step_each_child = function () {
         me.children.forEach (childobject => {

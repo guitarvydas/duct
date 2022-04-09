@@ -9,7 +9,7 @@ flowchart Try-component {
   skewer try-self {
     : try-self/1
     : try-self/2
-    step
+    run-self
     unless self-produced-output no-output/3
     > produced-output/0
   }
