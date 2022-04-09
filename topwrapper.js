@@ -40,7 +40,7 @@ function TopWrapper (infname, outfname) {
         this.children.forEach (child => { child.step (this.uut); });
     };
     this.uut =  new top.Top (this);
-    this.children = [this.uut];
+    this.children = [{name: "uut", instance: this.uut}];
     this.route = function () {
         this.uut.route ();
     }
@@ -74,7 +74,7 @@ function displayAllOutputsForAllChildren (me) {
 
 function displayAllOutputs (child) {
     child.outputQueue.forEach (m => {
-        console.log (`${child.signature.name} outputs ${m.etag}:${m.data}:${recursiveDisplay (m.tracer)}`);
+        console.log (`${child.signature.name} outputs ${recursiveDisplay (m)}`);
     })
 }
 
@@ -87,7 +87,7 @@ function recursiveDisplay (m) {
 }
 
 function recursivelyDisplayAllOutputsForAllChildren (me) {
-    displayAllOutputsForAllChildren (me);
+    displayAllOutputsForAllChildren (me.uut);
     //displayAllOutputsForAllChildren (me.uut);
 }
 
