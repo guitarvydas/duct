@@ -29,12 +29,9 @@ function WriteWrapper () {
         destructivelyDisplayAllOutputsForAllChildren (this);
     };    
     this.step = function () {
-        this.stepAllChildrenOnce ();
+	this.uut.step ();
         this.route ();
     };    
-    this.stepAllChildrenOnce = function () {
-	this.uut.step ();
-    };
     this.uut =  new write.Write (this);
     this.children = [{name: "uut", runnable: this.uut}];
 }
