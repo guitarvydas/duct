@@ -33,6 +33,9 @@ function testContainer () {
     testHarness.begin ('test.txt', 'test.out');
     testHarness.step ();
     testHarness.route ();
+
+    testHarness.step ();
+    testHarness.route ();
 }
 
 console.log ();
