@@ -1,4 +1,5 @@
 all: routing handling step drawingFactbase find_connection
+	node test
 
 drawingFactbase:
 	./run-simple.bash
