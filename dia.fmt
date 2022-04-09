@@ -1,8 +1,8 @@
 Main [@i] = [[${i}]]
 Implementation [x] = [[${x}]]
 
-ContainerImplementation_withParam [ki name lp formal rp b] = [[exports.${name} = function (${formal}) \{\nvar _me = this;${b}\n\}]]
-ContainerImplementation_noParam [ki name b] = [[exports.${name} = function () \{\nvar _me = this;${b}\n\}]]
+ContainerImplementation_withParam [ki name lp formal rp b] = [[exports.${name} = function (${formal}) \{\nvar _me = this;\nvar _ret =  null;\n${b}\nreturn  _ret;\n\}]]
+ContainerImplementation_noParam [ki name b] = [[exports.${name} = function () \{\nvar _me = this;\nvar _ret = null;\n${b}\nreturn _ret;\n\}]]
 
 SynchronousLeafImplementation_withFormals [ksync name karrow dl b] = [[
 
@@ -22,9 +22,10 @@ BoxOperation [op] = [[${op}]]
 
 When [kwhen kmessages @nb] = [[if (_me.inputQueue.length > 0) {${nb}\n\};]]
 
-Fetch [kfetch karrow d @nb] = [[var ${d} = _me.inputQueue.dequeue ();${nb}]]
-
 FindConnectionFromMe [kfind d kfrom kme kon kport d2 @nb] = [[var ${d} = _me.find_connection (${d2});${nb}]]
+
+WhenAll [kwhen kall pb nb] = [[\nif (${pb}) \{${nb}\n\}]]
+Return [karrow d @nb] = [[\n_ret = ${d};${nb}]]
 
 Cond [kcond ccf ccr] = [[${ccf}${ccr}]]
 CondClause [klb p b krb] = [[(${p}) {${b}
@@ -43,13 +44,13 @@ Synonym_obj [ksyn name keq klb dl krb @nb] = [[var ${name} = \[${dl}\];${nb}]]
 Synonym_solitary [ksyn name keq dl @nb] = [[var ${name} = ${dl};${nb}]]
 
 ForEvery_sugaredWithParams [kfor kevery kitem kin d kgiven pl kassign name @nb]
-  = [[var ${name} = ${d} (${pl}).forEach (item => \{${nb}\n\});]]
+  = [[${d} (${pl}).forEach (${name} => \{${nb}\n\});]]
 ForEvery_withParams [kfor kevery name1 kin d kgiven pl kassign name @nb]
-  = [[var ${name} = ${d} (${pl}).forEach (${name1} => \{${nb}\n\});]]
+  = [[${d} (${pl}).${name}.forEach (${name1} => \{${nb}\n\});]]
 ForEvery_sugaredWithoutParams [kfor kevery kitem kin d kassign name @nb]
-  = [[var ${name} = ${d}.forEach (item => \{${nb}\n\});]]
+  = [[${d}.forEach (${name} => \{${nb}\n\});]]
 ForEvery_withoutParams [kfor kevery name1 kin d kassign name @nb]
-  = [[var ${name} = ${d}.forEach (${name1} => \{${nb}\n\});]]
+  = [[${d}.${name}.forEach (${name1} => \{${nb}\n\});]]
 
 
 
@@ -59,8 +60,12 @@ Datum_name [n] = [[${n}]]
 Datum_me [n] = [[_me]]
 Datum_port [n] = [[port]]
 
-Predicate_eq [left eq right] = [[${left} === ${right}]]
-Predicate_ne [left eq right] = [[${left} !== ${right}]]
+Predicate_eq [left eq right] = [[(${left} === ${right})]]
+Predicate_ne [left eq right] = [[(${left} !== ${right})]]
+
+PredicateBlock [lb p1 pm rb] = [[${p1}${pm}]]
+PredicateMore [p] = [[ && ${p}]]
+
 
 ParameterList_list [d kx pl] = [[${d}, ${pl}]]
 ParameterList_solitary [d] = [[${d}]]

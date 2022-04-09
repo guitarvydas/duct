@@ -22,12 +22,14 @@ BoxOperation
   | WithLock
   | Cond
   | VarBox
+  | WhenAll
   | When
-  | Fetch
+  | Return
   | SynchronousCall
 
+WhenAll = "when" "all" PredicateBlock NestedBox
 When = "when" "messages" NB?
-Fetch = "fetch" "=>" Datum NB?
+Return = "->" DatumList NB?
 FindConnectionFromMe = "find" Datum "from" "me" "on" "port" Datum NB?
 
 Cond = "cond" FirstCondClause RestCondClause*
@@ -71,6 +73,9 @@ Predicate
   = Datum "==" Datum -- eq
   | Datum "!=" Datum -- ne
 
+PredicateBlock = "{" Predicate PredicateMore "}"
+PredicateMore = Predicate
+
 ParameterList
   = Datum "X" ParameterList -- list
   | Datum                   -- solitary
@@ -82,6 +87,7 @@ DatumList
   separator
     = "<="
     | "=>"
+    | "->"
     | "//"
     | "=="
     | "!="
@@ -112,6 +118,7 @@ keyword
           | "sync"
           | "port"
           | "for"
+          | "all"
           | "in"
           | "on"
           | "of"

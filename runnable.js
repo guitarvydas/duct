@@ -2,6 +2,7 @@ let queue = require ('./queue');
 let message = require ('./message');
 let routing = require ('./routing');
 let steprecursively = require ('./step');
+let fc = require ('./find_connection');
 
 function send (etag, v, tracer) {
     let m = new message.OutputMessage (etag, v, tracer);
@@ -85,6 +86,7 @@ function Container (signature, protoImplementation, container, name) {
             return childobject.runnable.hasOutputs ();
         });
     };
+    me.find_connection = fc.find_connection;
     return me;
 }
 

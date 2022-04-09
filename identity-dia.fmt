@@ -17,8 +17,10 @@ Box [klb bo @b krb] = [[${klb}${bo}${b}${krb}]]
 BoxOperation [op] = [[${op}]]
 
 When [kwhen kmessages @nb] = [[${kwhen}${kmessages}${nb}]]
-Fetch [kfetch karrow d @nb] = [[${kfetch}${karrow}${d}${nb}]]
 FindConnectionFromMe [kfind d kfrom kme kon kport d2 @nb] = [[${kfind}${d}${kfrom}${kme}${kon}${kport}${d2}${nb}]]
+
+WhenAll [kwhen kall pb nb] = [[${kwhen}${kall}${pb}${nb}]]
+Return [karrow d @nb] = [[${karrow]${d}${nb}]]
 
 Cond [kcond first @rest] = [[${kcond}${first}${rest}]]
 CondClause [klb p b krb] = [[${klb}${p}${b}${krb}]]
@@ -54,6 +56,9 @@ Datum_me [n] = [[${n}]]
 
 Predicate_eq [left eq right] = [[${left}${eq}${right}]]
 Predicate_ne [left eq right] = [[${left}${eq}${right}]]
+
+PredicateBlock [lb p1 pm rb] = [[${lb}${p1}${pm}${rb}]]
+PredicateMore [p] = [[${p}]]
 
 ParameterList_list [d kx pl] = [[${d}${kx}${pl}]]
 ParameterList_solitary [d] = [[${d}]]
