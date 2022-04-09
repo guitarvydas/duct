@@ -25,6 +25,9 @@ function Runnable (signature, protoImplementation, container) {
     this.dequeueOutput = function () {return this.outputQueue.dequeue ();};
     this.begin = protoImplementation.begin;
     this.finish = protoImplementation.finish;
+    this.resetOutputQueue = function () {
+	this.outputQueue = new queue.Queue ();
+    }
 }
 
 function Leaf (signature, protoImplementation, container) {
