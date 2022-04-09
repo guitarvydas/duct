@@ -1,7 +1,8 @@
 flowchart Try-component {
+  start main
   skewer main {
     unless has-children try-self/1
-    run-each-child
+    step-each-child
     unless child-produced-output try-self/2
     > produced-output/0
   }

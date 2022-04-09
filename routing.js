@@ -1,15 +1,17 @@
 exports.route = function () {
 var _me = this;
-var child = _me.children.forEach (child => {
-var output_message = child.runnable.outputQueue.forEach (item => {
+var _ret = null;
+
+_me.children.forEach (child => {
+child.runnable.outputQueue.forEach (output_message => {
 var message = output_message;
 var connection = this.find_connection_in__me (child, message.port);
 connection.lock ();
-var dest = connection.forEach (receiver => {
+connection.dest.forEach (receiver => {
 var params = [_me, message, receiver];
-if (dest.component !== _me) {
+if ((dest.component !== _me)) {
 deliver_output_to_child_input (params);
-} else if (dest.component === _me) {
+} else if ((dest.component === _me)) {
 deliver_output_to_me_output (params);
 }
 });
@@ -17,6 +19,7 @@ connection.unlock ();
 });
 child.runnable.resetOutputQueue ();
 });
+return _ret;
 }
 
 this.deliver_output_to_child_input = function (_me, receiver, message) {

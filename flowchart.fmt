@@ -1,35 +1,35 @@
-Flowchart [kfc name lb @sk rb] = [[\nexports.${name} = function () {
+Flowchart [kfc name lb kstart start @sk rb] = [[\nexports.${name} = function () {
 var lambdas = {${sk}
 _endoflambdas: null
 };
-return (function () { this.lambdas.${name} (0); });
+return (function (_me) { lambdas.${start} (_me, 0); });
 }
 ]]
 
 
-Skewer_both [ksk name lb a @la rb] = [[\n${name}: function (_label) {
+Skewer_both [ksk name lb a @la rb] = [[\n${name}: function (_me, _label) {
 if (_label === 0) {${a}${la}
 } else {
-this.panic ("${name}", _label); 
+_me.panic ("${name}", _label); 
 }
 }\,]]
 
-Skewer_actiononly [ksk name lb a rb] = [[\n${name}: function (_label) {
+Skewer_actiononly [ksk name lb a rb] = [[\n${name}: function (_me, _label) {
 if (_label === 0) {${a}
 } else {
-this.panic ("${name}", _label); 
+_me.panic ("${name}", _label); 
 }
 }\,]]
 
-Skewer_labelledactionsonly [ksk name lb @la rb] = [[\n${name}: function (_label) {
+Skewer_labelledactionsonly [ksk name lb @la rb] = [[\n${name}: function (_me, _label) {
 if (_label === 0) {${la}
 } else {
-this.panic ("${name}", _label); 
+_me.panic ("${name}", _label); 
 }
 }\,]]
 
-Skewer_neither [ksk name lb rb] = [[\n${name}: function (_label) {
-this.panic ("${name}", _label); 
+Skewer_neither [ksk name lb rb] = [[\n${name}: function (_me, _label) {
+_me.panic ("${name}", _label); 
 }\,]]
 
 Action [a] = [[\n${a}\n]]
@@ -40,15 +40,15 @@ LabelledAction_empty [kcolon ldef] = [[\nreturn ${support.formatLabelFunction (l
 } else if (_label === ${support.formatIndex (ldef)}) {\n]]
 
 Unless [ku n1 lref @cont]
-  = [[if (!this.${n1} ()) {
- return this.${support.formatLabelFunction (lref)};
+  = [[if (!_me.${n1} ()) {
+ return ${support.formatLabelFunction (lref)};
 } else {
 ${cont}
 ;}]]
 
-Jump [k n @cont] = [[return this.${support.formatLabelFunction (n)} ();${cont}]]
-Call [n @cont] = [[this.${n} ();${cont}]]
-Send [ksend n v @cont] = [[this.send ("${n}", ${v});${cont}]]
+Jump [k n @cont] = [[return ${support.formatLabelFunction (n)} ();${cont}]]
+Call [n @cont] = [[_me.${n} ();${cont}]]
+Send [ksend n v @cont] = [[_me.send ("${n}", ${v});${cont}]]
 
 
 
