@@ -33,7 +33,7 @@ CondClause [klb p b krb] = [[(${p}) {${b}
 FirstCondClause [cc] = [[if ${cc}]]
 RestCondClause [cc] = [[ else if ${cc}]]
 
-WithLock [klock kreceivers kof name @nb] = [[${name}.lock ();${nb}\n${name}.unlock ();]]
+WithLock [klock kreceivers kof name @nb] = [[// locking only matters on bare metal (async)${nb}\n]] 
 
 Find_withParams [kfind name kin d kgiven pl karrow name2 @nb] = [[var ${name2} = this.find_${name}_in_${d} (${pl});${nb}]]
 Find_withoutParams [kfind name kin d karrow name2 @nb] = [[var ${name2} = this.find_${name}_in_${d} ();${nb}]]

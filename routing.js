@@ -6,7 +6,7 @@ _me.children.forEach (child => {
 child.runnable.outputQueue.forEach (output_message => {
 var message = output_message;
 var connection = this.find_connection_in__me (child, message.port);
-connection.lock ();
+// locking only matters on bare metal (async)
 connection.dest.forEach (receiver => {
 var params = [_me, message, receiver];
 if ((dest.component !== _me)) {
@@ -15,7 +15,7 @@ deliver_output_to_child_input (params);
 deliver_output_to_me_output (params);
 }
 });
-connection.unlock ();
+
 });
 child.runnable.resetOutputQueue ();
 });
