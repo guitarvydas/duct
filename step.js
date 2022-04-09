@@ -78,6 +78,6 @@ this.panic ("finished", _label);
 },
 _endoflambdas: null
 };
-return (function () { this.lambdas.Try_component (0); });
+return (function () { lambdas.main (0); });
 }
 

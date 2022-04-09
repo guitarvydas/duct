@@ -1,8 +1,8 @@
-Flowchart [kfc name lb @sk rb] = [[\nexports.${name} = function () {
+Flowchart [kfc name lb kstart start @sk rb] = [[\nexports.${name} = function () {
 var lambdas = {${sk}
 _endoflambdas: null
 };
-return (function () { this.lambdas.${name} (0); });
+return (function () { lambdas.${start} (0); });
 }
 ]]
 

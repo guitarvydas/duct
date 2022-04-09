@@ -1,4 +1,5 @@
 flowchart Try-component {
+  start main
   skewer main {
     unless has-children try-self/1
     run-each-child
