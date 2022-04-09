@@ -1,11 +1,14 @@
 exports.find_connection = function (etag) {
     var _me = this;
-    var connection = _me.connections.forEach (item => {
+    var _ret =  null;
+
+    _me.connections.forEach (connection => {
 	var sender = connection.sender;
 
-	if (sender.component === _me && sender.etag === etag) {
+	if ((sender.component === _me) && (sender.etag === etag)) {
 
-	    return connection;
+	    _ret = connection;
 	}
     });
+    return  _ret;
 }
