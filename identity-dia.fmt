@@ -7,9 +7,6 @@ ContainerImplementation_noParam [ki name b] = [[${ki}${name}${b}]]
 SynchronousLeafImplementation_withFormals [ksync name karrow dl b] = ][[${ksync}${name}${karrow}${dl}${b}]]
 SynchronousLeafImplementation_withoutFormals [ksync name b] = ][[${ksync}${name}${b}]]
 
-SynchronousCall_params [kat d1 karrow d2] = [[${kat}${d1}${karrow}${d2}]]
-SynchronousCall_noparams [kat d1] = [[${kat}${d1}]]
-
 SequenceOfBoxes [@nb] = [[${nb}]]
 NestedBox [b] = [[${b}]]
 NB [b] = [[${b}]]
@@ -46,6 +43,9 @@ ForEvery_sugaredWithoutParams [kfor kevery kitem kin d kassign name @nb]
   = [[${kfor}${kevery}${kitem}${kin}${d}${kassign}${name}${nb}]]
 ForEvery_withoutParams [kfor kevery name1 kin d kassign name @nb]
   = [[${kfor}${kevery}${name1}${kin}${d}${kassign}${name}${nb}]]
+
+SynchronousCall_params [kat d1 karrow d2] = [[${kat}${d1}${karrow}${d2}]]
+SynchronousCall_noparams [kat d1] = [[${kat}${d1}]]
 
 
 
