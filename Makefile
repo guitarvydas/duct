@@ -6,44 +6,29 @@ IDRAKON=flowchart.ohm identity-flowchart.fmt
 all: test.js
 	node test
 
-test.js: routing.js handling.js step.js fb.pl find_connection.js
-
 # drawing simple.drawio -> factbase (fb.pl)
 fb.pl: simple.drawio
 	./run-simple.bash
 
-dev: find_connection
-
-find_connection.js: find_connection.das
+find_connection.js: find_connection.das $(DIA)
 	./dev.bash <find_connection.das >find_connection.js
-
-devXX: fcit fct
 
 routing.js: routing.das $(DIA) identity
 	./dev.bash <routing.das >routing.js
 
-handling.js: handling.das $(DIA) identity
+handling.js: handling.das $(DIA) $(IDIA)
 	./dev.bash <handling.das >handling.js
 
-identity: identity.bash routing.das handling.das
+$(IDIA): identity.bash routing.das handling.das
 	./identity.bash <routing.das
 	./identity.bash <handling.das
 
-fcit:
-	./identity-flowchart.bash <testrouting.drakon
-
-stepIdentity: identity-flowchart.bash flowchart.ohm identity-flowchart.fmt step.drakon
+$(IDRAKON): identity-flowchart.bash step.drakon
 	./identity-flowchart.bash <step.drakon
 
-fct:
-	./flowchart.bash <testrouting.drakon >testrouting.js
-
-step.js: step.drakon $(DRAKON)
+step.js: step.drakon $(DRAKON) $(IDRAKON)
 	./flowchart.bash <step.drakon >step.js
 
-fctest:
-	./flowchart.bash <testrouting.drakon >testrouting.js
-
-tyIdentity:
-	./identity-ty.bash <mp.ty
+# tyIdentity:
+# 	./identity-ty.bash <mp.ty
 
