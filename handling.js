@@ -4,7 +4,7 @@ var _ret =  null;
 
 var connection = _me.find_connection (message.etag);
 // locking only matters on bare metal (async)
-connection.dest.forEach (receiver => {
+connection.receiver.forEach (dest => {
 var params = [_me, message, receiver];
 if ((dest.component !== _me)) {
 deliver_input_from_container_input_to_child_input (params);

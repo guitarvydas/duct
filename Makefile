@@ -1,3 +1,6 @@
+DIA=dia.ohm dia.fmt
+DRAKON=flowchart.ohm flowchart.fmt
+
 all: test.js
 	node test
 
@@ -14,10 +17,10 @@ find_connection.js: find_connection.das
 
 devXX: fcit fct
 
-routing.js: routing.das
+routing.js: routing.das $(DIA)
 	./dev.bash <routing.das >routing.js
 
-handling.js: handling.das
+handling.js: handling.das $(DIA)
 	./dev.bash <handling.das >handling.js
 
 identity: fcIdentity
@@ -33,7 +36,7 @@ stepIdentity:
 fct:
 	./flowchart.bash <testrouting.drakon >testrouting.js
 
-step.js: step.drakon
+step.js: step.drakon $(DRAKON)
 	./flowchart.bash <step.drakon >step.js
 
 fctest:
@@ -41,3 +44,4 @@ fctest:
 
 tyIdentity:
 	./identity-ty.bash <mp.ty
+

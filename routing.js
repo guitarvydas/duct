@@ -7,7 +7,7 @@ child.runnable.outputQueue.forEach (output_message => {
 var message = output_message;
 var connection = this.find_connection_in__me (child, message.port);
 // locking only matters on bare metal (async)
-connection.dest.forEach (receiver => {
+connection.receiver.forEach (dest => {
 var params = [_me, message, receiver];
 if ((dest.component !== _me)) {
 deliver_output_to_child_input (params);
