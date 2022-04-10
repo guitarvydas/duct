@@ -1,4 +1,4 @@
-Flowchart [kfc name lb kstart kstart start @sk rb] = [[${kfc}${name}${lb}${kstart}${start}${sk}${rb}]]
+Flowchart [kfc name lb kstart start @sk rb] = [[${kfc}${name}${lb}${kstart}${start}${sk}${rb}]]
 
 Skewer_both [ksk name lb a @la rb] = [[${ksk}${name}${lb}${a}${la}${rb}]]
 Skewer_actiononly [ksk name lb a rb] = [[${ksk}${name}${lb}${a}${rb}]]

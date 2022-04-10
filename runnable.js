@@ -62,7 +62,7 @@ function Container (signature, protoImplementation, container, name) {
         var workFunction = steprecursively.Try_component ();
         var workPerformed = workFunction (this);
         if (! workPerformed) {
-	    return m.run_self ();
+	    return this.run_self ();
         } else {
             return false;
         }

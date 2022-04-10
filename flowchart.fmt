@@ -46,7 +46,7 @@ Unless [ku n1 lref @cont]
 ${cont}
 ;}]]
 
-Jump [k n @cont] = [[return ${support.formatLabelFunction (n)} ();${cont}]]
+Jump [k n @cont] = [[return ${support.formatLabelFunction (n)};${cont}]]
 Call [n @cont] = [[_me.${n} ();${cont}]]
 Send [ksend n v @cont] = [[_me.send ("${n}", ${v});${cont}]]
 
