@@ -86,6 +86,7 @@ function Container (signature, protoImplementation, container, name) {
             return childobject.runnable.hasOutputs ();
         });
     };
+    me.self_produced_output = function () { return (me.hasOutputs ()); };
     me.find_connection = fc.find_connection;
     return me;
 }
