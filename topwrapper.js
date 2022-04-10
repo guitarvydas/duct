@@ -79,7 +79,7 @@ function displayAllOutputs (runnablechild) {
 
 function recursiveDisplay (m) {
     if (m) {
-        return `(${m.etag}:${m.data}:${recursiveDisplay (m.tracer)})`;
+        return `(${m.comefrom}::[${m.kind}]${m.etag}:${m.data}:${recursiveDisplay (m.tracer)})`;
     } else {
         return '.';
     }
