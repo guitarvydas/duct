@@ -26,11 +26,11 @@ handling.js: handling.das $(DIA) $(IDIA)
 	./dev.bash <handling.das >handling.js
 
 $(IDIA): identity.bash routing.das handling.das
-	./identity.bash <routing.das
-	./identity.bash <handling.das
+	./identity.bash <routing.das >identity-routing.js
+	./identity.bash <handling.das >identity-handling.js
 
 $(IDRAKON): identity-flowchart.bash step.drakon
-	./identity-flowchart.bash <step.drakon
+	./identity-flowchart.bash <step.drakon >identity-step.js
 
 step.js: step.drakon $(DRAKON) $(IDRAKON)
 	./flowchart.bash <step.drakon >step.js

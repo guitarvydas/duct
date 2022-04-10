@@ -34,6 +34,8 @@ function testContainer () {
     testHarness.tracing = true;
     
     testHarness.begin ('test.txt', 'test.out');
+    testHarness.route ();
+
     testHarness.step ();
     testHarness.route ();
 

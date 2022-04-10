@@ -7,6 +7,14 @@ child.runnable.outputQueue.forEach (output_message => {
 var message = output_message;
 var connection = this.find_connection_in__me (child, message.port);
 
+connection.receiver.forEach (dest => {
+var params = [_me, message, receiver];
+if ((dest.component !== _me)) {
+deliver_output_to_child_input (params);
+} else if ((dest.component === _me)) {
+deliver_output_to_me_output (params);
+}
+});
 });
 child.runnable.resetOutputQueue ();
 });

@@ -2,7 +2,7 @@ implementation deliverInputMessageToAllChildrenOfSelf (message)
       { find connection from me on port message.etag
         { lock connection
           { for every receivers in connection => dest
-            { synonym params = {me, message, receiver}
+            { synonym params = {me, message, dest}
 	      { cond
 		{ dest.component != me
 		  { @deliver_input_from_container_input_to_child_input <= params }
