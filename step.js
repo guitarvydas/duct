@@ -49,7 +49,7 @@ no_output: function (_me, _label) {
 if (_label === 0) {
 return lambdas.no_output (_me, 3);
 } else if (_label === 3) {
-_me.send ("no_output", true);
+_me.send ("no_output", true, _me.name, null);
 return lambdas.finished (_me, 0);
 
 
@@ -60,7 +60,7 @@ _me.panic ("no_output", _label);
 },
 produced_output: function (_me, _label) {
 if (_label === 0) {
-_me.send ("produced_output", true);
+_me.send ("produced_output", true, _me.name, null);
 return lambdas.finished (_me, 0);
 
 

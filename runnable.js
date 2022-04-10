@@ -44,10 +44,10 @@ function Leaf (signature, protoImplementation, container, name) {
     me.connections = [];
     me.step = function () {
         // Leaf has no children, so it always looks at it own input
-        if (! me.inputQueue.empty ()) {
-            let m = me.inputQueue.dequeue ();
+        if (! this.inputQueue.empty ()) {
+            let m = this.inputQueue.dequeue ();
             this.handler (this, m);
-            return m.hasOutputs ();
+            return this.hasOutputs ();
         } else {
             return false;
         }
