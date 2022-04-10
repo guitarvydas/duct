@@ -1,20 +1,23 @@
-all: routing handling step drawingFactbase find_connection
+all: test.js
 	node test
 
-drawingFactbase: fb.pl
+test.js: routing.js handling.js step.js fb.pl find_connection.js
+
+# drawing simple.drawio -> factbase (fb.pl)
+fb.pl: simple.drawio
 	./run-simple.bash
 
 dev: find_connection
 
-find_connection:
+find_connection.js: find_connection.das
 	./dev.bash <find_connection.das >find_connection.js
 
 devXX: fcit fct
 
-routing:
+routing.js: routing.das
 	./dev.bash <routing.das >routing.js
 
-handling:
+handling.js: handling.das
 	./dev.bash <handling.das >handling.js
 
 identity: fcIdentity
@@ -30,7 +33,7 @@ stepIdentity:
 fct:
 	./flowchart.bash <testrouting.drakon >testrouting.js
 
-step:
+step.js: step.drakon
 	./flowchart.bash <step.drakon >step.js
 
 fctest:
