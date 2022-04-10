@@ -6,6 +6,10 @@ IDRAKON=flowchart.ohm identity-flowchart.fmt
 all: test.js
 	node test
 
+dev:
+	./identity.bash <routing.das
+
+
 # drawing simple.drawio -> factbase (fb.pl)
 fb.pl: simple.drawio
 	./run-simple.bash

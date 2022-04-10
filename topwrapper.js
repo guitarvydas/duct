@@ -15,7 +15,7 @@ function TopWrapper (infname, outfname) {
     this.isInputETag = isInputETag;
     this.send = function (etag, v) {
         if (this.isValidETagForUUT (etag)) {
-            var m = new message.OutputMessage (etag, v, this);
+            var m = new message.OutputMessage (etag, v, undefined);
             this.uut.handler (this.uut, m);
         } else {
             console.error (`invalid input message ${message.etag}`);
@@ -37,6 +37,7 @@ function TopWrapper (infname, outfname) {
         this.route ();
     };    
     this.uut =  new top.Top (this);
+    this.handler = this.step;
     this.children = [{name: "uut", runnable: this.uut}];
     this.route = function () {
         this.uut.route ();

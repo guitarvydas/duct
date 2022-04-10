@@ -4,8 +4,8 @@ Implementation [x] = [[${x}]]
 ContainerImplementation_withParam [ki name lp formal rp b] = [[${ki}${name}${lp}${formal}${rp}${b}]]
 ContainerImplementation_noParam [ki name b] = [[${ki}${name}${b}]]
 
-SynchronousLeafImplementation_withFormals [ksync name karrow dl b] = ][[${ksync}${name}${karrow}${dl}${b}]]
-SynchronousLeafImplementation_withoutFormals [ksync name b] = ][[${ksync}${name}${b}]]
+SynchronousLeafImplementation_withFormals [ksync name karrow dl b] = [[${ksync}${name}${karrow}${dl}${b}]]
+SynchronousLeafImplementation_withoutFormals [ksync name b] = [[${ksync}${name}${b}]]
 
 SequenceOfBoxes [@nb] = [[${nb}]]
 NestedBox [b] = [[${b}]]
@@ -17,7 +17,7 @@ When [kwhen kmessages @nb] = [[${kwhen}${kmessages}${nb}]]
 FindConnectionFromMe [kfind d kfrom kme kon kport d2 @nb] = [[${kfind}${d}${kfrom}${kme}${kon}${kport}${d2}${nb}]]
 
 WhenAll [kwhen kall pb nb] = [[${kwhen}${kall}${pb}${nb}]]
-Return [karrow d @nb] = [[${karrow]${d}${nb}]]
+Return [karrow d @nb] = [[${karrow}${d}${nb}]]
 CheckReturn [kcheck kreturn s @nb] = [[${kcheck}${kreturn}${s}${nb}]]
 
 Cond [kcond first @rest] = [[${kcond}${first}${rest}]]
