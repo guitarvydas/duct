@@ -21,6 +21,7 @@ FindConnectionFromMe [kfind d kfrom kme kon kport d2 @nb] = [[${kfind}${d}${kfro
 
 WhenAll [kwhen kall pb nb] = [[${kwhen}${kall}${pb}${nb}]]
 Return [karrow d @nb] = [[${karrow]${d}${nb}]]
+CheckReturn [kcheck kreturn s @nb] = [[${kcheck}${kreturn}${s}${nb}]]
 
 Cond [kcond first @rest] = [[${kcond}${first}${rest}]]
 CondClause [klb p b krb] = [[${klb}${p}${b}${krb}]]
@@ -58,7 +59,7 @@ Predicate_me [left kis kme] = [[${left}${kis}${kme}]]
 Predicate_eq [left eq right] = [[${left}${eq}${right}]]
 Predicate_ne [left eq right] = [[${left}${eq}${right}]]
 
-PredicateBlock [lb p1 pm rb] = [[${lb}${p1}${pm}${rb}]]
+PredicateBlock [lb p1 @pm rb] = [[${lb}${p1}${pm}${rb}]]
 PredicateMore [p] = [[${p}]]
 
 ParameterList_list [d kx pl] = [[${d}${kx}${pl}]]
@@ -80,3 +81,6 @@ eol [c] = [[${c}]]
 space [c] = [[${c}]]
 
 comment [c] = [[${c}]]
+
+string [dq1 @s dq2] = [[${dq1}${s}${dq2}]]
+dq [c] = [[${c}]]

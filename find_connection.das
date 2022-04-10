@@ -1,6 +1,6 @@
 implementation find_connection (etag)
   { for every item in connections of me => connection
-      { synonym sender = connection.sender.sender
+      { synonym sender = connection.sender
           { when all
               {
                   sender.component is me
@@ -10,4 +10,5 @@ implementation find_connection (etag)
           }
       }
   }
+  { check return "connection not found for ${etag}" }
 

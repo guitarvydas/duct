@@ -25,11 +25,13 @@ BoxOperation
   | WhenAll
   | When
   | Return
+  | CheckReturn
   | SynchronousCall
 
 WhenAll = "when" "all" PredicateBlock NestedBox
 When = "when" "messages" NB?
 Return = "->" DatumList NB?
+CheckReturn = "check" "return" string NB?
 FindConnectionFromMe = "find" Datum "from" "me" "on" "port" Datum NB?
 
 Cond = "cond" FirstCondClause RestCondClause*
@@ -74,7 +76,7 @@ Predicate =
   | Datum "==" Datum -- eq
   | Datum "!=" Datum -- ne
 
-PredicateBlock = "{" Predicate PredicateMore "}"
+PredicateBlock = "{" Predicate PredicateMore* "}"
 PredicateMore = Predicate
 
 ParameterList
@@ -107,8 +109,10 @@ keyword
           ( "implementation"
           | "receivers"
           | "messages"
+          | "return"
           | "given"
           | "every"
+          | "check"
           | "lock"
           | "find"
           | "from"
@@ -131,6 +135,9 @@ keyword
 kwME = &(~namecharFirst) "me" &(~namecharRest)
 kwPORT = &(~namecharFirst) "port" &(~namecharRest)
 
+string = dq (~dq any)* dq
+dq = "\""
+    
 eol = "\n"
 
 name = namecharFirst namecharRest*

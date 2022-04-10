@@ -1,7 +1,7 @@
 all: routing handling step drawingFactbase find_connection
 	node test
 
-drawingFactbase:
+drawingFactbase: fb.pl
 	./run-simple.bash
 
 dev: find_connection

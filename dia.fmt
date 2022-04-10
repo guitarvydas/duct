@@ -14,8 +14,9 @@ SynchronousLeafImplementation_withoutFormals [ksync name b] = [[
 this.${name} = function () {${b}
 \}]]
 
-SynchronousCall_params [kat d1 karrow d2] = [[${d1} (${d2});]]
-SynchronousCall_noparams [kat d1] = [[${d1} ();]]
+SequenceOfBoxes [@b] = [[${b}]]
+NestedBox [b] = [[${b}]]
+NB [b] = [[${b}]]
 
 Box [klb bo @b krb] = [[\n${bo}${b}]]
 BoxOperation [op] = [[${op}]]
@@ -26,6 +27,7 @@ FindConnectionFromMe [kfind d kfrom kme kon kport d2 @nb] = [[var ${d} = _me.fin
 
 WhenAll [kwhen kall pb nb] = [[\nif (${pb}) \{${nb}\n\}]]
 Return [karrow d @nb] = [[\n_ret = ${d};${nb}]]
+CheckReturn [kcheck kreturn s @nb] = [[if (_ret === null) {\nconsole.error ("no value returned");\nconsole.error (\`${s}\`);\nprocess.exit (1);}\n${nb}]]
 
 Cond [kcond ccf ccr] = [[${ccf}${ccr}]]
 CondClause [klb p b krb] = [[(${p}) {${b}
@@ -53,6 +55,9 @@ ForEvery_withoutParams [kfor kevery name1 kin d kassign name @nb]
   = [[${d}.${name}.forEach (${name1} => \{${nb}\n\});]]
 
 
+SynchronousCall_params [kat d1 karrow d2] = [[${d1} (${d2});]]
+SynchronousCall_noparams [kat d1] = [[${d1} ();]]
+
 
 Datum_field [n kof d] = [[${d}.${n}]]
 Datum_dottedField [n kdot d] = [[${n}.${d}]]
@@ -64,7 +69,7 @@ Predicate_me [left kis kme] = [[(${left} === "$me")]]
 Predicate_eq [left eq right] = [[(${left} === ${right})]]
 Predicate_ne [left eq right] = [[(${left} !== ${right})]]
 
-PredicateBlock [lb p1 pm rb] = [[${p1}${pm}]]
+PredicateBlock [lb p1 @pm rb] = [[${p1}${pm}]]
 PredicateMore [p] = [[ && ${p}]]
 
 
@@ -87,3 +92,6 @@ eol [c] = [[${c}]]
 space [c] = [[${c}]]
 
 comment [c] = [[${c}]]
+
+string [dq1 @s dq2] = [[${s}]]
+dq [c] = [[]]
