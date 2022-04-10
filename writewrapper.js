@@ -59,7 +59,7 @@ function destructivelyDisplayAllOutputsForAllChildren (me) {
 
 function displayAllOutputs (child) {
     child.outputQueue.forEach (m => {
-        console.log (`${child.signature.name} outputs ${recursiveDisplay (m)}`);
+        console.log (`${child.name} outputs ${recursiveDisplay (m)}`);
     })
 }
 

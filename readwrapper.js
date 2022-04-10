@@ -14,7 +14,7 @@ function ReadWrapper () {
     this.isInputETag = isInputETag;
     this.send = function (etag, v) {
         if (this.isValidETagForUUT (etag)) {
-            var m = new message.OutputMessage (etag, v, undefined);
+            var m = new message.InputMessage (etag, v, this.name, undefined);
             this.uut.handler (this.uut, m);
         } else {
             console.error (`invalid input message ${etag}`);
@@ -60,13 +60,13 @@ function destructivelyDisplayAllOutputsForAllChildren (me) {
 
 function displayAllOutputs (child) {
     child.outputQueue.forEach (m => {
-        console.log (`${child.signature.name} outputs ${recursiveDisplay (m)}`);
+        console.log (`${child.name} outputs ${recursiveDisplay (m)}`);
     })
 }
 
 function recursiveDisplay (m) {
     if (m) {
-        return `(${m.comefrom}::${m.etag}:${m.data}:${recursiveDisplay (m.tracer)})`;
+        return `(${m.comefrom}::[${m.kind}]${m.etag}:${m.data}:${recursiveDisplay (m.tracer)})`;
     } else {
 	return '.';
     }
