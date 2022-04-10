@@ -62,27 +62,27 @@ function Container (signature, protoImplementation, container, name) {
         var workFunction = steprecursively.Try_component ();
         var workPerformed = workFunction (this);
         if (! workPerformed) {
-	    return me.run_self ();
+	    return m.run_self ();
         } else {
             return false;
         }
     },
     me.run_self = function () {
-        if (! me.inputQueue.empty ()) {
-            let m = me.inputQueue.dequeue ();
-            me.handler (m);
-            return me.hasOutputs ();
+        if (! this.inputQueue.empty ()) {
+            let m = this.inputQueue.dequeue ();
+            this.handler (m);
+            return this.hasOutputs ();
 	} else {
 	    return false;
 	}
     },
     me.step_each_child = function () {
-        me.children.forEach (childobject => {
+        this.children.forEach (childobject => {
             childobject.runnable.step ();
         });
     };
     me.child_produced_output = function () {
-        return me.children.some (childobject => {
+        return this.children.some (childobject => {
             return childobject.runnable.hasOutputs ();
         });
     };

@@ -37,6 +37,7 @@ function TopWrapper (infname, outfname) {
         this.route ();
     };    
     this.uut =  new top.Top (this);
+    this.handler = this.step;
     this.children = [{name: "uut", runnable: this.uut}];
     this.route = function () {
         this.uut.route ();
