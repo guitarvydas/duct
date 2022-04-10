@@ -45,7 +45,7 @@ function Leaf (signature, protoImplementation, container, name) {
         // Leaf has no children, so it always looks at it own input
         if (! me.inputQueue.empty ()) {
             let m = me.inputQueue.dequeue ();
-            me.handler (m);
+            this.handler (this, m);
             return m.hasOutputs ();
         } else {
             return false;
@@ -72,7 +72,7 @@ function Container (signature, protoImplementation, container, name) {
     me.run_self = function () {
         if (! this.inputQueue.empty ()) {
             let m = this.inputQueue.dequeue ();
-            this.handler (m);
+            this.handler (this, m);
             return this.hasOutputs ();
 	} else {
 	    return false;
@@ -94,7 +94,8 @@ function Container (signature, protoImplementation, container, name) {
 	var _ret = null;
 	this.children.forEach (childobj => {
 	    if (childobj.name === name) {
-		_ret = childobj.runnable);
+		_ret = childobj.runnable;
+	    }
 	});
 	if (_ret === null) {
 	    console.error (`child ${name} not found in ${this.name}`);
