@@ -88,6 +88,7 @@ function Container (signature, protoImplementation, container, name) {
     };
     me.self_produced_output = function () { return (me.hasOutputs ()); };
     me.find_connection = fc.find_connection;
+    me.end = function () {};
     return me;
 }
 
