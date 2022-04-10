@@ -34,6 +34,7 @@ function Runnable (signature, protoImplementation, container, name) {
     this.resetOutputQueue = function () {
         this.outputQueue = new queue.Queue ();
     }
+    this.panic = function () { throw "panic"; }
 }
 
 function Leaf (signature, protoImplementation, container, name) {
@@ -91,6 +92,7 @@ function Container (signature, protoImplementation, container, name) {
     };
     me.self_produced_output = function () { return (me.hasOutputs ()); };
     me.find_connection = fc.find_connection;
+    me.find_connection_in__me = function (etag) { return this.find_connection (this, etag); }
     me.lookupChild = function (name) {
 	var _ret = null;
 	this.children.forEach (childobj => {

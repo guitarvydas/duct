@@ -2,7 +2,7 @@ implementation route
 { for every item in children of me => child
   { for every item in outputQueue of child.runnable => output_message
     { synonym message = output_message
-      { find connection in me given child X message.port => connection
+      { find connection in me given message.etag => connection
         { lock receivers of connection
 	  { for every receiver in connection => dest
 	      { synonym params = {me, message, receiver}

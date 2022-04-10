@@ -5,7 +5,7 @@ var _ret = null;
 _me.children.forEach (child => {
 child.runnable.outputQueue.forEach (output_message => {
 var message = output_message;
-var connection = this.find_connection_in__me (child, message.port);
+var connection = this.find_connection_in__me (message.etag);
 
 connection.receiver.forEach (dest => {
 var params = [_me, message, receiver];
