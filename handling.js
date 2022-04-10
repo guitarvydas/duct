@@ -1,5 +1,4 @@
-exports.deliverInputMessageToAllChildrenOfSelf = function (message) {
-var _me = this;
+exports.deliverInputMessageToAllChildrenOfSelf = function (_me, message) {
 var _ret =  null;
 
 var connection = _me.find_connection (message.etag);

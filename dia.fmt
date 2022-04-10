@@ -1,7 +1,7 @@
 Main [@i] = [[${i}]]
 Implementation [x] = [[${x}]]
 
-ContainerImplementation_withParam [ki name lp formal rp b] = [[exports.${name} = function (${formal}) \{\nvar _me = this;\nvar _ret =  null;\n${b}\nreturn  _ret;\n\}]]
+ContainerImplementation_withParam [ki name lp formal rp b] = [[exports.${name} = function (_me, ${formal}) \{\nvar _ret =  null;\n${b}\nreturn  _ret;\n\}]]
 ContainerImplementation_noParam [ki name b] = [[exports.${name} = function () \{\nvar _me = this;\nvar _ret = null;\n${b}\nreturn _ret;\n\}]]
 
 SynchronousLeafImplementation_withFormals [ksync name karrow dl b] = [[

@@ -41,6 +41,7 @@ function Leaf (signature, protoImplementation, container, name) {
     me.conclude = container.conclude;
     me.route = function () { };
     me.children = [];
+    me.connections = [];
     me.step = function () {
         // Leaf has no children, so it always looks at it own input
         if (! me.inputQueue.empty ()) {

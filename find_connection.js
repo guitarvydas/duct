@@ -1,5 +1,4 @@
-exports.find_connection = function (etag) {
-var _me = this;
+exports.find_connection = function (_me, etag) {
 var _ret =  null;
 
 _me.connections.forEach (connection => {
