@@ -39,7 +39,7 @@ FirstCondClause = CondClause
 RestCondClause = CondClause
 CondClause = "{" Predicate Box "}"
 
-WithLock = "lock" "receivers" "of" Datum NB?
+WithLock = "lock" Datum NB?
 
 Find
   = "find" name "in" Datum "given" ParameterList "=>" name NB? -- withParams
@@ -107,7 +107,6 @@ DatumList
 keyword
   = &(~namecharFirst)
           ( "implementation"
-          | "receivers"
           | "messages"
           | "return"
           | "given"
