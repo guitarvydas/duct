@@ -27,6 +27,8 @@ function Runnable (signature, protoImplementation, container, name) {
     this.hasOutputs = function () {return !this.outputQueue.empty ()};
     this.has_children = function () {return (0 < this.children.length); };
     this.dequeueOutput = function () {return this.outputQueue.dequeue ();};
+    this.enqueueInput = function (m) { this.inputQueue.enqueue (m); };
+    this.enqueueOutput = function (m) { this.outputQueue.enqueue (m); };
     this.begin = protoImplementation.begin;
     this.finish = protoImplementation.finish;
     this.resetOutputQueue = function () {
@@ -88,6 +90,18 @@ function Container (signature, protoImplementation, container, name) {
     };
     me.self_produced_output = function () { return (me.hasOutputs ()); };
     me.find_connection = fc.find_connection;
+    me.lookupChild = function (name) {
+	var _ret = null;
+	this.children.forEach (childobj => {
+	    if (childobj.name === name) {
+		_ret = childobj.runnable);
+	});
+	if (_ret === null) {
+	    console.error (`child ${name} not found in ${this.name}`);
+	    process.exit (1);
+	};
+	return _ret;
+    }
     me.end = function () {};
     return me;
 }
