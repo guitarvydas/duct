@@ -23,7 +23,7 @@ BoxOperation [op] = [[${op}]]
 
 When [kwhen kmessages @nb] = [[if (_me.inputQueue.length > 0) {${nb}\n\};]]
 
-FindConnectionFromMe [kfind d kfrom kme kon kport d2 @nb] = [[var ${d} = _me.find_connection (${d2});${nb}]]
+FindConnectionFromMe [kfind d kfrom kme kon kport d2 @nb] = [[var ${d} = _me.find_connection (_me, ${d2});${nb}]]
 
 WhenAll [kwhen kall pb nb] = [[\nif (${pb}) \{${nb}\n\}]]
 Return [karrow d @nb] = [[\n_ret = ${d};${nb}]]

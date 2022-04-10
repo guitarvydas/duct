@@ -4,13 +4,13 @@ let routing = require ('./routing');
 let steprecursively = require ('./step');
 let fc = require ('./find_connection');
 
-function send (etag, v, tracer) {
-    let m = new message.OutputMessage (etag, v, tracer);
+function send (etag, v, who, tracer) {
+    let m = new message.OutputMessage (etag, v, who, tracer);
     this.outputQueue.enqueue (m);
 }
 
 function inject (etag, v, tracer) {
-    let m = new message.InputMessage (etag, v, tracer);
+    let m = new message.InputMessage (etag, v, "<inject>", tracer);
     this.inputQueue.enqueue (m);
 }
 

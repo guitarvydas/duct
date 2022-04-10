@@ -15,7 +15,7 @@ function TopWrapper (infname, outfname) {
     this.isInputETag = isInputETag;
     this.send = function (etag, v) {
         if (this.isValidETagForUUT (etag)) {
-            var m = new message.OutputMessage (etag, v, undefined);
+            var m = new message.OutputMessageNoTrace (etag, v, this.name, undefined);
             this.uut.handler (this.uut, m);
         } else {
             console.error (`invalid input message ${message.etag}`);
