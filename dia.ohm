@@ -19,6 +19,7 @@ BoxOperation
   | Synonym
   | FindConnectionFromMe
   | Find
+  | Lookup
   | WithLock
   | Cond
   | VarBox
@@ -50,6 +51,9 @@ VarBox = "var" name "<=" "{" DatumList "}" NB?
 Synonym 
   = "synonym" name "=" "{" DatumList "}" NB? -- obj
   | "synonym" name "=" Datum NB?             -- solitary
+
+Lookup =
+  | "lookup" Datum "=>" name NB?
 
 ForEvery
   = "for" "every" "item" "in" Datum "given" ParameterList "=>" name NB? -- sugaredWithParams
@@ -117,6 +121,7 @@ keyword
           | "messages"
           | "return"
           | "given"
+          | "lookup"
           | "every"
           | "check"
           | "lock"

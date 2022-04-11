@@ -21,12 +21,13 @@ child.runnable.resetOutputQueue ();
 return _ret;
 }
 
-deliver_to_child_input = function ([_me, receiver, message]) {
-var input_message = [receiver.etag, message.data];
-receiver.enqueueInputMessage (input_message);
+deliver_to_child_input = function ([_me, dest, message]) {
+var input_message = [dest.etag, message.data];
+var receiver = _me.lookupChild (dest.name);
+receiver.enqueueInput (input_message);
 }
 
-deliver_to_me_output = function ([_me, receiver, message]) {
+deliver_to_me_output = function ([_me, dest, message]) {
 var output_message = [receiver.etag, message.data];
-_me.enqueueInputMessage (output_message);
+_me.enqueueInput (output_message);
 }

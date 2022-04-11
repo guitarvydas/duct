@@ -35,6 +35,8 @@ VarBox [kvar name karrow klb dl krb @nb] = [[${kvar}${name}${karrow}${klb}${dl}$
 Synonym_obj [ksyn name keq klb dl krb @nb] = [[${ksyn}${name}${keq}${klb}${dl}${krb}${nb}]]
 Synonym_solitary [ksyn name keq dl @nb] = [[${ksyn}${name}${keq}${dl}${nb}]]
 
+Lookup [klookup d karrow name @nb] = [[${klookup}${d}${karrow}${name}${nb}]]
+
 ForEvery_sugaredWithParams [kfor kevery kitem kin d kgiven pl kassign name @nb]
   = [[${kfor}${kevery}${kitem}${kin}${d}${kgiven}${pl}${kassign}${name}${nb}]]
 ForEvery_withParams [kfor kevery name1 kin d kgiven pl kassign name @nb]

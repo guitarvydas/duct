@@ -23,14 +23,16 @@ implementation route
   }
 }
 
-sync deliver_to_child_input <= me, receiver, message
+sync deliver_to_child_input <= me, dest, message
    // map message for receiver
-  { var input_message <= {receiver.etag, message.data}
-    { @receiver.enqueueInputMessage <= input_message } 
+  { var input_message <= {dest.etag, message.data}
+    { lookup dest.name => receiver
+      { @receiver.enqueueInput <= input_message }
+    }
   }
 
-sync deliver_to_me_output <= me, receiver, message
+sync deliver_to_me_output <= me, dest, message
   // map message for output
   { var output_message <= {receiver.etag, message.data}
-    { @me.enqueueInputMessage <= output_message }
+    { @me.enqueueInput <= output_message }
   }
