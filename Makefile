@@ -1,34 +1,43 @@
-all: routing handling
+DIA=dia.ohm dia.fmt
+IDIA=dia.ohm identity-dia.fmt
+DRAKON=flowchart.ohm flowchart.fmt
+IDRAKON=flowchart.ohm identity-flowchart.fmt
+
+all: test.js fb.pl
+	node test
+
+test.js: step.js routing.js handling.js find_connection.js find_connection_in__me.js
+
+dev:
+	./identity.bash <routing.das
+
+
+# drawing simple.drawio -> factbase (fb.pl)
+fb.pl: simple.drawio
 	./run-simple.bash
 
-dev: fcIdentity fc
+find_connection.js: find_connection.das $(DIA)
+	./dev.bash <find_connection.das >find_connection.js
 
-devXX: fcit fct
+find_connection_in__me.js: find_connection_in__me.das $(DIA)
+	./dev.bash <find_connection_in__me.das >find_connection_in__me.js
 
-routing:
+routing.js: routing.das $(DIA) $(IDIA)
 	./dev.bash <routing.das >routing.js
 
-handling:
+handling.js: handling.das $(DIA) $(IDIA)
 	./dev.bash <handling.das >handling.js
 
-identity: fcIdentity
-	./identity.bash <routing.das
-	./identity.bash <handling.das
+$(IDIA): identity.bash routing.das handling.das
+	./identity.bash <routing.das >identity-routing.js
+	./identity.bash <handling.das >identity-handling.js
 
-fcit:
-	./identity-flowchart.bash <testrouting.drakon
+$(IDRAKON): identity-flowchart.bash step.drakon
+	./identity-flowchart.bash <step.drakon >identity-step.js
 
-fcIdentity:
-	./identity-flowchart.bash <tryMeWithoutRouting.drakon
+step.js: step.drakon $(DRAKON) $(IDRAKON)
+	./flowchart.bash <step.drakon >step.js
 
-fct:
-	./flowchart.bash <testrouting.drakon >testrouting.js
+# tyIdentity:
+# 	./identity-ty.bash <mp.ty
 
-fc:
-	./flowchart.bash <tryMeWithoutRouting.drakon >tryMeWithoutRouting.js
-
-fctest:
-	./flowchart.bash <testrouting.drakon >testrouting.js
-
-tyIdentity:
-	./identity-ty.bash <mp.ty

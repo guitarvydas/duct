@@ -191,7 +191,7 @@ diagram_fact(target, cell_16, id_LWPhjr7DYTPskbLwUoHT__2).
 diagram_fact(target, cell_18, id_LWPhjr7DYTPskbLwUoHT__16).
 diagram_fact(value, cell_11, "char").
 diagram_fact(value, cell_12, "char").
-diagram_fact(value, cell_13, "input filename").
+diagram_fact(value, cell_13, "filename").
 diagram_fact(value, cell_15, "input filename").
 diagram_fact(value, cell_17, "output filename").
 diagram_fact(value, cell_19, "request").
@@ -199,7 +199,7 @@ diagram_fact(value, cell_20, "req").
 diagram_fact(value, cell_6, "top").
 diagram_fact(value, cell_7, "write").
 diagram_fact(value, cell_8, "read").
-diagram_fact(value, cell_9, "output filename").
+diagram_fact(value, cell_9, "filename").
 diagram_fact(vertex, cell_11, 1).
 diagram_fact(vertex, cell_12, 1).
 diagram_fact(vertex, cell_13, 1).

@@ -1,11 +1,12 @@
 Main [@i] = [[${i}]]
 Implementation [x] = [[${x}]]
 
-ContainerImplementation [ki name b] = [[exports.${name} = function () \{\nvar _me = this;${b}\n\}]]
+ContainerImplementation_withParam [ki name lp formal rp b] = [[exports.${name} = function (_me, ${formal}) \{\nvar _ret =  null;\n${b}\nreturn  _ret;\n\}]]
+ContainerImplementation_noParam [ki name b] = [[exports.${name} = function () \{\nvar _me = this;\nvar _ret = null;\n${b}\nreturn _ret;\n\}]]
 
 SynchronousLeafImplementation_withFormals [ksync name karrow dl b] = [[
 
-this.${name} = function (${dl}) {${b}
+${name} = function ([${dl}]) {${b}
 \}]]
 
 SynchronousLeafImplementation_withoutFormals [ksync name b] = [[
@@ -13,17 +14,20 @@ SynchronousLeafImplementation_withoutFormals [ksync name b] = [[
 this.${name} = function () {${b}
 \}]]
 
-SynchronousCall_params [kat d1 karrow d2] = [[this.${d1} (${d2});]]
-SynchronousCall_noparams [kat d1] = [[this.${d1} ();]]
+SequenceOfBoxes [@b] = [[${b}]]
+NestedBox [b] = [[${b}]]
+NB [b] = [[${b}]]
 
 Box [klb bo @b krb] = [[\n${bo}${b}]]
 BoxOperation [op] = [[${op}]]
 
 When [kwhen kmessages @nb] = [[if (_me.inputQueue.length > 0) {${nb}\n\};]]
 
-Fetch [kfetch karrow d @nb] = [[var ${d} = _me.inputQueue.dequeue ();${nb}]]
+FindConnectionFromMe [kfind d kfrom kme kon kport d2 @nb] = [[var ${d} = _me.find_connection (_me, ${d2});${nb}]]
 
-FindConnectionFromMe [kfind d kfrom kme kon kport d2 @nb] = [[var ${d} = _me.find_connection (${d2});${nb}]]
+WhenAll [kwhen kall pb nb] = [[\nif (${pb}) \{${nb}\n\}]]
+Return [karrow d @nb] = [[\n_ret = ${d};${nb}]]
+CheckReturn [kcheck kreturn s @nb] = [[if (_ret === null) {\nconsole.error ("no value returned");\nconsole.error (\`${s}\`);\nprocess.exit (1);}\n${nb}]]
 
 Cond [kcond ccf ccr] = [[${ccf}${ccr}]]
 CondClause [klb p b krb] = [[(${p}) {${b}
@@ -31,41 +35,55 @@ CondClause [klb p b krb] = [[(${p}) {${b}
 FirstCondClause [cc] = [[if ${cc}]]
 RestCondClause [cc] = [[ else if ${cc}]]
 
-WithLock [klock kreceivers kof name @nb] = [[${name}.lock ();${nb}\n${name}.unlock ();]]
+WithLock [klock name @nb] = [[${nb}]]
 
-Find_withParams [kfind name kin d kgiven pl karrow name2 @nb] = [[var ${name2} = this.find_${name}_in_${d} (${pl});${nb}]]
-Find_withoutParams [kfind name kin d karrow name2 @nb] = [[var ${name2} = this.find_${name}_in_${d} ();${nb}]]
+Find_withParams [kfind name kin d kgiven pl karrow name2 @nb] = [[var ${name2} = this.find_${name}_in_${d} (this, ${pl});${nb}]]
+Find_withoutParams [kfind name kin d karrow name2 @nb] = [[var ${name2} = this.find_${name}_in_${d} (this);${nb}]]
 
 VarBox [kvar name karrow klb dl krb @nb] = [[var ${name} = \[${dl}\];${nb}]]
 
 Synonym_obj [ksyn name keq klb dl krb @nb] = [[var ${name} = \[${dl}\];${nb}]]
 Synonym_solitary [ksyn name keq dl @nb] = [[var ${name} = ${dl};${nb}]]
 
+Lookup [klookup d karrow name @nb] = [[var ${name} = _me.lookupChild (${d});${nb}]]
+
 ForEvery_sugaredWithParams [kfor kevery kitem kin d kgiven pl kassign name @nb]
-  = [[var ${name} = ${d} (${pl}).forEach (item => \{${nb}\n\});]]
+  = [[${d} (${pl}).forEach (${name} => \{${nb}\n\});]]
 ForEvery_withParams [kfor kevery name1 kin d kgiven pl kassign name @nb]
-  = [[var ${name} = ${d} (${pl}).forEach (${name1} => \{${nb}\n\});]]
+  = [[${d} (${pl}).${name}.forEach (${name1} => \{${nb}\n\});]]
 ForEvery_sugaredWithoutParams [kfor kevery kitem kin d kassign name @nb]
-  = [[var ${name} = ${d}.forEach (item => \{${nb}\n\});]]
-ForEvery_withoutParams [kfor kevery name1 kin d kassign name @nb]
-  = [[var ${name} = ${d}.forEach (${name1} => \{${nb}\n\});]]
+  = [[${d}.forEach (${name} => \{${nb}\n\});]]
+ForEvery_withoutParams [kfor kevery name kin d kassign name1 @nb]
+  = [[${d}.${name}.forEach (${name1} => \{${nb}\n\});]]
 
 
+SynchronousCall_params [kat d1 karrow d2] = [[${d1} (${d2});]]
+SynchronousCall_noparams [kat d1] = [[${d1} ();]]
+SynchronousCall_external_params [kat d1 karrow d2] = [[_me.${d1} (${d2});]]
+SynchronousCall_external_noparams [kat d1] = [[_me.${d1} ();]]
 
-Datum_field [n kof d] = [[${d}${n}]]
+
+Datum_field [n kof d] = [[${d}.${n}]]
 Datum_dottedField [n kdot d] = [[${n}.${d}]]
 Datum_name [n] = [[${n}]]
 Datum_me [n] = [[_me]]
 Datum_port [n] = [[port]]
 
-Predicate_eq [left eq right] = [[${left} === ${right}]]
-Predicate_ne [left eq right] = [[${left} !== ${right}]]
+Predicate_me [left kis kme] = [[(${left} === "$me")]]
+Predicate_eq [left eq right] = [[(${left} === ${right})]]
+Predicate_ne [left eq right] = [[(${left} !== ${right})]]
+
+PredicateBlock [lb p1 @pm rb] = [[${p1}${pm}]]
+PredicateMore [p] = [[ && ${p}]]
+
 
 ParameterList_list [d kx pl] = [[${d}, ${pl}]]
 ParameterList_solitary [d] = [[${d}]]
 
 DatumList_list [d1 kcomma d2] = [[${d1}, ${d2}]]
 DatumList_solitary [d] = [[${d}]]
+NameList_list [d1 kcomma d2] = [[${d1}, ${d2}]]
+NameList_solitary [d] = [[${d}]]
 
 name [first @rest] = [[${first}${rest}]]
 namecharFirst [c] = [[${c}]]
@@ -80,3 +98,6 @@ eol [c] = [[${c}]]
 space [c] = [[${c}]]
 
 comment [c] = [[${c}]]
+
+string [dq1 @s dq2] = [[${s}]]
+dq [c] = [[]]

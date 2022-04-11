@@ -1,17 +1,17 @@
-implementation routeChildrenOutputs
-{ for every child in me => child
-  { for every item in outputQueue of child => output_message
+implementation route
+{ for every item in children of me => child
+  { for every item in outputQueue of child.runnable => output_message
     { synonym message = output_message
-      { find connection in me given child X message.port => connection
+      { find connection in me given child X message.etag => connection
         { lock receivers of connection
-	  { for every receiver in connection => dest
-	      { synonym params = {me, message, receiver}
+	  { for every receivers in connection => dest
+	      { synonym params = {me, dest, message}
 		{ cond
 		  { dest.component != me
-		    { @deliver_output_to_child_input <= params }
+		    { @deliver_to_child_input <= params }
 		  }
 		  { dest.component == me
-		    { @deliver_output_to_me_output <= params }
+		    { @deliver_to_me_output <= params }
 		  }
 		}
 	    }
@@ -19,18 +19,20 @@ implementation routeChildrenOutputs
         }
       }
     }
-    {@child.resetOutputQueue}
+    {@child.runnable.resetOutputQueue}
   }
 }
 
-sync deliver_output_to_child_input <= me, receiver, message
+sync deliver_to_child_input <= me, dest, message
    // map message for receiver
-  { var input_message <= {receiver.etag, message.data}
-    { @receiver.enqueueInputMessage <= input_message } 
+  { var input_message <= {dest.etag, message.data}
+    { lookup dest.component => receiver
+      { @receiver.enqueueInput <= input_message }
+    }
   }
 
-sync deliver_output_to_me_output <= me, receiver, message
+sync deliver_to_me_output <= me, dest, message
   // map message for output
   { var output_message <= {receiver.etag, message.data}
-    { @me.enqueueInputMessage <= output_message }
+    { @me.enqueueInput <= output_message }
   }

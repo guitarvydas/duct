@@ -2,7 +2,10 @@ dia {
   Main = Implementation+
   Implementation = ContainerImplementation | SynchronousLeafImplementation
 
-ContainerImplementation = "implementation" name SequenceOfBoxes
+ContainerImplementation =
+  | "implementation" name "(" NameList ")" SequenceOfBoxes -- withParam
+  | "implementation" name SequenceOfBoxes -- noParam
+
 SynchronousLeafImplementation 
   = "sync" name "<=" DatumList Box -- withFormals
   | "sync" name                Box -- withoutFormals
@@ -16,15 +19,20 @@ BoxOperation
   | Synonym
   | FindConnectionFromMe
   | Find
+  | Lookup
   | WithLock
   | Cond
   | VarBox
+  | WhenAll
   | When
-  | Fetch
+  | Return
+  | CheckReturn
   | SynchronousCall
 
+WhenAll = "when" "all" PredicateBlock NestedBox
 When = "when" "messages" NB?
-Fetch = "fetch" "=>" Datum NB?
+Return = "->" DatumList NB?
+CheckReturn = "check" "return" string NB?
 FindConnectionFromMe = "find" Datum "from" "me" "on" "port" Datum NB?
 
 Cond = "cond" FirstCondClause RestCondClause*
@@ -32,7 +40,7 @@ FirstCondClause = CondClause
 RestCondClause = CondClause
 CondClause = "{" Predicate Box "}"
 
-WithLock = "lock" "receivers" "of" Datum NB?
+WithLock = "lock" Datum NB?
 
 Find
   = "find" name "in" Datum "given" ParameterList "=>" name NB? -- withParams
@@ -44,6 +52,9 @@ Synonym
   = "synonym" name "=" "{" DatumList "}" NB? -- obj
   | "synonym" name "=" Datum NB?             -- solitary
 
+Lookup =
+  | "lookup" Datum "=>" name NB?
+
 ForEvery
   = "for" "every" "item" "in" Datum "given" ParameterList "=>" name NB? -- sugaredWithParams
   | "for" "every" name "in" Datum "given" ParameterList "=>" name NB? -- withParams
@@ -51,10 +62,12 @@ ForEvery
   | "for" "every" name "in" Datum  "=>" name NB? -- withoutParams
 
 
-SynchronousCall
+SynchronousCall =
   // no nesting here - Call is a Leaf, not a nested box
-  = "@" Datum "<=" Datum -- params
+  | "@" Datum "<=" Datum -- params
   | "@" Datum            -- noparams
+  | "#" Datum "<=" Datum -- external_params
+  | "#" Datum            -- external_noparams
 
 
 Datum
@@ -64,9 +77,13 @@ Datum
   | kwME            -- me
   | name            -- name
 
-Predicate
-  = Datum "==" Datum -- eq
+Predicate =
+  | Datum "is" "me"      -- me
+  | Datum "==" Datum -- eq
   | Datum "!=" Datum -- ne
+
+PredicateBlock = "{" Predicate PredicateMore* "}"
+PredicateMore = Predicate
 
 ParameterList
   = Datum "X" ParameterList -- list
@@ -76,9 +93,14 @@ DatumList
   = Datum "," DatumList -- list
   | Datum               -- solitary
 
+NameList 
+  = name "," NameList -- list
+  | name              -- solitary
+
   separator
     = "<="
     | "=>"
+    | "->"
     | "//"
     | "=="
     | "!="
@@ -88,6 +110,7 @@ DatumList
     | "("
     | ")"
     | "@"
+    | "#"
     | "."
     | ","
     | eol
@@ -95,10 +118,12 @@ DatumList
 keyword
   = &(~namecharFirst)
           ( "implementation"
-          | "receivers"
           | "messages"
+          | "return"
           | "given"
+          | "lookup"
           | "every"
+          | "check"
           | "lock"
           | "find"
           | "from"
@@ -109,6 +134,8 @@ keyword
           | "sync"
           | "port"
           | "for"
+          | "all"
+          | "is"
           | "in"
           | "on"
           | "of"
@@ -119,6 +146,9 @@ keyword
 kwME = &(~namecharFirst) "me" &(~namecharRest)
 kwPORT = &(~namecharFirst) "port" &(~namecharRest)
 
+string = dq (~dq any)* dq
+dq = "\""
+    
 eol = "\n"
 
 name = namecharFirst namecharRest*

@@ -2,7 +2,6 @@ const runnable = require('./runnable');
 
 var signature = {
     name: "write",
-    kind: "leaf",
     inputs: [
 	{ "name": "filename", "structure": ["filename"] },
 	{ "name": "char", "structure": ["char"] }
@@ -18,11 +17,11 @@ var protoImplementation = {
     kind: "leaf",
     handler: function (me, message) {
 	if ("filename" === message.etag) {
-	    me.send ("request", true);
+	    me.send ("request", true, me.name, message);
 	} else if ("char" === message.etag) {
 	    console.log (message.data);
-	    me.send ("char", message.data);
-	    me.send ("request", true);
+	    me.send ("char", message.data, me.name, message);
+	    me.send ("request", true, me.name, message);
 	} else {
 	    me.errorUnhandledMessage (message);
 	}
@@ -31,6 +30,7 @@ var protoImplementation = {
 
 function Write (container) {
     let me = new runnable.Leaf (signature, protoImplementation, container);
+    me.name = "w";
     me.filename = null;
     return me;
 }

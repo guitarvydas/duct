@@ -1,0 +1,76 @@
+Main [@i] = [[${i}]]
+Implementation [x] = [[${x}]]
+
+ContainerImplementation_withParam [ki name lp formal rp b] = [[${ki}${name}${lp}${formal}${rp}${b}]]
+ContainerImplementation_noParam [ki name b] = [[${ki}${name}${b}]]
+
+SynchronousLeafImplementation_withFormals [ksync name karrow dl b] = ][[${ksync}${name}${karrow}${dl}${b}]]
+SynchronousLeafImplementation_withoutFormals [ksync name b] = ][[${ksync}${name}${b}]]
+
+SynchronousCall_params [kat d1 karrow d2] = [[${kat}${d1}${karrow}${d2}]]
+SynchronousCall_noparams [kat d1] = [[${kat}${d1}]]
+
+SequenceOfBoxes [@nb] = [[${nb}]]
+NestedBox [b] = [[${b}]]
+NB [b] = [[${b}]]
+Box [klb bo @b krb] = [[${klb}${bo}${b}${krb}]]
+BoxOperation [op] = [[${op}]]
+
+When [kwhen kmessages @nb] = [[${kwhen}${kmessages}${nb}]]
+Fetch [kfetch karrow d @nb] = [[${kfetch}${karrow}${d}${nb}]]
+FindConnectionFromMe [kfind d kfrom kme kon kport d2 @nb] = [[${kfind}${d}${kfrom}${kme}${kon}${kport}${d2}${nb}]]
+
+Cond [kcond first @rest] = [[${kcond}${first}${rest}]]
+CondClause [klb p b krb] = [[${klb}${p}${b}${krb}]]
+FirstCondClause [c] = [[${c}]]
+RestCondClause [c] = [[${c}]]
+
+WithLock [klock kreceivers kof name @nb] = [[${klock}${kreceivers}${kof}${name}${nb}]]
+
+Find_withParams [kfind name kin d kgiven pl karrow name2 @nb] = [[${kfind}${name}${kin}${d}${kgiven}${pl}${karrow}${name2}${nb}]]
+Find_withoutParams [kfind name kin d karrow name2 @nb] = [[${kfind}${name}${kin}${d}${karrow}${name2}${nb}]]
+
+VarBox [kvar name karrow klb dl krb @nb] = [[${kvar}${name}${karrow}${klb}${dl}${krb}${nb}]]
+
+Synonym_obj [ksyn name keq klb dl krb @nb] = [[${ksyn}${name}${keq}${klb}${dl}${krb}${nb}]]
+Synonym_solitary [ksyn name keq dl @nb] = [[${ksyn}${name}${keq}${dl}${nb}]]
+
+ForEvery_sugaredWithParams [kfor kevery kitem kin d kgiven pl kassign name @nb]
+  = [[${kfor}${kevery}${kitem}${kin}${d}${kgiven}${pl}${kassign}${name}${nb}]]
+ForEvery_withParams [kfor kevery name1 kin d kgiven pl kassign name @nb]
+  = [[${kfor}${kevery}${name1}${kin}${d}${kgiven}${pl}${kassign}${name}${nb}]]
+ForEvery_sugaredWithoutParams [kfor kevery kitem kin d kassign name @nb]
+  = [[${kfor}${kevery}${kitem}${kin}${d}${kassign}${name}${nb}]]
+ForEvery_withoutParams [kfor kevery name1 kin d kassign name @nb]
+  = [[${kfor}${kevery}${name1}${kin}${d}${kassign}${name}${nb}]]
+
+
+
+Datum_field [n kof d] = [[${n}${kof}${d}]]
+Datum_dottedField [n kdot d] = [[${n}${kdot}${d}]]
+Datum_name [n] = [[${n}]]
+Datum_port [n] = [[${n}]]
+Datum_me [n] = [[${n}]]
+
+Predicate_eq [left eq right] = [[${left}${eq}${right}]]
+Predicate_ne [left eq right] = [[${left}${eq}${right}]]
+
+ParameterList_list [d kx pl] = [[${d}${kx}${pl}]]
+ParameterList_solitary [d] = [[${d}]]
+
+DatumList_list [d1 kcomma d2] = [[${d1}${kcomma}${d2}]]
+DatumList_solitary [d] = [[${d}]]
+
+name [first @rest] = [[${first}${rest}]]
+namecharFirst [c] = [[${c}]]
+namecharRest [c] = [[${c}]]
+
+separator [sep] = [[${sep}]]
+
+keyword [kw] = [[${kw}]]
+
+eol [c] = [[${c}]]
+
+space [c] = [[${c}]]
+
+comment [c] = [[${c}]]

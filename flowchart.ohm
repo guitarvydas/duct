@@ -1,6 +1,6 @@
 flowchart {
 
-Flowchart = "flowchart" name "{" Skewer+ "}"
+Flowchart = "flowchart" name "{" "start" name Skewer+ "}"
 Skewer
   = "skewer" name "{" Action LabelledAction+ "}" -- both
   | "skewer" name "{" Action "}"                 -- actiononly
@@ -25,6 +25,7 @@ Call = MethodRef Action?
 keyword = (
     "flowchart" 
   | "skewer" 
+  | "start" 
   | "unless" 
   | "send" 
   | "_"

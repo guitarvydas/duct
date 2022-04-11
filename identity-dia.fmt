@@ -1,13 +1,11 @@
 Main [@i] = [[${i}]]
 Implementation [x] = [[${x}]]
 
-ContainerImplementation [ki name b] = [[${ki}${name}${b}]]
+ContainerImplementation_withParam [ki name lp formal rp b] = [[${ki}${name}${lp}${formal}${rp}${b}]]
+ContainerImplementation_noParam [ki name b] = [[${ki}${name}${b}]]
 
-SynchronousLeafImplementation_withFormals [ksync name karrow dl b] = ][[${ksync}${name}${karrow}${dl}${b}]]
-SynchronousLeafImplementation_withoutFormals [ksync name b] = ][[${ksync}${name}${b}]]
-
-SynchronousCall_params [kat d1 karrow d2] = [[${kat}${d1}${karrow}${d2}]]
-SynchronousCall_noparams [kat d1] = [[${kat}${d1}]]
+SynchronousLeafImplementation_withFormals [ksync name karrow dl b] = [[${ksync}${name}${karrow}${dl}${b}]]
+SynchronousLeafImplementation_withoutFormals [ksync name b] = [[${ksync}${name}${b}]]
 
 SequenceOfBoxes [@nb] = [[${nb}]]
 NestedBox [b] = [[${b}]]
@@ -16,15 +14,18 @@ Box [klb bo @b krb] = [[${klb}${bo}${b}${krb}]]
 BoxOperation [op] = [[${op}]]
 
 When [kwhen kmessages @nb] = [[${kwhen}${kmessages}${nb}]]
-Fetch [kfetch karrow d @nb] = [[${kfetch}${karrow}${d}${nb}]]
 FindConnectionFromMe [kfind d kfrom kme kon kport d2 @nb] = [[${kfind}${d}${kfrom}${kme}${kon}${kport}${d2}${nb}]]
+
+WhenAll [kwhen kall pb nb] = [[${kwhen}${kall}${pb}${nb}]]
+Return [karrow d @nb] = [[${karrow}${d}${nb}]]
+CheckReturn [kcheck kreturn s @nb] = [[${kcheck}${kreturn}${s}${nb}]]
 
 Cond [kcond first @rest] = [[${kcond}${first}${rest}]]
 CondClause [klb p b krb] = [[${klb}${p}${b}${krb}]]
 FirstCondClause [c] = [[${c}]]
 RestCondClause [c] = [[${c}]]
 
-WithLock [klock kreceivers kof name @nb] = [[${klock}${kreceivers}${kof}${name}${nb}]]
+WithLock [klock name @nb] = [[${klock}${name}${nb}]]
 
 Find_withParams [kfind name kin d kgiven pl karrow name2 @nb] = [[${kfind}${name}${kin}${d}${kgiven}${pl}${karrow}${name2}${nb}]]
 Find_withoutParams [kfind name kin d karrow name2 @nb] = [[${kfind}${name}${kin}${d}${karrow}${name2}${nb}]]
@@ -33,6 +34,8 @@ VarBox [kvar name karrow klb dl krb @nb] = [[${kvar}${name}${karrow}${klb}${dl}$
 
 Synonym_obj [ksyn name keq klb dl krb @nb] = [[${ksyn}${name}${keq}${klb}${dl}${krb}${nb}]]
 Synonym_solitary [ksyn name keq dl @nb] = [[${ksyn}${name}${keq}${dl}${nb}]]
+
+Lookup [klookup d karrow name @nb] = [[${klookup}${d}${karrow}${name}${nb}]]
 
 ForEvery_sugaredWithParams [kfor kevery kitem kin d kgiven pl kassign name @nb]
   = [[${kfor}${kevery}${kitem}${kin}${d}${kgiven}${pl}${kassign}${name}${nb}]]
@@ -43,6 +46,11 @@ ForEvery_sugaredWithoutParams [kfor kevery kitem kin d kassign name @nb]
 ForEvery_withoutParams [kfor kevery name1 kin d kassign name @nb]
   = [[${kfor}${kevery}${name1}${kin}${d}${kassign}${name}${nb}]]
 
+SynchronousCall_params [kat d1 karrow d2] = [[${kat}${d1}${karrow}${d2}]]
+SynchronousCall_noparams [kat d1] = [[${kat}${d1}]]
+SynchronousCall_external_params [k d1 karrow d2] = [[${k}${d1}${karrow}${d2}]]
+SynchronousCall_external_noparams [k d1] = [[${k}${d1}]]
+
 
 
 Datum_field [n kof d] = [[${n}${kof}${d}]]
@@ -51,14 +59,21 @@ Datum_name [n] = [[${n}]]
 Datum_port [n] = [[${n}]]
 Datum_me [n] = [[${n}]]
 
+Predicate_me [left kis kme] = [[${left}${kis}${kme}]]
 Predicate_eq [left eq right] = [[${left}${eq}${right}]]
 Predicate_ne [left eq right] = [[${left}${eq}${right}]]
+
+PredicateBlock [lb p1 @pm rb] = [[${lb}${p1}${pm}${rb}]]
+PredicateMore [p] = [[${p}]]
 
 ParameterList_list [d kx pl] = [[${d}${kx}${pl}]]
 ParameterList_solitary [d] = [[${d}]]
 
 DatumList_list [d1 kcomma d2] = [[${d1}${kcomma}${d2}]]
 DatumList_solitary [d] = [[${d}]]
+
+NameList_list [d1 kcomma d2] = [[${d1}${kcomma}${d2}]]
+NameList_solitary [d] = [[${d}]]
 
 name [first @rest] = [[${first}${rest}]]
 namecharFirst [c] = [[${c}]]
@@ -73,3 +88,6 @@ eol [c] = [[${c}]]
 space [c] = [[${c}]]
 
 comment [c] = [[${c}]]
+
+string [dq1 @s dq2] = [[${dq1}${s}${dq2}]]
+dq [c] = [[${c}]]
