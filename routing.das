@@ -26,7 +26,7 @@ implementation route
 sync deliver_to_child_input <= me, dest, message
    // map message for receiver
   { var input_message <= {dest.etag, message.data}
-    { lookup dest.name => receiver
+    { lookup dest.component => receiver
       { @receiver.enqueueInput <= input_message }
     }
   }

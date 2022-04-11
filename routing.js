@@ -23,7 +23,7 @@ return _ret;
 
 deliver_to_child_input = function ([_me, dest, message]) {
 var input_message = [dest.etag, message.data];
-var receiver = _me.lookupChild (dest.name);
+var receiver = _me.lookupChild (dest.component);
 receiver.enqueueInput (input_message);
 }
 
