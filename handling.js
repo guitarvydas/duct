@@ -1,3 +1,4 @@
+const msg = require ('./message');
 exports.deliverInputMessageToAllChildrenOfSelf = function (_me, message) {
 var _ret =  null;
 

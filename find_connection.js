@@ -1,3 +1,4 @@
+const msg = require ('./message');
 exports.find_connection = function (_me, etag) {
 var _ret =  null;
 

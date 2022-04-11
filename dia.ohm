@@ -46,10 +46,13 @@ Find
   = "find" name "in" Datum "given" ParameterList "=>" name NB? -- withParams
   | "find" name "in" Datum "=>" name                       NB? -- withoutParams
 
-VarBox = "var" name "<=" "{" DatumList "}" NB?
+VarBox =
+  | "var" name "<=" "$i" "{" "{" DatumList "}" Datum "}" NB? -- inputmessage
+  | "var" name "<=" "$o" "{" "{" DatumList "}" Datum "}" NB? -- outputmessage
+  | "var" name "<="          "{" DatumList "}" NB?           -- array
 
-Synonym 
-  = "synonym" name "=" "{" DatumList "}" NB? -- obj
+Synonym =
+  | "synonym" name "=" "{" DatumList "}" NB? -- obj
   | "synonym" name "=" Datum NB?             -- solitary
 
 Lookup =
@@ -104,6 +107,8 @@ NameList
     | "//"
     | "=="
     | "!="
+    | "$i"
+    | "$o"
     | "="
     | "{"
     | "}"

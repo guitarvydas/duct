@@ -1,3 +1,4 @@
+const msg = require ('./message');
 exports.route = function () {
 var _me = this;
 var _ret = null;
@@ -22,12 +23,12 @@ return _ret;
 }
 
 deliver_to_child_input = function ([_me, dest, message]) {
-var input_message = [dest.etag, message.data];
+var input_message = new msg.InputMessage (dest.etag, message.data,this,message);
 var receiver = _me.lookupChild (dest.component);
 receiver.enqueueInput (input_message);
 }
 
 deliver_to_me_output = function ([_me, dest, message]) {
-var output_message = [receiver.etag, message.data];
-_me.enqueueInput (output_message);
+var output_message = new msg.OutputMessage (receiver.etag, message.data,this,message);
+_me.enqueueOutput (output_message);
 }

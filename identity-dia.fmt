@@ -30,7 +30,9 @@ WithLock [klock name @nb] = [[${klock}${name}${nb}]]
 Find_withParams [kfind name kin d kgiven pl karrow name2 @nb] = [[${kfind}${name}${kin}${d}${kgiven}${pl}${karrow}${name2}${nb}]]
 Find_withoutParams [kfind name kin d karrow name2 @nb] = [[${kfind}${name}${kin}${d}${karrow}${name2}${nb}]]
 
-VarBox [kvar name karrow klb dl krb @nb] = [[${kvar}${name}${karrow}${klb}${dl}${krb}${nb}]]
+VarBox_array         [kvar name karrow         klb dl krb        @nb] = [[${kvar}${name}${karrow}${klb}${dl}${krb}${nb}]]
+VarBox_inputmessage  [kvar name karrow ki klb0 klb dl krb d krb0 @nb] = [[${kvar}${name}${ki}${klb0}${karrow}${klb}${dl}${krb}${d}${krb0}${nb}]]
+VarBox_outputmessage  [kvar name karrow ko klb0 klb dl krb d krb0 @nb] = [[${kvar}${name}${ko}${klb0}${karrow}${klb}${dl}${krb}${d}${krb0}${nb}]]
 
 Synonym_obj [ksyn name keq klb dl krb @nb] = [[${ksyn}${name}${keq}${klb}${dl}${krb}${nb}]]
 Synonym_solitary [ksyn name keq dl @nb] = [[${ksyn}${name}${keq}${dl}${nb}]]

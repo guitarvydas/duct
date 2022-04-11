@@ -1,4 +1,4 @@
-Main [@i] = [[${i}]]
+Main [@i] = [[const msg = require ('./message');\n${i}]]
 Implementation [x] = [[${x}]]
 
 ContainerImplementation_withParam [ki name lp formal rp b] = [[exports.${name} = function (_me, ${formal}) \{\nvar _ret =  null;\n${b}\nreturn  _ret;\n\}]]
@@ -40,7 +40,10 @@ WithLock [klock name @nb] = [[${nb}]]
 Find_withParams [kfind name kin d kgiven pl karrow name2 @nb] = [[var ${name2} = this.find_${name}_in_${d} (this, ${pl});${nb}]]
 Find_withoutParams [kfind name kin d karrow name2 @nb] = [[var ${name2} = this.find_${name}_in_${d} (this);${nb}]]
 
-VarBox [kvar name karrow klb dl krb @nb] = [[var ${name} = \[${dl}\];${nb}]]
+VarBox_array [kvar name karrow klb dl krb @nb] = [[var ${name} = \[${dl}\];${nb}]]
+VarBox_inputmessage  [kvar name karrow ki klb0 klb dl krb d krb0 @nb] = [[${kvar} ${name} = new msg.InputMessage (${dl},this,${d});${nb}]]
+VarBox_outputmessage  [kvar name karrow ko klb0 klb dl krb d krb0 @nb] = [[${kvar} ${name} = new msg.OutputMessage (${dl},this,${d});${nb}]]
+
 
 Synonym_obj [ksyn name keq klb dl krb @nb] = [[var ${name} = \[${dl}\];${nb}]]
 Synonym_solitary [ksyn name keq dl @nb] = [[var ${name} = ${dl};${nb}]]
