@@ -7,10 +7,10 @@ implementation route
 	  { for every receivers in connection => dest
 	      { synonym params = {me, dest, message}
 		{ cond
-		  { dest.component is not me
+		  { dest.name is not me
 		    { @deliver_to_child_input <= params }
 		  }
-		  { dest.component is me
+		  { dest.name is me
 		    { @deliver_to_me_output <= params }
 		  }
 		}
@@ -26,7 +26,7 @@ implementation route
 sync deliver_to_child_input <= me, dest, message
    // map message for receiver
   { var input_message <= $i{{dest.etag, message.data} message}
-    { lookup dest.component => receiver
+    { lookup dest.name => receiver
       { @receiver.enqueueInput <= input_message }
     }
   }

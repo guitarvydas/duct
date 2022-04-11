@@ -5,7 +5,7 @@ var _ret =  null;
 _me.connections.forEach (connection => {
 var sender = connection.sender;
 
-if ((sender.component === childname) && (sender.etag === etag)) {
+if ((sender.name === childname) && (sender.etag === etag)) {
 
 _ret = connection;
 }

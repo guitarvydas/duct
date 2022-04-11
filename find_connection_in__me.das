@@ -3,7 +3,7 @@ implementation find_connection_in__me (childname, etag)
       { synonym sender = connection.sender
           { when all
               {
-                  sender.component == childname
+                  sender.name == childname
                   sender.etag == etag
               }
               { -> connection }

@@ -3,7 +3,7 @@ implementation find_connection (etag)
       { synonym sender = connection.sender
           { when all
               {
-                  sender.component is me
+                  sender.name is me
                   sender.etag == etag
               }
               { -> connection }
