@@ -1,5 +1,4 @@
 const handling = require('./handling');
-const deliver = require('./containerDeliver');
 const routing = require('./routing');
 const runnable = require('./runnable');
 
@@ -80,8 +79,6 @@ function Top (container) {
     me.children = makeChildren (container);
     me.nets = makeNets (container);
     me.connections = makeConnections (container);
-    me.deliver_input_from_container_input_to_child_input = deliver.deliver_input_from_container_input_to_child_input;
-    me.deliver_input_from_container_input_to_me_output = deliver.deliver_input_from_container_input_to_me_output;
     return me;
 }
 

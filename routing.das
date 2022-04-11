@@ -8,10 +8,10 @@ implementation route
 	      { synonym params = {me, message, dest}
 		{ cond
 		  { dest.component != me
-		    { @deliver_output_to_child_input <= params }
+		    { @deliver_to_child_input <= params }
 		  }
 		  { dest.component == me
-		    { @deliver_output_to_me_output <= params }
+		    { @deliver_to_me_output <= params }
 		  }
 		}
 	    }
@@ -23,13 +23,13 @@ implementation route
   }
 }
 
-sync deliver_output_to_child_input <= me, receiver, message
+sync deliver_to_child_input <= me, receiver, message
    // map message for receiver
   { var input_message <= {receiver.etag, message.data}
     { @receiver.enqueueInputMessage <= input_message } 
   }
 
-sync deliver_output_to_me_output <= me, receiver, message
+sync deliver_to_me_output <= me, receiver, message
   // map message for output
   { var output_message <= {receiver.etag, message.data}
     { @me.enqueueInputMessage <= output_message }

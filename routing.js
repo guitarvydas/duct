@@ -10,9 +10,9 @@ var connection = this.find_connection_in__me (this, child, message.etag);
 connection.receivers.forEach (dest => {
 var params = [_me, message, dest];
 if ((dest.component !== _me)) {
-deliver_output_to_child_input (params);
+deliver_input_from_container_input_to_child_input (params);
 } else if ((dest.component === _me)) {
-deliver_output_to_me_output (params);
+deliver_input_from_container_input_to_me_output (params);
 }
 });
 });
