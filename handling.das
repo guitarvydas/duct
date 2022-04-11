@@ -5,10 +5,10 @@ implementation deliverInputMessageToAllChildrenOfSelf (message)
             { synonym params = {me, message, dest}
 	      { cond
 		{ dest.component != me
-		  { @me.deliver_input_from_container_input_to_child_input <= params }
+		  { #deliver_input_from_container_input_to_child_input <= params }
 		}
 		{ dest.component == me
-		  { @me.deliver_input_from_container_input_to_me_output <= params }
+		  { #deliver_input_from_container_input_to_me_output <= params }
 		}
 	      }
             }

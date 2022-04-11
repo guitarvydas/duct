@@ -6,7 +6,7 @@ ContainerImplementation_noParam [ki name b] = [[exports.${name} = function () \{
 
 SynchronousLeafImplementation_withFormals [ksync name karrow dl b] = [[
 
-this.${name} = function (${dl}) {${b}
+${name} = function (${dl}) {${b}
 \}]]
 
 SynchronousLeafImplementation_withoutFormals [ksync name b] = [[
@@ -57,8 +57,8 @@ ForEvery_withoutParams [kfor kevery name kin d kassign name1 @nb]
 
 SynchronousCall_params [kat d1 karrow d2] = [[${support.stripMe (d1)} (${d2});]]
 SynchronousCall_noparams [kat d1] = [[${support.stripMe (d1)} ();]]
-SynchronousCall_external_params [kat d1 karrow d2] = [[${d1} (${d2});]]
-SynchronousCall_external_noparams [kat d1] = [[${d1} ();]]
+SynchronousCall_external_params [kat d1 karrow d2] = [[_me.${d1} (${d2});]]
+SynchronousCall_external_noparams [kat d1] = [[_me.${d1} ();]]
 
 
 Datum_field [n kof d] = [[${d}.${n}]]

@@ -21,12 +21,12 @@ child.runnable.resetOutputQueue ();
 return _ret;
 }
 
-this.deliver_to_child_input = function (_me, receiver, message) {
+deliver_to_child_input = function (_me, receiver, message) {
 var input_message = [receiver.etag, message.data];
 receiver.enqueueInputMessage (input_message);
 }
 
-this.deliver_to_me_output = function (_me, receiver, message) {
+deliver_to_me_output = function (_me, receiver, message) {
 var output_message = [receiver.etag, message.data];
 enqueueInputMessage (output_message);
 }
