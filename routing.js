@@ -28,5 +28,5 @@ receiver.enqueueInputMessage (input_message);
 
 deliver_to_me_output = function (_me, receiver, message) {
 var output_message = [receiver.etag, message.data];
-enqueueInputMessage (output_message);
+_me.enqueueInputMessage (output_message);
 }
