@@ -93,7 +93,14 @@ function Container (signature, protoImplementation, container, name) {
     };
     me.self_produced_output = function () { return (me.hasOutputs ()); };
     me.find_connection = fc.find_connection;
-    me.find_connection_in__me = function (child, etag) { return fcim.find_connection_in__me (this, child, etag); }
+    me.find_connection_in__me = function (_me, child, etag) {
+	console.error ();
+	console.error ();
+	console.error ('find_connection_in__me');
+	console.error (child.name);
+	console.error (etag);
+	return fcim.find_connection_in__me (this, child,name, etag);
+    };
     me.lookupChild = function (name) {
 	var _ret = null;
 	this.children.forEach (childobj => {
