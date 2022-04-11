@@ -36,14 +36,10 @@ function testContainer () {
     testHarness.begin ('test.txt', 'test.out');
     testHarness.route ();
 
-    testHarness.step ();
-    testHarness.route ();
-
-    testHarness.step ();
-    testHarness.route ();
-
-    testHarness.step ();
-    testHarness.route ();
+    while (!testHarness.done ()) {
+	testHarness.step ();
+	testHarness.route ();
+    }
 }
 
 console.log ();

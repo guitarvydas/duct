@@ -72,7 +72,8 @@ Datum_name [n] = [[${n}]]
 Datum_me [n] = [[_me]]
 Datum_port [n] = [[port]]
 
-Predicate_me [left kis kme] = [[(${left} === "$me")]]
+Predicate_me [left kis kme] = [[(${left} === "_me")]]
+Predicate_notme [left kis lnot kme] = [[(${left} !== "_me")]]
 Predicate_eq [left eq right] = [[(${left} === ${right})]]
 Predicate_ne [left eq right] = [[(${left} !== ${right})]]
 

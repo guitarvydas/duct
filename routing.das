@@ -7,10 +7,10 @@ implementation route
 	  { for every receivers in connection => dest
 	      { synonym params = {me, dest, message}
 		{ cond
-		  { dest.component != me
+		  { dest.component is not me
 		    { @deliver_to_child_input <= params }
 		  }
-		  { dest.component == me
+		  { dest.component is me
 		    { @deliver_to_me_output <= params }
 		  }
 		}

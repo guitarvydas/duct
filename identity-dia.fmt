@@ -62,6 +62,7 @@ Datum_port [n] = [[${n}]]
 Datum_me [n] = [[${n}]]
 
 Predicate_me [left kis kme] = [[${left}${kis}${kme}]]
+Predicate_notme [left kis knot kme] = [[${left}${kis}${knot}${kme}]]
 Predicate_eq [left eq right] = [[${left}${eq}${right}]]
 Predicate_ne [left eq right] = [[${left}${eq}${right}]]
 

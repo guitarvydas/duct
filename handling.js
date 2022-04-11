@@ -6,9 +6,9 @@ var connection = _me.find_connection (_me, message.etag);
 
 connection.receivers.forEach (dest => {
 var params = [_me, message, dest];
-if ((dest.component !== _me)) {
+if ((dest.name !== _me)) {
 _me.deliver_input_from_container_input_to_child_input (params);
-} else if ((dest.component === _me)) {
+} else if ((dest.name === _me)) {
 _me.deliver_input_from_container_input_to_me_output (params);
 }
 });

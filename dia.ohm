@@ -81,6 +81,7 @@ Datum
   | name            -- name
 
 Predicate =
+  | Datum "is" "not" "me" -- notme
   | Datum "is" "me"      -- me
   | Datum "==" Datum -- eq
   | Datum "!=" Datum -- ne
@@ -140,6 +141,7 @@ keyword
           | "port"
           | "for"
           | "all"
+          | "not"
           | "is"
           | "in"
           | "on"
