@@ -19,8 +19,8 @@ var signature = {
 };
 
 function begin (me, infname, outfname) {
-    me.inject ("input filename", infname, this);
-    me.inject ("output filename", outfname, this);
+    me.inject ("input filename", infname);
+    me.inject ("output filename", outfname);
 }
 
 function finish (me) {

@@ -41,6 +41,9 @@ function testContainer () {
 
     testHarness.step ();
     testHarness.route ();
+
+    testHarness.step ();
+    testHarness.route ();
 }
 
 console.log ();

@@ -11,7 +11,7 @@ function send (etag, v, who, tracer) {
 }
 
 function inject (etag, v, tracer) {
-    let m = new message.InputMessage (etag, v, "<inject>", tracer);
+    let m = new message.InputMessageNoTrace (etag, v, "<inject>", undefined);
     this.inputQueue.enqueue (m);
 }
 
@@ -35,6 +35,10 @@ function Runnable (signature, protoImplementation, container, name) {
     this.resetOutputQueue = function () {
         this.outputQueue = new queue.Queue ();
     }
+    this.errorUnhandledMessage = function (message) {
+	console.error (`unhandled message in ${this.name} ${message.tag}`);
+	process.exit (1);
+    };
     this.panic = function () { throw "panic"; }
 }
 
