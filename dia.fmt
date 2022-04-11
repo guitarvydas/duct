@@ -37,8 +37,8 @@ RestCondClause [cc] = [[ else if ${cc}]]
 
 WithLock [klock name @nb] = [[${nb}]]
 
-Find_withParams [kfind name kin d kgiven pl karrow name2 @nb] = [[var ${name2} = this.find_${name}_in_${d} (${pl});${nb}]]
-Find_withoutParams [kfind name kin d karrow name2 @nb] = [[var ${name2} = this.find_${name}_in_${d} ();${nb}]]
+Find_withParams [kfind name kin d kgiven pl karrow name2 @nb] = [[var ${name2} = this.find_${name}_in_${d} (this, ${pl});${nb}]]
+Find_withoutParams [kfind name kin d karrow name2 @nb] = [[var ${name2} = this.find_${name}_in_${d} (this);${nb}]]
 
 VarBox [kvar name karrow klb dl krb @nb] = [[var ${name} = \[${dl}\];${nb}]]
 
@@ -78,6 +78,8 @@ ParameterList_solitary [d] = [[${d}]]
 
 DatumList_list [d1 kcomma d2] = [[${d1}, ${d2}]]
 DatumList_solitary [d] = [[${d}]]
+NameList_list [d1 kcomma d2] = [[${d1}, ${d2}]]
+NameList_solitary [d] = [[${d}]]
 
 name [first @rest] = [[${first}${rest}]]
 namecharFirst [c] = [[${c}]]

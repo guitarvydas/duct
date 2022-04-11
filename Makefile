@@ -6,7 +6,7 @@ IDRAKON=flowchart.ohm identity-flowchart.fmt
 all: test.js fb.pl
 	node test
 
-test.js: step.js routing.js handling.js find_connection.js
+test.js: step.js routing.js handling.js find_connection.js find_connection_in__me.js
 
 dev:
 	./identity.bash <routing.das
@@ -18,6 +18,9 @@ fb.pl: simple.drawio
 
 find_connection.js: find_connection.das $(DIA)
 	./dev.bash <find_connection.das >find_connection.js
+
+find_connection_in__me.js: find_connection_in__me.das $(DIA)
+	./dev.bash <find_connection_in__me.das >find_connection_in__me.js
 
 routing.js: routing.das $(DIA) $(IDIA)
 	./dev.bash <routing.das >routing.js

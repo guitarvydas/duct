@@ -68,6 +68,9 @@ ParameterList_solitary [d] = [[${d}]]
 DatumList_list [d1 kcomma d2] = [[${d1}${kcomma}${d2}]]
 DatumList_solitary [d] = [[${d}]]
 
+NameList_list [d1 kcomma d2] = [[${d1}${kcomma}${d2}]]
+NameList_solitary [d] = [[${d}]]
+
 name [first @rest] = [[${first}${rest}]]
 namecharFirst [c] = [[${c}]]
 namecharRest [c] = [[${c}]]
