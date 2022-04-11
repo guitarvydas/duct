@@ -6,7 +6,7 @@ ContainerImplementation_noParam [ki name b] = [[exports.${name} = function () \{
 
 SynchronousLeafImplementation_withFormals [ksync name karrow dl b] = [[
 
-${name} = function (${dl}) {${b}
+${name} = function ([${dl}]) {${b}
 \}]]
 
 SynchronousLeafImplementation_withoutFormals [ksync name b] = [[

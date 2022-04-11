@@ -5,7 +5,7 @@ implementation route
       { find connection in me given child X message.etag => connection
         { lock receivers of connection
 	  { for every receivers in connection => dest
-	      { synonym params = {me, message, dest}
+	      { synonym params = {me, dest, message}
 		{ cond
 		  { dest.component != me
 		    { @deliver_to_child_input <= params }
