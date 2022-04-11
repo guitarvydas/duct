@@ -46,6 +46,8 @@ ForEvery_withoutParams [kfor kevery name1 kin d kassign name @nb]
 
 SynchronousCall_params [kat d1 karrow d2] = [[${kat}${d1}${karrow}${d2}]]
 SynchronousCall_noparams [kat d1] = [[${kat}${d1}]]
+SynchronousCall_external_params [k d1 karrow d2] = [[${k}${d1}${karrow}${d2}]]
+SynchronousCall_external_noparams [k d1] = [[${k}${d1}]]
 
 
 

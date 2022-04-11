@@ -16,3 +16,6 @@ exports.formatLabelFunction = function (s) {
     return `lambdas.${groups[1]} (_me, ${groups[2]})`;
 }
 
+exports.stripMe = function (s) {
+    return s.replace (/_me\./,"");
+}

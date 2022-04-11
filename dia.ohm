@@ -58,10 +58,12 @@ ForEvery
   | "for" "every" name "in" Datum  "=>" name NB? -- withoutParams
 
 
-SynchronousCall
+SynchronousCall =
   // no nesting here - Call is a Leaf, not a nested box
-  = "@" Datum "<=" Datum -- params
+  | "@" Datum "<=" Datum -- params
   | "@" Datum            -- noparams
+  | "#" Datum "<=" Datum -- external_params
+  | "#" Datum            -- external_noparams
 
 
 Datum
@@ -104,6 +106,7 @@ NameList
     | "("
     | ")"
     | "@"
+    | "#"
     | "."
     | ","
     | eol
