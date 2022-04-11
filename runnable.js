@@ -99,7 +99,7 @@ function Container (signature, protoImplementation, container, name) {
 	console.error ('find_connection_in__me');
 	console.error (child.name);
 	console.error (etag);
-	return fcim.find_connection_in__me (this, child,name, etag);
+	return fcim.find_connection_in__me (this, child.name, etag);
     };
     me.lookupChild = function (name) {
 	var _ret = null;

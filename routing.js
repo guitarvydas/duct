@@ -7,8 +7,8 @@ child.runnable.outputQueue.forEach (output_message => {
 var message = output_message;
 var connection = this.find_connection_in__me (this, child, message.etag);
 
-connection.receiver.forEach (dest => {
-var params = [_me, message, receiver];
+connection.receivers.forEach (dest => {
+var params = [_me, message, dest];
 if ((dest.component !== _me)) {
 deliver_output_to_child_input (params);
 } else if ((dest.component === _me)) {
