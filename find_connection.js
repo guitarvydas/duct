@@ -11,7 +11,7 @@ _ret = connection;
 });
 if (_ret === null) {
 console.error ("no value returned");
-console.error (`connection not found for ${etag}`);
+console.error (`find_connection: connection not found for ${etag}`);
 process.exit (1);}
 
 return  _ret;

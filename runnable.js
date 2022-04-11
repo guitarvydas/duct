@@ -3,6 +3,7 @@ let message = require ('./message');
 let routing = require ('./routing');
 let steprecursively = require ('./step');
 let fc = require ('./find_connection');
+let fcim = require ('./find_connection_in__me');
 
 function send (etag, v, who, tracer) {
     let m = new message.OutputMessage (etag, v, who, tracer);
@@ -92,7 +93,7 @@ function Container (signature, protoImplementation, container, name) {
     };
     me.self_produced_output = function () { return (me.hasOutputs ()); };
     me.find_connection = fc.find_connection;
-    me.find_connection_in__me = function (etag) { return this.find_connection (this, etag); }
+    me.find_connection_in__me = function (child, etag) { return fcim.find_connection_in__me (this, child, etag); }
     me.lookupChild = function (name) {
 	var _ret = null;
 	this.children.forEach (childobj => {

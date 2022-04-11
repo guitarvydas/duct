@@ -3,12 +3,12 @@ implementation find_connection_in__me (child, etag)
       { synonym sender = connection.sender
           { when all
               {
-                  sender.component == child
+                  sender.component == child.name
                   sender.etag == etag
               }
               { -> connection }
           }
       }
   }
-  { check return "connection not found for ${etag}" }
+  { check return "find_connection_in__me: connection not found for ${child.name}:${etag}" }
 

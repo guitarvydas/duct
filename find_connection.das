@@ -10,5 +10,5 @@ implementation find_connection (etag)
           }
       }
   }
-  { check return "connection not found for ${etag}" }
+  { check return "find_connection: connection not found for ${etag}" }
 
