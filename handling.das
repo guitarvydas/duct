@@ -14,4 +14,7 @@ implementation deliverInputMessageToAllChildrenOfSelf (message)
             }
           }
         }
+	{ orelse
+	  { pass }
+	}
       }

@@ -14,6 +14,8 @@ SequenceOfBoxes = NestedBox+
 NestedBox = Box
 NB = NestedBox
 Box = "{" BoxOperation Box? "}"
+OrElse = "{" "orelse" Box "}"
+
 BoxOperation
   = ForEvery
   | Synonym
@@ -28,12 +30,14 @@ BoxOperation
   | Return
   | CheckReturn
   | SynchronousCall
+  | Pass
 
 WhenAll = "when" "all" PredicateBlock NestedBox
 When = "when" "messages" NB?
 Return = "->" DatumList NB?
 CheckReturn = "check" "return" string NB?
 FindConnectionFromMe = "find" Datum "from" "me" "on" "port" Datum NB?
+Pass = "pass"
 
 Cond = "cond" FirstCondClause RestCondClause*
 FirstCondClause = CondClause
@@ -43,8 +47,8 @@ CondClause = "{" Predicate Box "}"
 WithLock = "lock" Datum NB?
 
 Find
-  = "find" name "in" Datum "given" ParameterList "=>" name NB? -- withParams
-  | "find" name "in" Datum "=>" name                       NB? -- withoutParams
+  = "find" name "in" Datum "given" ParameterList "=>" name OrElse NB? -- withParams
+  | "find" name "in" Datum "=>" name                       OrElse NB? -- withoutParams
 
 VarBox =
   | "var" name "<=" "$i" "{" "{" DatumList "}" Datum "}" NB? -- inputmessage
@@ -125,11 +129,13 @@ keyword
   = &(~namecharFirst)
           ( "implementation"
           | "messages"
+          | "orelse"
           | "return"
           | "given"
           | "lookup"
           | "every"
           | "check"
+          | "pass"
           | "lock"
           | "find"
           | "from"

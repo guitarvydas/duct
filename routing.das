@@ -3,7 +3,7 @@ implementation route
   { for every item in outputQueue of child.runnable => output_message
     { synonym message = output_message
       { find connection in me given child X message.etag => connection
-        { lock receivers of connection
+        { lock connection
 	  { for every receivers in connection => dest
 	      { synonym params = {me, dest, message}
 		{ cond
@@ -17,7 +17,9 @@ implementation route
 	    }
           }
         }
-      }
+	{ orelse
+	   { drop message NC }
+	}
     }
     {@child.runnable.resetOutputQueue}
   }
