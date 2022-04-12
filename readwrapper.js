@@ -27,7 +27,9 @@ function ReadWrapper () {
     this.done = function () {return this._done;};
     this.route = function () {
 	this.uut.route ();
-        destructivelyDisplayAllOutputsForAllChildren (this);
+	if (this.tracing) {
+            destructivelyDisplayAllOutputsForAllChildren (this);
+	}
     };    
     this.step = function () {
 	this.uut.step ();

@@ -26,7 +26,9 @@ function WriteWrapper () {
     };
     this.done = function () {return this._done;};
     this.route = function () {
-        destructivelyDisplayAllOutputsForAllChildren (this);
+	if (this.tracing) {
+            destructivelyDisplayAllOutputsForAllChildren (this);
+	}
     };    
     this.step = function () {
 	this.uut.step ();
