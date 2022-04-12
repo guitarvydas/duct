@@ -8,7 +8,7 @@ var signature = {
     ],
     outputs: [
 	{ "name": "request", "structure": ["request"] },
-	{ "teechar": "request", "structure": ["char"] }
+	{ "char": "request", "structure": ["char"] }
     ]
 };
 
@@ -20,7 +20,7 @@ var protoImplementation = {
 	    me.send ("request", true, me.name, message);
 	} else if ("char" === message.etag) {
 	    console.log (message.data);
-	    me.send ("teechar", message.data, me.name, message);
+	    me.send ("char", message.data, me.name, message);
 	    me.send ("request", true, me.name, message);
 	} else {
 	    me.errorUnhandledMessage (message);

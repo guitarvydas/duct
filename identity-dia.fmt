@@ -12,9 +12,11 @@ NestedBox [b] = [[${b}]]
 NB [b] = [[${b}]]
 Box [klb bo @b krb] = [[${klb}${bo}${b}${krb}]]
 BoxOperation [op] = [[${op}]]
+OrElse [klb korelse b krb] = [[${klb}${korelse}${b}${krb}]]
 
+Pass [kpass] = [[${kpass}]]
 When [kwhen kmessages @nb] = [[${kwhen}${kmessages}${nb}]]
-FindConnectionFromMe [kfind d kfrom kme kon kport d2 @nb] = [[${kfind}${d}${kfrom}${kme}${kon}${kport}${d2}${nb}]]
+FindConnectionFromMe [kfind d kfrom kme kon kport d2 b e @nb] = [[${kfind}${d}${kfrom}${kme}${kon}${kport}${d2}${b}${e}${nb}]]
 
 WhenAll [kwhen kall pb nb] = [[${kwhen}${kall}${pb}${nb}]]
 Return [karrow d @nb] = [[${karrow}${d}${nb}]]
@@ -27,8 +29,8 @@ RestCondClause [c] = [[${c}]]
 
 WithLock [klock name @nb] = [[${klock}${name}${nb}]]
 
-Find_withParams [kfind name kin d kgiven pl karrow name2 @nb] = [[${kfind}${name}${kin}${d}${kgiven}${pl}${karrow}${name2}${nb}]]
-Find_withoutParams [kfind name kin d karrow name2 @nb] = [[${kfind}${name}${kin}${d}${karrow}${name2}${nb}]]
+Find_withParams [kfind name kin d kgiven pl karrow name2 b e @nb] = [[${kfind}${name}${kin}${d}${kgiven}${pl}${karrow}${name2}{$b}${e}${nb}]]
+Find_withoutParams [kfind name kin d        karrow name2 b e @nb] = [[${kfind}${name}${kin}${d}${karrow}${name2}${b}${e}${nb}]]
 
 VarBox_array         [kvar name karrow         klb dl krb        @nb] = [[${kvar}${name}${karrow}${klb}${dl}${krb}${nb}]]
 VarBox_inputmessage  [kvar name karrow ki klb0 klb dl krb d krb0 @nb] = [[${kvar}${name}${ki}${klb0}${karrow}${klb}${dl}${krb}${d}${krb0}${nb}]]

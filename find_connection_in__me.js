@@ -10,10 +10,5 @@ if ((sender.name === childname) && (sender.etag === etag)) {
 _ret = connection;
 }
 });
-if (_ret === null) {
-console.error ("no value returned");
-console.error (`find_connection_in__me: connection not found for ${childname}:${etag}`);
-process.exit (1);}
-
 return  _ret;
 }

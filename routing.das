@@ -4,22 +4,23 @@ implementation route
     { synonym message = output_message
       { find connection in me given child X message.etag => connection
         { lock connection
-	  { for every receivers in connection => dest
-	      { synonym params = {me, dest, message}
-		{ cond
-		  { dest.name is not me
-		    { @deliver_to_child_input <= params }
-		  }
-		  { dest.name is me
-		    { @deliver_to_me_output <= params }
-		  }
-		}
-	    }
+          { for every receivers in connection => dest
+              { synonym params = {me, dest, message}
+                { cond
+                  { dest.name is not me
+                    { @deliver_to_child_input <= params }
+                  }
+                  { dest.name is me
+                    { @deliver_to_me_output <= params }
+                  }
+                }
+            }
           }
         }
-	{ orelse
-	   { drop message NC }
-	}
+        { orelse
+           { pass }
+        }
+      }
     }
     {@child.runnable.resetOutputQueue}
   }

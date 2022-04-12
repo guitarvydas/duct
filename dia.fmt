@@ -20,10 +20,16 @@ NB [b] = [[${b}]]
 
 Box [klb bo @b krb] = [[\n${bo}${b}]]
 BoxOperation [op] = [[${op}]]
+OrElse [klb korelse b krb] = [[${b}]]
+
+Pass [kpass] = [[]]
 
 When [kwhen kmessages @nb] = [[if (_me.inputQueue.length > 0) {${nb}\n\};]]
 
-FindConnectionFromMe [kfind d kfrom kme kon kport d2 @nb] = [[var ${d} = _me.find_connection (_me, ${d2});${nb}]]
+FindConnectionFromMe [kfind d kfrom kme kon kport d2 b e @nb]
+  = [[var ${d} = _me.find_connection (_me, ${d2});
+if (${d}) {${b}
+} else \{${e}\}${nb}]]
 
 WhenAll [kwhen kall pb nb] = [[\nif (${pb}) \{${nb}\n\}]]
 Return [karrow d @nb] = [[\n_ret = ${d};${nb}]]
@@ -37,8 +43,10 @@ RestCondClause [cc] = [[ else if ${cc}]]
 
 WithLock [klock name @nb] = [[${nb}]]
 
-Find_withParams [kfind name kin d kgiven pl karrow name2 @nb] = [[var ${name2} = this.find_${name}_in_${d} (this, ${pl});${nb}]]
-Find_withoutParams [kfind name kin d karrow name2 @nb] = [[var ${name2} = this.find_${name}_in_${d} (this);${nb}]]
+Find_withParams [kfind name kin d kgiven pl karrow name2 b e @nb]
+  = [[var ${name2} = this.find_${name}_in_${d} (this, ${pl});if (${name2}) \{${b}\n\} else \{${e}\};${nb}]]
+Find_withoutParams [kfind name kin d        karrow name2 b e @nb]
+  = [[var ${name2} = this.find_${name}_in_${d} (this);if (${name2}) \{${b}\n\} else \{${e}\};${nb}]]
 
 VarBox_array [kvar name karrow klb dl krb @nb] = [[var ${name} = \[${dl}\];${nb}]]
 VarBox_inputmessage  [kvar name karrow ki klb0 klb dl krb d krb0 @nb] = [[${kvar} ${name} = new msg.InputMessage (${dl},this,${d});${nb}]]

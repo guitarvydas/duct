@@ -36,7 +36,7 @@ WhenAll = "when" "all" PredicateBlock NestedBox
 When = "when" "messages" NB?
 Return = "->" DatumList NB?
 CheckReturn = "check" "return" string NB?
-FindConnectionFromMe = "find" Datum "from" "me" "on" "port" Datum NB?
+FindConnectionFromMe = "find" Datum "from" "me" "on" "port" Datum NB OrElse NB?
 Pass = "pass"
 
 Cond = "cond" FirstCondClause RestCondClause*
@@ -47,8 +47,8 @@ CondClause = "{" Predicate Box "}"
 WithLock = "lock" Datum NB?
 
 Find
-  = "find" name "in" Datum "given" ParameterList "=>" name OrElse NB? -- withParams
-  | "find" name "in" Datum "=>" name                       OrElse NB? -- withoutParams
+  = "find" name "in" Datum "given" ParameterList "=>" name NB OrElse NB? -- withParams
+  | "find" name "in" Datum                       "=>" name NB OrElse NB? -- withoutParams
 
 VarBox =
   | "var" name "<=" "$i" "{" "{" DatumList "}" Datum "}" NB? -- inputmessage
