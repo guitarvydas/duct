@@ -3,19 +3,22 @@ implementation route
   { for every item in outputQueue of child.runnable => output_message
     { synonym message = output_message
       { find connection in me given child X message.etag => connection
-        { lock receivers of connection
-	  { for every receivers in connection => dest
-	      { synonym params = {me, dest, message}
-		{ cond
-		  { dest.name is not me
-		    { @deliver_to_child_input <= params }
-		  }
-		  { dest.name is me
-		    { @deliver_to_me_output <= params }
-		  }
-		}
-	    }
+        { lock connection
+          { for every receivers in connection => dest
+              { synonym params = {me, dest, message}
+                { cond
+                  { dest.name is not me
+                    { @deliver_to_child_input <= params }
+                  }
+                  { dest.name is me
+                    { @deliver_to_me_output <= params }
+                  }
+                }
+            }
           }
+        }
+        { orelse
+           { pass }
         }
       }
     }

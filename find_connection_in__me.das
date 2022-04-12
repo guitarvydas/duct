@@ -10,5 +10,4 @@ implementation find_connection_in__me (childname, etag)
           }
       }
   }
-  { check return "find_connection_in__me: connection not found for ${childname}:${etag}" }
 
