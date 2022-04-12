@@ -19,7 +19,7 @@ var protoImplementation = {
 	if ("filename" === message.etag) {
 	    me.send ("request", true, me.name, message);
 	} else if ("char" === message.etag) {
-	    console.log (message.data);
+	    process.stdout.write (message.data);
 	    me.send ("char", message.data, me.name, message);
 	    me.send ("request", true, me.name, message);
 	} else {
