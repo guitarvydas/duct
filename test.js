@@ -34,6 +34,23 @@ function testContainer () {
     
     //testHarness.tracing = true;
     
+    testHarness.begin ('test1.txt', 'test.out');
+    testHarness.route ();
+
+    while (!testHarness.done ()) {
+        testHarness.step ();
+        testHarness.route ();
+    }
+
+    testHarness.finish ();
+}
+
+function testContainerContainer () {
+    var ttw = require ('./toptopwrapper');
+    var testHarness = new ttw.TopTopWrapper ();
+    
+    //testHarness.tracing = true;
+    
     testHarness.begin ('test.txt', 'test.out');
     testHarness.route ();
 
@@ -57,3 +74,8 @@ console.log ();
 console.log ();
 console.log ('top ...');
 testContainer ();
+
+console.log ();
+console.log ();
+console.log ('top top ...');
+testContainerContainer ();
