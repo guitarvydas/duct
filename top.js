@@ -15,6 +15,7 @@ var signature = {
         { "name": "output filename", "structure": ["outfname"] }
     ],
     outputs: [
+        { "name": "char", "structure": ["char"] }
     ]
 };
 
@@ -49,7 +50,8 @@ function makeNets (me) {
         {"name":"⇒₁","locks":["r"]},
         {"name":"⇒₂","locks":["w"]},
         {"name":"⇒₃","locks":["r"]},
-        {"name":"⇒₄","locks":["w"]}
+        {"name":"⇒₄","locks":["w"]},
+        {"name":"⇒₅","locks":[]}
     ];
 }
 
@@ -70,6 +72,10 @@ function makeConnections (me) {
         {"sender":{"name":"w","etag":"request"},
          "net":"⇒₄",
          "receivers": [{"name":"r","etag":"req"}]
+        },
+        {"sender":{"name":"w","etag":"char"},
+         "net":"⇒₅",
+         "receivers": [{"name":"_me","etag":"char"}]
         }
     ];
 }
