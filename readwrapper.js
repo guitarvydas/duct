@@ -10,6 +10,7 @@ function ReadWrapper () {
     this.finish = function () {
         uut.finish ();
     };
+
     this.isValidETagForUUT = isValidETagForUUT;
     this.isInputETag = isInputETag;
     this.send = function (etag, v) {
@@ -26,13 +27,13 @@ function ReadWrapper () {
     };
     this.done = function () {return this._done;};
     this.route = function () {
-	this.uut.route ();
-	if (this.tracing) {
+        this.uut.route ();
+        if (this.tracing) {
             destructivelyDisplayAllOutputsForAllChildren (this);
-	}
+        }
     };    
     this.step = function () {
-	this.uut.step ();
+        this.uut.step ();
         this.route ();
     };    
     this.uut =  new read.Read (this);
@@ -54,9 +55,9 @@ function isInputETag (etag) {
 
 function destructivelyDisplayAllOutputsForAllChildren (me) {
     me.children.forEach (child => {
-	var r = child.runnable;
+        var r = child.runnable;
         displayAllOutputs (r);
-	r.resetOutputQueue ();
+        r.resetOutputQueue ();
     });
 }
 
@@ -70,7 +71,7 @@ function recursiveDisplay (m) {
     if (m) {
         return `(${m.comefrom}::[${m.kind}]${m.etag}:${m.data}:${recursiveDisplay (m.tracer)})`;
     } else {
-	return '.';
+        return '.';
     }
 }
 

@@ -3,12 +3,12 @@ const runnable = require('./runnable');
 var signature = {
     name: "write",
     inputs: [
-	{ "name": "filename", "structure": ["filename"] },
-	{ "name": "char", "structure": ["char"] }
+        { "name": "filename", "structure": ["filename"] },
+        { "name": "char", "structure": ["char"] }
     ],
     outputs: [
-	{ "name": "request", "structure": ["request"] },
-	{ "char": "request", "structure": ["char"] }
+        { "name": "request", "structure": ["request"] },
+        { "char": "request", "structure": ["char"] }
     ]
 };
 
@@ -16,15 +16,15 @@ var protoImplementation = {
     name: "write",
     kind: "leaf",
     handler: function (me, message) {
-	if ("filename" === message.etag) {
-	    me.send ("request", true, me.name, message);
-	} else if ("char" === message.etag) {
-	    process.stdout.write (message.data);
-	    me.send ("char", message.data, me.name, message);
-	    me.send ("request", true, me.name, message);
-	} else {
-	    me.errorUnhandledMessage (message);
-	}
+        if ("filename" === message.etag) {
+            me.send ("request", true, me.name, message);
+        } else if ("char" === message.etag) {
+            process.stdout.write (message.data);
+            me.send ("char", message.data, me.name, message);
+            me.send ("request", true, me.name, message);
+        } else {
+            me.errorUnhandledMessage (message);
+        }
     }
 }
 

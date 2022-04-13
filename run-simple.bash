@@ -5,7 +5,7 @@
 # change this for your own environment
 root=`realpath ~/projects/das/`
 
-infile=simple.drawio
+infile=cat.drawio
 
 ${root}/d2f/d2f.bash ${root} ${infile} >fb.pl
 

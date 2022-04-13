@@ -26,12 +26,12 @@ function WriteWrapper () {
     };
     this.done = function () {return this._done;};
     this.route = function () {
-	if (this.tracing) {
+        if (this.tracing) {
             destructivelyDisplayAllOutputsForAllChildren (this);
-	}
+        }
     };    
     this.step = function () {
-	this.uut.step ();
+        this.uut.step ();
         this.route ();
     };    
     this.uut =  new write.Write (this);
@@ -53,9 +53,9 @@ function isInputETag (etag) {
 
 function destructivelyDisplayAllOutputsForAllChildren (me) {
     me.children.forEach (child => {
-	var r = child.runnable;
+        var r = child.runnable;
         displayAllOutputs (r);
-	r.resetOutputQueue ();
+        r.resetOutputQueue ();
     });
 }
 
@@ -69,7 +69,7 @@ function recursiveDisplay (m) {
     if (m) {
         return `(${m.comefrom}::[${m.kind}]${m.etag}:${m.data}:${recursiveDisplay (m.tracer)})`;
     } else {
-	return '.';
+        return '.';
     }
 }
 

@@ -12,8 +12,8 @@ dev:
 	./identity.bash <routing.das
 
 
-# drawing simple.drawio -> factbase (fb.pl)
-fb.pl: simple.drawio
+# drawing cat.drawio -> factbase (fb.pl)
+fb.pl: cat.drawio
 	./run-simple.bash
 
 find_connection.js: find_connection.das $(DIA)

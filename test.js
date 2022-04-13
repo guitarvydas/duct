@@ -2,7 +2,8 @@
 function testRead () {
     var rw = require ('./readwrapper');
     var testHarness = new rw.ReadWrapper ();
-    testHarness.send ("filename", "test.txt");
+    testHarness.tracing = true;
+    testHarness.send ("filename", "test1.txt");
     while (!testHarness.done ()) {
         testHarness.send ("req", true); 
         testHarness.step ();
@@ -37,9 +38,11 @@ function testContainer () {
     testHarness.route ();
 
     while (!testHarness.done ()) {
-	testHarness.step ();
-	testHarness.route ();
+        testHarness.step ();
+        testHarness.route ();
     }
+
+    testHarness.finish ();
 }
 
 console.log ();
@@ -50,6 +53,7 @@ console.log ();
 console.log ('write ...');
 testWrite ();
 
+console.log ();
 console.log ();
 console.log ('top ...');
 testContainer ();
