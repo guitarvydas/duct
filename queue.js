@@ -4,6 +4,7 @@ function Queue () {
     this.enqueue = function (item) { this.queue.push (item); };
     this.dequeue = function () { return this.queue.pop (); };
     this.forEach = function (f) { return this.queue.forEach (f); };
+    this.length = function () { return this.queue.length; };
 }
 
 /* var q = new Queue ();

@@ -1,4 +1,5 @@
 Flowchart [kfc name lb kstart start @sk rb] = [[\nexports.${name} = function () {
+var _ret = undefined;
 var lambdas = {${sk}
 _endoflambdas: null
 };
@@ -49,6 +50,11 @@ ${cont}
 Jump [k n @cont] = [[return ${support.formatLabelFunction (n)};${cont}]]
 Call [n @cont] = [[_me.${n} ();${cont}]]
 Send [ksend n v @cont] = [[_me.send ("${n}", ${v}, _me.name, null);${cont}]]
+Result [k v @cont] = [[_ret = ${v};${cont}]]
+End [k @cont] = [[return _ret;${cont}]]
+
+YesNo_yes [yn] = [[true]]
+YesNo_no [yn] = [[false]]
 
 
 

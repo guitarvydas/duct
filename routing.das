@@ -36,6 +36,6 @@ sync deliver_to_child_input <= me, dest, message
 
 sync deliver_to_me_output <= me, dest, message
   // map message for output
-  { var output_message <= $o{{receiver.etag, message.data} message}
+  { var output_message <= $o{{dest.etag, message.data} message}
     { @me.enqueueOutput <= output_message }
   }

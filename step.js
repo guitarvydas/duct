@@ -1,5 +1,6 @@
 
 exports.Try_component = function () {
+var _ret = undefined;
 var lambdas = {
 main: function (_me, _label) {
 if (_label === 0) {
@@ -49,7 +50,7 @@ no_output: function (_me, _label) {
 if (_label === 0) {
 return lambdas.no_output (_me, 3);
 } else if (_label === 3) {
-_me.send ("no_output", true, _me.name, null);
+_ret = false;
 return lambdas.finished (_me, 0);
 
 
@@ -60,7 +61,7 @@ _me.panic ("no_output", _label);
 },
 produced_output: function (_me, _label) {
 if (_label === 0) {
-_me.send ("produced_output", true, _me.name, null);
+_ret = true;
 return lambdas.finished (_me, 0);
 
 
@@ -70,7 +71,7 @@ _me.panic ("produced_output", _label);
 },
 finished: function (_me, _label) {
 if (_label === 0) {
-_me.end ();
+return _ret;
 
 } else {
 _me.panic ("finished", _label); 

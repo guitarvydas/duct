@@ -42,6 +42,8 @@ function testContainer () {
         testHarness.route ();
     }
 
+    testHarness.route ();
+
     testHarness.finish ();
 }
 

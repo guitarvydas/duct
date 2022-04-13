@@ -10,6 +10,8 @@ function TopWrapper (infname, outfname) {
     };
     this.finish = function () {
         this.uut.finish (this.uut);
+	console.log ();
+	displayOutputLengths (this);
     };
     this.isValidETagForUUT = isValidETagForUUT;
     this.isInputETag = isInputETag;
@@ -26,9 +28,6 @@ function TopWrapper (infname, outfname) {
         this.container._done = true; 
     };
     this.done = function () {return this._done;};
-    this.route = function () {
-        destructivelyDisplayAllOutputsForAllChildrenAndDestroy (this);
-    };    
     this.step = function () {
         this.uut.step ();
         if (this.tracing) {
@@ -41,6 +40,7 @@ function TopWrapper (infname, outfname) {
     this.children = [{name: "uut", runnable: this.uut}];
     this.route = function () {
         this.uut.route ();
+        destructivelyDisplayAllOutputsForAllChildren (this);
     }
 }
 
@@ -58,10 +58,18 @@ function isInputETag (etag) {
 }
 
 function destructivelyDisplayAllOutputsForAllChildren (me) {
+    console.log ();
     me.children.forEach (child => {
         var r = child.runnable;
         displayAllOutputs (r);
         r.resetOutputQueue ();
+    });
+}
+
+function displayOutputLengths (me) {
+    me.children.forEach (child => {
+        var r = child.runnable;
+	console.log (`child ${r.name} output length=${r.outputQueue.length ()}`);
     });
 }
 

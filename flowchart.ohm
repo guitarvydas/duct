@@ -9,9 +9,12 @@ Skewer
   
 Action 
   = Unless
+  | Result
   | Jump
+  | End
   | Call
   | Send
+
 
 LabelledAction 
   = ":" LabelDef Action -- action
@@ -21,6 +24,12 @@ Unless = "unless" name LabelRef Action?
 Jump = ">" LabelRef Action?
 Send = "send" name Value Action?
 Call = MethodRef Action?
+Result = ">>" YesNo Action?
+End = "end" Action?
+
+YesNo = 
+  | "yes" -- yes
+  | "no"  -- no
 
 keyword = (
     "flowchart" 
@@ -28,11 +37,14 @@ keyword = (
   | "start" 
   | "unless" 
   | "send" 
+  | "end"
+  | "yes"
+  | "no"
   | "_"
   ) ~namecharRest
 
 bracket = "{" | "}" | "(" | ")" | "[" | "]"
-separator = ":" | ">" | "/" | bracket
+separator = ":" | ">>" | ">" | "/" | bracket
 
 LabelDef = Label
 LabelRef = Label
@@ -64,4 +76,3 @@ dq = "\""
 Value = name | number
 
 }
-

@@ -13,7 +13,11 @@ Unless [ku n1 lref @cont] = [[${ku}${n1}${lref}${cont}]]
 Jump [k n @cont] = [[${k}${n}${cont}]]
 Send [ksend n v @cont] = [[${ksend}${n}${v}${cont}]]
 Call [n @cont] = [[${n}${cont}]]
+Result [k v @cont] = [[${k}${v}${cont}]]
+End [k @cont] = [[${k}${cont}]]
 
+YesNo_yes [yn] = [[${yn}]]
+YesNo_no [yn] = [[${yn}]]
 
 LabelDef [n] = [[${n}]]
 LabelRef [n] = [[${n}]]

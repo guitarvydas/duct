@@ -15,11 +15,11 @@ flowchart Try-component {
   }
   skewer no-output {
     : no-output/3
-    send no-output _
+    >> no
     > finished/0
   }
   skewer produced-output {
-    send produced-output _
+    >> yes
     > finished/0
   }
   skewer finished {
