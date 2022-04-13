@@ -49,8 +49,8 @@ Find_withoutParams [kfind name kin d        karrow name2 b e @nb]
   = [[var ${name2} = this.find_${name}_in_${d} (this);if (${name2}) \{${b}\n\} else \{${e}\};${nb}]]
 
 VarBox_array [kvar name karrow klb dl krb @nb] = [[var ${name} = \[${dl}\];${nb}]]
-VarBox_inputmessage  [kvar name karrow ki klb0 klb dl krb d krb0 @nb] = [[${kvar} ${name} = new msg.InputMessage (${dl},this,"?",${d});${nb}]]
-VarBox_outputmessage  [kvar name karrow ko klb0 klb dl krb d krb0 @nb] = [[${kvar} ${name} = new msg.OutputMessage (${dl},this,"?",${d});${nb}]]
+VarBox_inputmessage  [kvar name karrow ki klb0 klb dl krb d krb0 @nb] = [[${kvar} ${name} = new msg.InputMessage (${dl},${d}.comefrom,"?",${d});${nb}]]
+VarBox_outputmessage  [kvar name karrow ko klb0 klb dl krb d krb0 @nb] = [[${kvar} ${name} = new msg.OutputMessage (${dl},${d}.comefrom,"?",${d});${nb}]]
 
 
 Synonym_obj [ksyn name keq klb dl krb @nb] = [[var ${name} = \[${dl}\];${nb}]]

@@ -6,12 +6,12 @@ let fc = require ('./find_connection');
 let fcim = require ('./find_connection_in__me');
 
 function send (etag, v, who, tracer) {
-    let m = new message.OutputMessage (etag, v, who, "?", tracer);
+    let m = new message.OutputMessage (etag, v, who, "?", tracer); // Send knows who the sender is, but doesn't yet know who the receiver is
     this.outputQueue.enqueue (m);
 }
 
 function inject (etag, v, tracer) {
-    let m = new message.InputMessageNoTrace (etag, v, ".", "?", undefined);
+    let m = new message.InputMessageNoTrace (etag, v, ".", undefined);
     this.inputQueue.enqueue (m);
 }
 
