@@ -25,12 +25,12 @@ return _ret;
 }
 
 deliver_to_child_input = function ([_me, dest, message]) {
-var input_message = new msg.InputMessage (dest.etag, message.data,this,message);
+var input_message = new msg.InputMessage (dest.etag, message.data,this,"?",message);
 var receiver = _me.lookupChild (dest.name);
 receiver.enqueueInput (input_message);
 }
 
 deliver_to_me_output = function ([_me, dest, message]) {
-var output_message = new msg.OutputMessage (dest.etag, message.data,this,message);
+var output_message = new msg.OutputMessage (dest.etag, message.data,this,"?",message);
 _me.enqueueOutput (output_message);
 }

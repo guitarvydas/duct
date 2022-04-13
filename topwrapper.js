@@ -58,8 +58,8 @@ function isInputETag (etag) {
 }
 
 function destructivelyDisplayAllOutputsForAllChildren (me) {
-    console.log ();
     me.children.forEach (child => {
+	console.log ();
         var r = child.runnable;
         displayAllOutputs (r);
         r.resetOutputQueue ();
@@ -81,13 +81,14 @@ function displayAllOutputsForAllChildren (me) {
 
 function displayAllOutputs (runnablechild) {
     runnablechild.outputQueue.forEach (m => {
-        console.log (`${runnablechild.name} outputs ${recursiveDisplay (m)}`);
+	var name = runnablechild.name;
+        console.log (`${name} outputs ${recursiveDisplay (m)}`);
     })
 }
 
 function recursiveDisplay (m) {
     if (m) {
-        return `(${m.comefrom}::[${m.kind}]${m.etag}:${m.data}:${recursiveDisplay (m.tracer)})`;
+        return `(${m.comefrom}->${m.target}::[${m.kind}]${m.etag}:${m.data}:${recursiveDisplay (m.tracer)})`;
     } else {
         return '.';
     }

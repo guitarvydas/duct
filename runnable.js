@@ -6,12 +6,12 @@ let fc = require ('./find_connection');
 let fcim = require ('./find_connection_in__me');
 
 function send (etag, v, who, tracer) {
-    let m = new message.OutputMessage (etag, v, who, tracer);
+    let m = new message.OutputMessage (etag, v, who, "?", tracer);
     this.outputQueue.enqueue (m);
 }
 
 function inject (etag, v, tracer) {
-    let m = new message.InputMessageNoTrace (etag, v, "<inject>", undefined);
+    let m = new message.InputMessageNoTrace (etag, v, ".", "?", undefined);
     this.inputQueue.enqueue (m);
 }
 
@@ -28,8 +28,8 @@ function Runnable (signature, protoImplementation, container, name) {
     this.hasOutputs = function () {return !this.outputQueue.empty ()};
     this.has_children = function () {return (0 < this.children.length); };
     this.dequeueOutput = function () {return this.outputQueue.dequeue ();};
-    this.enqueueInput = function (m) { this.inputQueue.enqueue (m); };
-    this.enqueueOutput = function (m) { this.outputQueue.enqueue (m); };
+    this.enqueueInput = function (m) { m.target = this.name; this.inputQueue.enqueue (m); };
+    this.enqueueOutput = function (m) { m.target = this.name; this.outputQueue.enqueue (m); };
     this.begin = protoImplementation.begin;
     this.finish = protoImplementation.finish;
     this.resetOutputQueue = function () {

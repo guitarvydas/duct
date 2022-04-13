@@ -15,7 +15,7 @@ function ReadWrapper () {
     this.isInputETag = isInputETag;
     this.send = function (etag, v) {
         if (this.isValidETagForUUT (etag)) {
-            var m = new message.InputMessageNoTrace (etag, v, this.name);
+            var m = new message.InputMessageNoTrace (etag, v, this.name, this.uut.name);
             this.uut.handler (this.uut, m);
         } else {
             console.error (`invalid input message ${etag}`);
