@@ -15,8 +15,12 @@ function inject (etag, v, tracer) {
     this.inputQueue.enqueue (m);
 }
 
-function Runnable (signature, protoImplementation, container, name) {
-    this.name = name;
+function Runnable (signature, protoImplementation, container, instancename) {
+    if (instancename) {
+	this.name = instancename;
+    } else {
+	this.name = signature.name;
+    }
     this.signature = signature;
     this.protoImplementation = protoImplementation;
     this.container = container;
