@@ -75,8 +75,10 @@ function Container (signature, protoImplementation, container, name) {
     me.step = function () {
         // Container tries to step all children,
         // if no child was busy, then Container looks at its own input
-        var workFunction = steprecursively.Try_component ();
-        var workPerformed = workFunction (this);
+	// (logic written in step.drawio -> step.drakon -> step.js ; step returns
+	//  a stepper function, which must be called with this)
+        var stepperFunction = steprecursively.Try_component ();
+        var workPerformed = stepperFunction (this);
         if (! workPerformed) {
 	    return this.run_self ();
         } else {
