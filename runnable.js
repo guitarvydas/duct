@@ -128,6 +128,25 @@ function Container (signature, protoImplementation, container, name) {
     if (protoImplementation.finish) {
         me.finish = protoImplementation.finish;
     }
+    me._done = false;
+    me.conclude = function () { 
+        this.container._done = true; 
+    };
+    me.done = function () {return this._done;};
+    me.resetdone = function () {this._done = false;}
+    me.wakeup = function () {
+	if (this.container) {
+	    this.route ();
+	    this.container.wakeup (); // keep punting upwards until at top
+	} else {
+	    while (this.activated && (!this.done ())) {
+		this.resetdone ();
+		this.step ();
+		this.route ();
+	    }
+	}
+    }
+
     return me;
 }
 
