@@ -3,22 +3,22 @@ flowchart Try-component {
   skewer main {
     unless has-children try-self/1
     step-each-child
-    unless child-activated try-self/2
-    > activated/0
+    unless child-produced-output try-self/2
+    > produced-output/0
   }
   skewer try-self {
     : try-self/1
     : try-self/2
     run-self
-    unless self-activate not-activated/3
-    > activated/0
+    unless self-produced-output no-output/3
+    > produced-output/0
   }
-  skewer not-activated {
-    : not-activated/3
+  skewer no-output {
+    : no-output/3
     >> no
     > finished/0
   }
-  skewer activated {
+  skewer produced-output {
     >> yes
     > finished/0
   }
