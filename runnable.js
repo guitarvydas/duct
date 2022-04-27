@@ -30,6 +30,7 @@ function Runnable (signature, protoImplementation, container, name) {
     this.dequeueOutput = function () {return this.outputQueue.dequeue ();};
     this.enqueueInput = function (m) { m.target = this.name; this.inputQueue.enqueue (m); };
     this.enqueueOutput = function (m) { m.target = this.name; this.outputQueue.enqueue (m); };
+    this.activated = false;
     this.begin = protoImplementation.begin;
     this.finish = protoImplementation.finish;
     this.resetOutputQueue = function () {
@@ -53,10 +54,15 @@ function Leaf (signature, protoImplementation, container, name) {
         if (! this.inputQueue.empty ()) {
             let m = this.inputQueue.dequeue ();
             this.handler (this, m);
-            return this.hasOutputs ();
+	    this.activated = true;
+            return this.activated
         } else {
-            return false;
+	    this.activated = false;
+            return this.activated
         }
+    }
+    me.wasActivated = function () {
+	return this.activated;
     }
     return me;
 }
@@ -80,9 +86,11 @@ function Container (signature, protoImplementation, container, name) {
         if (! this.inputQueue.empty ()) {
             let m = this.inputQueue.dequeue ();
             this.handler (this, m);
-            return this.hasOutputs ();
+	    this.activated = true;
+            return this.activated;
 	} else {
-	    return false;
+	    this.activated = this.child_wasActivated (); 
+	    return this.activated;
 	}
     },
     me.step_each_child = function () {
@@ -90,12 +98,12 @@ function Container (signature, protoImplementation, container, name) {
             childobject.runnable.step ();
         });
     };
-    me.child_produced_output = function () {
+    me.child_wasActivated = function () {
         return this.children.some (childobject => {
-            return childobject.runnable.hasOutputs ();
+            return childobject.runnable.wasActivated ();
         });
     };
-    me.self_produced_output = function () { return (me.hasOutputs ()); };
+    me.self_wasActivated = function () { return this.activated; };
     me.find_connection = fc.find_connection;
     me.find_connection_in__me = function (_me, child, etag) {
 	return fcim.find_connection_in__me (this, child.name, etag);

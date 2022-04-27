@@ -9,7 +9,7 @@ if (!_me.has_children ()) {
 } else {
 
 _me.step_each_child ();
-if (!_me.child_activated ()) {
+if (!_me.child_wasActivated ()) {
  return lambdas.try_self (_me, 2);
 } else {
 
@@ -32,7 +32,7 @@ return lambdas.try_self (_me, 1);
 return lambdas.try_self (_me, 2);
 } else if (_label === 2) {
 _me.run_self ();
-if (!_me.self_activate ()) {
+if (!_me.self_wasActivated ()) {
  return lambdas.not_activated (_me, 3);
 } else {
 

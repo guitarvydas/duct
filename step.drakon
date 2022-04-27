@@ -3,14 +3,14 @@ flowchart Try-component {
   skewer main {
     unless has-children try-self/1
     step-each-child
-    unless child-activated try-self/2
+    unless child-wasActivated try-self/2
     > activated/0
   }
   skewer try-self {
     : try-self/1
     : try-self/2
     run-self
-    unless self-activate not-activated/3
+    unless self-wasActivated not-activated/3
     > activated/0
   }
   skewer not-activated {
