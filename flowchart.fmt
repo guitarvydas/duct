@@ -3,7 +3,7 @@ var _ret = undefined;
 var lambdas = {${sk}
 _endoflambdas: null
 };
-return (function (_me) { lambdas.${start} (_me, 0); });
+return (function (_me) { return lambdas.${start} (_me, 0); });
 }
 ]]
 
