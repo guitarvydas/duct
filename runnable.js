@@ -45,7 +45,9 @@ function Runnable (signature, protoImplementation, container, name) {
 
 function Leaf (signature, protoImplementation, container, name) {
     let me = new Runnable (signature, protoImplementation, container, name);
-    me.conclude = container.conclude;
+    if (container) {
+	me.conclude = container.conclude;
+    }
     me.route = function () { };
     me.children = [];
     me.connections = [];
