@@ -40,14 +40,14 @@ function Runnable (signature, protoImplementation, container, name) {
 	console.error (`unhandled message in ${this.name} ${message.tag}`);
 	process.exit (1);
     };
+    if (container) {
+	this.conclude = container.conclude;
+    }
     this.panic = function () { throw "panic"; }
 }
 
 function Leaf (signature, protoImplementation, container, name) {
     let me = new Runnable (signature, protoImplementation, container, name);
-    if (container) {
-	me.conclude = container.conclude;
-    }
     me.route = function () { };
     me.children = [];
     me.connections = [];
@@ -71,7 +71,6 @@ function Leaf (signature, protoImplementation, container, name) {
 
 function Container (signature, protoImplementation, container, name) {
     let me = new Runnable (signature, protoImplementation, container, name);
-    me.conclude = container.conclude;
     me.route = routing.route;
     me.step = function () {
         // Container tries to step all children,
