@@ -31,8 +31,8 @@ function Runnable (signature, protoImplementation, container, name) {
     this.enqueueInput = function (m) { m.target = this.name; this.inputQueue.enqueue (m); };
     this.enqueueOutput = function (m) { m.target = this.name; this.outputQueue.enqueue (m); };
     this.activated = false;
-    this.begin = protoImplementation.begin;
-    this.finish = protoImplementation.finish;
+    this.begin = function () {};
+    this.finish = function () {};
     this.resetOutputQueue = function () {
         this.outputQueue = new queue.Queue ();
     }
@@ -122,10 +122,10 @@ function Container (signature, protoImplementation, container, name) {
 	return _ret;
     }
     if (protoImplementation.begin) {
-	this.begin = protoImplementation.begin;
+	    me.begin = protoImplementation.begin;
     }
     if (protoImplementation.finish) {
-        this.finish = protoImplementation.finish;
+        me.finish = protoImplementation.finish;
     }
     return me;
 }
