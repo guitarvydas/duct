@@ -5,6 +5,7 @@ function Queue () {
     this.dequeue = function () { return this.queue.pop (); };
     this.forEach = function (f) { return this.queue.forEach (f); };
     this.length = function () { return this.queue.length; };
+    this.toArray = function () { return this.queue; }
 }
 
 /* var q = new Queue ();

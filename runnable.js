@@ -26,6 +26,7 @@ function Runnable (signature, protoImplementation, container, instancename) {
     this.container = container;
     this.inputQueue = new queue.Queue ();
     this.outputQueue = new queue.Queue ();
+    this.outputs = function () { return this.outputQueue.toArray (); };
     this.send = send;
     this.inject = inject;
     this.handler = protoImplementation.handler;
