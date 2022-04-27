@@ -139,6 +139,9 @@ function Container (signature, protoImplementation, container, name) {
 	    this.route ();
 	    this.container.wakeup (); // keep punting upwards until at top
 	} else {
+	    this.resetdone ();
+	    this.step ();
+	    this.route ();
 	    while (this.activated && (!this.done ())) {
 		this.resetdone ();
 		this.step ();
