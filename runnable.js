@@ -121,6 +121,12 @@ function Container (signature, protoImplementation, container, name) {
 	};
 	return _ret;
     }
+    if (protoImplementation.begin) {
+	this.begin = protoImplementation.begin;
+    }
+    if (protoImplementation.finish) {
+        this.finish = protoImplementation.finish;
+    }
     return me;
 }
 
