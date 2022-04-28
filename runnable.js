@@ -48,6 +48,8 @@ function Runnable (signature, protoImplementation, container, instancename) {
     if (container) {
 	this.conclude = container.conclude;
     }
+    this.memoPreviousReadiness = function () { this._previouslyReady = this.hasInputs (); };
+    this.testPreviousReadiness = function () { return this._previouslyReady; };
     this.panic = function () { throw "panic"; }
 }
 
@@ -63,8 +65,6 @@ function Leaf (signature, protoImplementation, container, name) {
         }
     };
     this._previouslyReady = false;
-    me.memoPreviousReadiness = function () { this._previouslyReady = this.hasInputs (); };
-    me.testPreviousReadiness = function () { return this._previouslyReady; };
     return me;
 }
 
