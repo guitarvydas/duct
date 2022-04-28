@@ -1,3 +1,6 @@
+
+
+
 function InputMessage (etag, v, who, target, tracer) {
     if (tracer === undefined) {
 	throw "bad args to InputMessage";
@@ -8,6 +11,7 @@ function InputMessage (etag, v, who, target, tracer) {
     this.comefrom = who;
     this.target = target;
     this.kind = "i";
+    this.toString = function () { return recursiveToString (this); }
 }
 function InputMessageNoTrace (etag, v, who, target, tracer) {
     if (tracer !== undefined) {
@@ -19,6 +23,7 @@ function InputMessageNoTrace (etag, v, who, target, tracer) {
     this.comefrom = who;
     this.target = target;
     this.kind = "i";
+    this.toString = function () { return recursiveToString (this); }
 }
 
 function OutputMessage (etag, v, who, target, tracer) {
@@ -31,6 +36,7 @@ function OutputMessage (etag, v, who, target, tracer) {
     this.comefrom = who;
     this.target = target;
     this.kind = "o";
+    this.toString = function () { return recursiveToString (this); }
 }
 
 function OutputMessageNoTrace (etag, v, who, target, tracer) {
@@ -43,9 +49,18 @@ function OutputMessageNoTrace (etag, v, who, target, tracer) {
     this.comefrom = who;
     this.target = target;
     this.kind = "o";
+    this.toString = function () { return recursiveToString (this); }
 }
 
 exports.InputMessage = InputMessage;
 exports.InputMessageNoTrace = InputMessageNoTrace;
 exports.OutputMessage = OutputMessage;
 exports.OutputMessageNoTrace = OutputMessageNoTrace;
+
+function recursiveToString (m) {
+    if (m) {
+        return `(${m.comefrom}->${m.target}::[${m.kind}]${m.etag}:${m.data}:${recursiveToString (m.tracer)})`;
+    } else {
+        return '.';
+    }
+}

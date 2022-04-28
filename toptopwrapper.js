@@ -73,16 +73,8 @@ function displayAllOutputsForAllChildren (me) {
 
 function displayAllOutputs (runnablechild) {
     runnablechild.outputQueue.forEach (m => {
-        console.log (`${runnablechild.name} outputs ${recursiveDisplay (m)}`);
+        console.log (`${runnablechild.name} outputs ${m.toString ()}`);
     })
-}
-
-function recursiveDisplay (m) {
-    if (m) {
-        return `(${m.comefrom}::[${m.kind}]${m.etag}:${m.data}:${recursiveDisplay (m.tracer)})`;
-    } else {
-        return '.';
-    }
 }
 
 function recursivelyDisplayAllOutputsForAllChildren (me) {

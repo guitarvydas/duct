@@ -61,16 +61,8 @@ function destructivelyDisplayAllOutputsForAllChildren (me) {
 
 function displayAllOutputs (child) {
     child.outputQueue.forEach (m => {
-        console.log (`${child.name} outputs ${recursiveDisplay (m)}`);
+        console.log (`${child.name} outputs ${m.toString ()}`);
     })
-}
-
-function recursiveDisplay (m) {
-    if (m) {
-        return `(${m.comefrom}::[${m.kind}]${m.etag}:${m.data}:${recursiveDisplay (m.tracer)})`;
-    } else {
-        return '.';
-    }
 }
 
 exports.WriteWrapper = WriteWrapper;
