@@ -17,11 +17,11 @@ var protoImplementation = {
     kind: "leaf",
     handler: function (me, message) {
         if ("filename" === message.etag) {
-            me.send ("request", true, me.name, message);
+            me.send ("request", true, message);
         } else if ("char" === message.etag) {
             process.stdout.write (message.data);
-            me.send ("char", message.data, me.name, message);
-            me.send ("request", true, me.name, message);
+            me.send ("char", message.data, message);
+            me.send ("request", true, message);
         } else {
             me.errorUnhandledMessage (message);
         }
