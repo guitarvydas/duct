@@ -4,10 +4,10 @@ implementation deliverInputMessageToAllChildrenOfSelf (message)
           { for every receivers in connection => dest
             { synonym params = {me, message, dest}
               { cond
-                { dest.name != me
+                { dest.name is not me
                   { #deliver_input_from_container_input_to_child_input <= params }
                 }
-                { dest.name == me
+                { dest.name is me
                   { #deliver_input_from_container_input_to_me_output <= params }
                 }
               }
