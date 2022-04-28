@@ -24,7 +24,7 @@ let protoImplementation = {
             if (eof (me)) {
                 me.conclude ();
             } else {
-                me.send ("char", nextChar (me), me.name, message);
+                me.send ("char", nextChar (me), message);
             }
         } else {
             me.errorUnhandledMessage (message);
