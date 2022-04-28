@@ -31,11 +31,11 @@ function Runnable (signature, protoImplementation, container, instancename) {
     this.inject = inject;
     this.handler = protoImplementation.handler;
     this.hasOutputs = function () {return !this.outputQueue.empty ()};
+    this.hasInputs = function () {return !this.inputQueue.empty ()};
     this.has_children = function () {return (0 < this.children.length); };
     this.dequeueOutput = function () {return this.outputQueue.dequeue ();};
     this.enqueueInput = function (m) { m.target = this.name; this.inputQueue.enqueue (m); };
     this.enqueueOutput = function (m) { m.target = this.name; this.outputQueue.enqueue (m); };
-    this.activated = false;
     this.begin = function () {};
     this.finish = function () {};
     this.resetOutputQueue = function () {
@@ -57,20 +57,14 @@ function Leaf (signature, protoImplementation, container, name) {
     me.children = [];
     me.connections = [];
     me.step = function () {
-        // Leaf has no children, so it always looks at it own input
         if (! this.inputQueue.empty ()) {
             let m = this.inputQueue.dequeue ();
             this.handler (this, m);
-	    this.activated = true;
-            return this.activated
-        } else {
-	    this.activated = false;
-            return this.activated
         }
-    }
-    me.wasActivated = function () {
-	return this.activated;
-    }
+    };
+    this._previouslyReady = false;
+    me.memoPreviousReadiness = function () { this._previouslyReady = this.hasInputs (); };
+    me.testPreviousReadiness = function () { return this._previouslyReady; };
     return me;
 }
 
@@ -83,35 +77,43 @@ function Container (signature, protoImplementation, container, name) {
 	// (logic written in step.drawio -> step.drakon -> step.js ; step returns
 	//  a stepper function, which must be called with this)
         var stepperFunction = steprecursively.Try_component ();
-        var workPerformed = stepperFunction (this);
-        if (! workPerformed) {
-	    return this.run_self ();
-        } else {
-            return false;
-        }
+        stepperFunction (this);
     },
-    me.run_self = function () {
+    me.self_first_step_with_input = function () {
         if (! this.inputQueue.empty ()) {
             let m = this.inputQueue.dequeue ();
             this.handler (this, m);
-	    this.activated = true;
-            return this.activated;
-	} else {
-	    this.activated = this.child_wasActivated (); 
-	    return this.activated;
 	}
     },
+    me.memo_readiness_of_each_child = function () {
+        this.children.forEach (childobject => {
+            childobject.runnable.memoPreviousReadiness ();
+        });
+    };
+    me.any_child_was_previously_ready = function () {
+        return this.children.some (childobject => {
+            childobject.runnable.testPreviousReadiness ();
+        });
+    };
     me.step_each_child = function () {
         this.children.forEach (childobject => {
             childobject.runnable.step ();
         });
     };
-    me.child_wasActivated = function () {
+
+    me.any_child_has_inputs = function () {
         return this.children.some (childobject => {
-            return childobject.runnable.wasActivated ();
+            childobject.runnable.hasInputs ();
         });
+    }
+    
+    me.self_has_input = me.hasInputs;
+    me.ready = me.hasInputs;
+    me.busy = me.any_child_has_inputs;
+    me.hasWorkToDo = function () {
+	return (this.ready () || this.busy () );
     };
-    me.self_wasActivated = function () { return this.activated; };
+
     me.find_connection = fc.find_connection;
     me.find_connection_in__me = function (_me, child, etag) {
 	return fcim.find_connection_in__me (this, child.name, etag);
@@ -149,8 +151,7 @@ function Container (signature, protoImplementation, container, name) {
 	    this.resetdone ();
 	    this.step ();
 	    this.route ();
-	    while (this.activated && (!this.done ())) {
-		this.resetdone ();
+	    while ( (!this.done ()) && this.hasWorkToDo () ) {
 		this.step ();
 		this.route ();
 	    }
