@@ -2,24 +2,23 @@ flowchart Try-component {
   start main
   skewer main {
     unless has-children try-self/1
+    memo-readiness-of-each-child
     step-each-child
-    unless child-wasActivated try-self/2
+    unless any-child-was-previously-ready try-self/2
     > activated/0
   }
   skewer try-self {
     : try-self/1
     : try-self/2
-    run-self
-    unless self-wasActivated not-activated/3
+    unless self-has-input not-activated/3
+    self-first-step-with-input
     > activated/0
   }
   skewer not-activated {
     : not-activated/3
-    >> no
     > finished/0
   }
   skewer activated {
-    >> yes
     > finished/0
   }
   skewer finished {
